@@ -1,1 +1,1 @@
-# Web verison of UJournal
+# Web client of UJournal
