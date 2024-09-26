@@ -12,6 +12,10 @@
     @apply font-bold;
 }
 
+.userinfo-name > a {
+    @apply hover:text-orange-500;
+}
+
 .userinfo-status {
     @apply font-normal;
 }
