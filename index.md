@@ -8,3 +8,4 @@
 
 {% include post_popover.html %}
 {% include reactions_popover.html %}
+{% include views_popover.html %}

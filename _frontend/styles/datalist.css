@@ -1,0 +1,11 @@
+dl.datalist {
+    @apply grid grid-cols-2 gap-4 p-2;
+}
+
+dl.datalist > dt {
+    @apply text-stone-600;
+}
+
+dl.datalist > dd {
+    @apply font-medium;
+}

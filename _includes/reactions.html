@@ -92,7 +92,13 @@
         </svg>
         <span class="reactions-count">5</span>
     </button>
-    <button type="button" class="reactions-button">
+    <button
+        type="button"
+        class="reactions-button"
+        popovertarget="views-popover"
+        onclick="document.body.style = '--views-popover-anchor: --views-{{ include.id }}-button-anchor';"
+        style="anchor-name: --views-{{ include.id }}-button-anchor"
+    >
         <svg
             xmlns="http://www.w3.org/2000/svg"
             width="24"
