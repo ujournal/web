@@ -1,0 +1,15 @@
+<div class="box-header">
+    <div class="box-header-start">
+        <!--prettier-ignore-->
+        {% if include.include_start %}
+        {% include {{include.include_start}} %}
+        {% endif %}
+    </div>
+    <div class="box-title">{{include.title}}</div>
+    <div class="box-header-end">
+        <!--prettier-ignore-->
+        {% if include.include_end %}
+        {% include {{include.include_end}} %}
+        {% endif %}
+    </div>
+</div>

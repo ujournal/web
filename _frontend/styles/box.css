@@ -3,10 +3,10 @@
 }
 
 .box-header {
-    @apply bg-stone-50 flex flex-row justify-between rounded-t-xl items-center p-2 -mx-6 -mt-6 mb-2;
+    @apply bg-stone-50 flex flex-row justify-between rounded-t-xl items-center p-2 -mx-6 -mt-6 mb-2 h-14;
 }
 
-.box > *:is(.box-header-start, .box-header-end) {
+.box-header > *:is(.box-header-start, .box-header-end) {
     @apply w-10 flex-shrink-0;
 }
 

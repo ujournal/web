@@ -1,5 +1,5 @@
 .button {
-    @apply flex flex-row gap-2 items-center justify-center px-3 h-10 min-w-10 transition rounded-lg bg-white hover:bg-orange-50 font-medium;
+    @apply flex flex-row gap-2 items-center justify-center px-3 h-10 min-w-10 transition rounded-lg bg-white hover:bg-orange-50 hover:text-orange-500 font-medium;
 }
 
 .button.button-primary {
