@@ -7,3 +7,4 @@
 {% include post.html id=5 %}
 
 {% include post_popover.html %}
+{% include reactions_popover.html %}

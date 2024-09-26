@@ -2,6 +2,10 @@
     @apply flex flex-col gap-2;
 }
 
+.nav.nav-emoji-grid {
+    @apply grid grid-cols-4;
+}
+
 .nav-button {
     @apply flex flex-row gap-2 items-center justify-start px-3 h-11 min-w-10 transition rounded-lg bg-stone-100 hover:bg-white font-medium;
 }
@@ -21,4 +25,8 @@
 .nav-button > img {
     @apply w-6 h-6 rounded-full object-cover outline-1 outline-stone-900/5;
     outline-style: inset;
+}
+
+.nav-emoji {
+    @apply text-lg;
 }

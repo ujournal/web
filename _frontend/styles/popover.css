@@ -4,7 +4,11 @@
     /* top: anchor(var(--popover-anchor) bottom); */
     /* justify-self: anchor-center; */
     inset-area: bottom;
-    /* position-try-options: flip-block; */
+    position-try-options: flip-block;
+}
+
+.popover.popover-top:popover-open {
+    inset-area: top;
 }
 
 .popover.popover-end:popover-open {

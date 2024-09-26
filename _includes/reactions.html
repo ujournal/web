@@ -1,18 +1,22 @@
-<form class="reactions">
-    <button class="reactions-button reactions-button-visual">
+<div class="reactions">
+    <button type="button" class="reactions-button reactions-button-visual">
         <span class="reactions-emoji">👍</span>
         <span class="reactions-count">5</span>
     </button>
-    <button class="reactions-button reactions-button-visual">
+    <button type="button" class="reactions-button reactions-button-visual">
         <span class="reactions-emoji">👎</span>
         <span class="reactions-count">5</span>
     </button>
-    <button class="reactions-button reactions-button-visual">
+    <button type="button" class="reactions-button reactions-button-visual">
         <span class="reactions-emoji">🚀</span>
         <span class="reactions-count">5</span>
     </button>
     <button
+        type="button"
         class="reactions-button reactions-button-visual reactions-button-plus"
+        popovertarget="reactions-popover"
+        onclick="document.body.style = '--reactions-popover-anchor: --reactions-{{ include.id }}-button-anchor';"
+        style="anchor-name: --reactions-{{ include.id }}-button-anchor"
     >
         <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -31,7 +35,7 @@
             <path d="M5 12l14 0" />
         </svg>
     </button>
-    <button class="reactions-button">
+    <button type="button" class="reactions-button">
         <svg
             xmlns="http://www.w3.org/2000/svg"
             width="24"
@@ -70,7 +74,7 @@
         </svg>
         <span class="reactions-count">5</span>
     </button>
-    <button class="reactions-button">
+    <button type="button" class="reactions-button">
         <svg
             xmlns="http://www.w3.org/2000/svg"
             width="24"
@@ -88,7 +92,7 @@
         </svg>
         <span class="reactions-count">5</span>
     </button>
-    <button class="reactions-button">
+    <button type="button" class="reactions-button">
         <svg
             xmlns="http://www.w3.org/2000/svg"
             width="24"
@@ -109,4 +113,4 @@
         </svg>
         <span class="reactions-count">2.5K</span>
     </button>
-</form>
+</div>
