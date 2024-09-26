@@ -3,7 +3,7 @@
 }
 
 .notifications-item {
-    @apply flex flex-col py-2 px-3 rounded-md transition bg-white hover:bg-orange-50 hover:text-orange-500;
+    @apply flex flex-col py-2 px-3 rounded-md transition bg-white hover:bg-stone-50;
 }
 
 .notifications-item > a {
@@ -11,5 +11,5 @@
 }
 
 .notifications-item.notifications-item-active {
-    @apply bg-orange-50;
+    @apply bg-orange-50 hover:bg-orange-100;
 }

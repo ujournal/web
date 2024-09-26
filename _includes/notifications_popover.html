@@ -1,0 +1,38 @@
+<div
+    id="notifications-popover"
+    class="popover"
+    popover
+    style="--popover-anchor: --notifications-button-anchor"
+>
+    <div class="popover-header">
+        <span class="popover-title">Сповіщення</span>
+        <button
+            class="button"
+            popovertarget="notifications-options-popover"
+            style="anchor-name: --notifications-options-button-anchor"
+        >
+            {% svg icons/dots.svg %}
+        </button>
+    </div>
+    <ul class="notifications">
+        <li class="notifications-item notifications-item-active">
+            <a href="#">{% include userinfo_status.html %}</a>
+        </li>
+        <li class="notifications-item notifications-item-active">
+            <a href="#">{% include userinfo_status.html %}</a>
+        </li>
+        <li class="notifications-item">
+            <a href="#">{% include userinfo_status.html %}</a>
+        </li>
+        <li class="notifications-item">
+            <a href="#">{% include userinfo_status.html %}</a>
+        </li>
+        <li class="notifications-item">
+            <a href="#">{% include userinfo_status.html %}</a>
+        </li>
+    </ul>
+    <a href="#" class="button">
+        {% svg icons/chevron-down.svg %}
+        <span class="button-label">Показати всі</span>
+    </a>
+</div>

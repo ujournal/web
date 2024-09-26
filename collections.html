@@ -2,37 +2,10 @@
 title: Колекції стрічок
 ---
 
-<div
-    class="box"
-    x-data="{ q: '', isShowing(el) { return !this.q || el.firstElementChild.innerText.toUpperCase().includes(this.q.toUpperCase()); } }"
->
-    <!--prettier-ignore-->
-    {% include box_header.html title=page.title include_end='collections_header_end.html' %}
-
-    <form class="search" x-on:submit.prevent>
-        {% svg icons/search.svg %}
-        <input
-            name="q"
-            class="search-input"
-            type="search"
-            placeholder="Шукати колекцію"
-            x-model="q"
-        />
-    </form>
-
-    <nav class="list">
-        <!--prettier-ignore-->
-        {% include list_item.html name='Стрічки про Київ' %}
-        {% include list_item.html name='Тематичні стрічки' %}
-        {% include list_item.html name='Користувацькі стрічки' %}
-        {% include list_item.html name='Наукові канали з YouTube' %}
-        {% include list_item.html name='Політичні подкасти на SoundCloud' %}
-        {% include list_item.html name='Наукові подкасти на SoundCloud' %}
-        {% include list_item.html name='Новинні стрічки про Україну' %}
-        {% include list_item.html name='Новинні стрічки про Америку' %}
-        {% include list_item.html name='Новинні стрічки про Польщу' %}
-        {% include list_item.html name='Стрічки про Одесу' %}
-        {% include list_item.html name='Стрічки про Житомир' %}
-        {% include list_item.html name='Стрічки про Львів' %}
-    </nav>
-</div>
+<!--prettier-ignore-->
+{% include box_list.html
+        title=page.title
+        list=site.collections
+        include_end='collections/header_end.html'
+        search_placeholder="Шукати колекцію"
+%}

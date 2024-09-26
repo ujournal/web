@@ -1,0 +1,11 @@
+<a
+    href="{{include.url}}"
+    class="list-item list-item-feed"
+    x-show="isShowing($el)"
+>
+    {% include userinfo_span.html name=include.name image=include.image
+    caption=include.description %}
+
+    <!--prettier-ignore-->
+    {% svg icons/chevron-right.svg %}
+</a>

@@ -1,0 +1,12 @@
+---
+layout: default
+---
+
+<!--prettier-ignore-->
+{% include box_list.html
+        title=page.title
+        list=page.feeds
+        search_placeholder="Шукати стрічку"
+        include_start='collections/header_start.html'
+        include_end='collections/header_end.html'
+%}

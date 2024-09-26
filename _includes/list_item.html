@@ -1,9 +1,19 @@
-<a href="#" class="list-item" x-show="isShowing($el)">
-    <span href="#" class="button">
+<a href="{{include.url}}" class="list-item" x-show="isShowing($el)">
+    <span class="button">
+        <!--prettier-ignore-->
+        {% if include.image %}
+        <img src="{{include.image}}" class="list-image" />
+        <!--prettier-ignore-->
+        {% else %}
         {% svg icons/folder.svg %}
+        {% endif %}
         <span class="button-label">{{include.name}}</span>
     </span>
 
-    <span class="list-item-label">5 стрічок</span>
+    {% if include.label %}
+    <span class="list-item-label">{{include.label}}</span>
+    {% endif %}
+
+    <!--prettier-ignore-->
     {% svg icons/chevron-right.svg %}
 </a>

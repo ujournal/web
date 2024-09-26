@@ -3,13 +3,30 @@
 }
 
 .list-item {
-    @apply flex flex-row items-center gap-4 h-11 rounded-lg bg-white transition hover:bg-orange-50 px-3;
+    @apply flex flex-row items-center gap-4 h-11 rounded-lg bg-white transition hover:bg-orange-50 hover:text-orange-500 px-3;
 }
 
 .list-item-label {
-    @apply ml-auto text-stone-400;
+    @apply text-stone-400;
 }
 
 .list .button {
-    @apply bg-transparent !px-0;
+    @apply bg-transparent !px-0 mr-auto;
+}
+
+.list-item.list-item-feed {
+    @apply h-auto py-2;
+}
+
+.list-item.list-item-feed > .userinfo {
+    @apply mr-auto;
+}
+
+.list-image {
+    --avatar-s: 1.75rem;
+    @apply avatar w-6 h-6;
+}
+
+.list-description {
+    @apply text-stone-400;
 }

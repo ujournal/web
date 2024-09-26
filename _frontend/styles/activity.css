@@ -1,10 +1,10 @@
 .activity {
-    @apply flex flex-col gap-4;
+    @apply flex flex-col gap-2;
     --avatar-s: 2rem;
 }
 
 .activity-item {
-    @apply flex flex-col gap-1;
+    @apply flex flex-col gap-1 p-2 bg-stone-100 rounded-lg hover:bg-white transition;
 }
 
 .activity-description {

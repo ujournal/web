@@ -1,0 +1,41 @@
+<div
+    class="box"
+    x-data="{ q: '', isShowing(el) { return !this.q || el.firstElementChild.innerText.toUpperCase().includes(this.q.toUpperCase()); } }"
+>
+    <!--prettier-ignore-->
+    {% include box_header.html
+            title=include.title
+            include_start=include.include_start
+            include_end=include.include_end
+    %}
+
+    <form class="search" x-on:submit.prevent>
+        {% svg icons/search.svg %}
+        <input
+            name="q"
+            class="search-input"
+            type="search"
+            placeholder="{{include.search_placeholder}}"
+            x-model="q"
+        />
+    </form>
+
+    <!--prettier-ignore-->
+    {% if page.box_list_item %}
+    {% assign list_item = page.box_list_item %}
+    {% else %}
+    {% assign list_item = "list_item.html" %}
+    {% endif %}
+
+    <nav class="list">
+        <!--prettier-ignore-->
+        {% for item in include.list %}
+        {% include {{list_item}}
+                name=item.title
+                url=item.url
+                image=item.image
+                description=item.description
+        %}
+        {% endfor %}
+    </nav>
+</div>
