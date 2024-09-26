@@ -11,7 +11,7 @@
 }
 
 .nav.nav-white .nav-button {
-    @apply bg-white hover:bg-stone-50;
+    @apply bg-white hover:bg-orange-50;
 }
 
 .nav.nav-white .nav-button-label {

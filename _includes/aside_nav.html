@@ -1,71 +1,23 @@
 <nav class="nav">
-    <a href="#" class="nav-button nav-button-active">
-        <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="24"
-            height="24"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="1.75"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            class="icon icon-tabler icons-tabler-outline icon-tabler-news"
-        >
-            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-            <path
-                d="M16 6h3a1 1 0 0 1 1 1v11a2 2 0 0 1 -4 0v-13a1 1 0 0 0 -1 -1h-10a1 1 0 0 0 -1 1v12a3 3 0 0 0 3 3h11"
-            />
-            <path d="M8 8l4 0" />
-            <path d="M8 12l4 0" />
-            <path d="M8 16l4 0" />
-        </svg>
+    <a
+        href="/"
+        class="nav-button {% if page.url == '/' %}nav-button-active{% endif %}"
+    >
+        {% svg icons/news.svg %}
         <span class="nav-button-label">Стрічка</span>
     </a>
-    <a href="#" class="nav-button">
-        <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="24"
-            height="24"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="1.75"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            class="icon icon-tabler icons-tabler-outline icon-tabler-list-details"
-        >
-            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-            <path d="M13 5h8" />
-            <path d="M13 9h5" />
-            <path d="M13 15h8" />
-            <path d="M13 19h5" />
-            <path
-                d="M3 4m0 1a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v4a1 1 0 0 1 -1 1h-4a1 1 0 0 1 -1 -1z"
-            />
-            <path
-                d="M3 14m0 1a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v4a1 1 0 0 1 -1 1h-4a1 1 0 0 1 -1 -1z"
-            />
-        </svg>
+    <a
+        href="/collections"
+        class="nav-button {% if page.url == '/collections.html' %}nav-button-active{% endif %}"
+    >
+        {% svg icons/folders.svg %}
         <span class="nav-button-label">Колекції</span>
     </a>
-    <a href="#" class="nav-button">
-        <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="24"
-            height="24"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="1.75"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            class="icon icon-tabler icons-tabler-outline icon-tabler-circle-check"
-        >
-            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-            <path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0" />
-            <path d="M9 12l2 2l4 -4" />
-        </svg>
+    <a
+        href="/subscriptions"
+        class="nav-button {% if page.url == '/subscriptions.html' %}nav-button-active{% endif %}"
+    >
+        {% svg icons/circle-check.svg %}
         <span class="nav-button-label">Підписки</span>
     </a>
 </nav>
@@ -100,21 +52,7 @@
         <span class="nav-button-label">Znaj.ua</span>
     </a>
     <a href="#" class="nav-button">
-        <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="24"
-            height="24"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="1.75"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            class="icon icon-tabler icons-tabler-outline icon-tabler-chevron-down"
-        >
-            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-            <path d="M6 9l6 6l6 -6" />
-        </svg>
+        {% svg icons/chevron-down.svg %}
         <span class="nav-button-label">Показати всі</span>
     </a>
 </nav>

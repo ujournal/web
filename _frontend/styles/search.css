@@ -1,0 +1,11 @@
+.search {
+    @apply flex flex-row items-center gap-1 bg-white border border-stone-300 rounded-lg h-11 px-3 text-stone-300 transition;
+}
+
+.search:has(.search-input:focus) {
+    @apply border-blue-500 text-blue-500;
+}
+
+.search-input {
+    @apply flex-1 self-stretch px-2 outline-none placeholder-stone-300 text-stone-950;
+}

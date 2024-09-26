@@ -1,3 +1,19 @@
 .box {
     @apply w-full flex flex-col gap-4 bg-white rounded-xl p-6 border border-stone-200 border-opacity-60 shadow-sm shadow-stone-200/15 max-w-screen-sm;
 }
+
+.box-header {
+    @apply bg-stone-50 flex flex-row justify-between rounded-t-xl items-center p-2 -mx-6 -mt-6;
+}
+
+.box > *:is(.box-header-start, .box-header-end) {
+    @apply w-10 flex-shrink-0;
+}
+
+.box-header .button {
+    @apply bg-stone-50 hover:bg-stone-100;
+}
+
+.box-title {
+    @apply font-medium truncate;
+}
