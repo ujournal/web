@@ -2,7 +2,7 @@
 title: Колекції стрічок
 ---
 
-<div class="box">
+<div class="box" x-data="{ q: '', isShowing(el) { return !this.q || el.firstElementChild.innerText.toUpperCase().includes(this.q.toUpperCase()); } }">
   <div class="box-header">
     <div class="box-header-start"></div>
     <div class="box-title">{{page.title}}</div>
@@ -13,9 +13,9 @@ title: Колекції стрічок
     </div>
   </div>
 
-  <form class="search">
+  <form class="search" x-on:submit.prevent>
     {% svg icons/search.svg %}
-    <input class="search-input" type="search" placeholder="Шукати колекцію" />
+    <input name="q" class="search-input" type="search" placeholder="Шукати колекцію" x-model="q" />
   </form>
 
   <nav class="list">

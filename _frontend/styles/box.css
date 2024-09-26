@@ -3,7 +3,7 @@
 }
 
 .box-header {
-    @apply bg-stone-50 flex flex-row justify-between rounded-t-xl items-center p-2 -mx-6 -mt-6;
+    @apply bg-stone-50 flex flex-row justify-between rounded-t-xl items-center p-2 -mx-6 -mt-6 mb-2;
 }
 
 .box > *:is(.box-header-start, .box-header-end) {
