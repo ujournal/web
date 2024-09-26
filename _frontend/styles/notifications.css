@@ -1,0 +1,15 @@
+.notifications {
+    @apply flex flex-col gap-2 w-full max-w-80;
+}
+
+.notifications-item {
+    @apply flex flex-col py-2 px-3 rounded-md transition bg-white hover:bg-stone-50;
+}
+
+.notifications-item > a {
+    @apply flex flex-col;
+}
+
+.notifications-item.notifications-item-active {
+    @apply bg-orange-50;
+}

@@ -1,0 +1,28 @@
+.post {
+    @apply box;
+}
+
+.post-header {
+    @apply flex flex-row gap-4 items-center justify-between;
+}
+
+.post-summary {
+    @apply flex flex-col gap-2;
+}
+
+.post-title {
+    @apply text-xl font-bold;
+}
+
+.post-title > a,
+.post-description > a {
+    @apply block;
+}
+
+.post-description {
+    @apply text-base;
+}
+
+.post-footer {
+    @apply flex flex-row gap-4 justify-between;
+}

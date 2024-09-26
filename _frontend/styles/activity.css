@@ -1,0 +1,16 @@
+.activity {
+    @apply flex flex-col gap-4;
+    --avatar-s: 2rem;
+}
+
+.activity-item {
+    @apply flex flex-col gap-1;
+}
+
+.activity-description {
+    @apply text-sm;
+}
+
+.activity-description > a {
+    @apply block;
+}

@@ -1,0 +1,9 @@
+.avatar {
+    @apply relative bg-stone-50 rounded-full overflow-hidden border border-stone-900/5;
+    width: var(--avatar-s, 2.5rem);
+    height: var(--avatar-s, 2.5rem);
+}
+
+.avatar > img {
+    @apply w-full h-full object-cover;
+}

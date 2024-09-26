@@ -1,0 +1,23 @@
+.reactions {
+    @apply w-full flex flex-row items-center justify-between gap-2;
+}
+
+.reactions-button {
+    @apply flex flex-row gap-2 items-center justify-center bg-white hover:bg-stone-50 transition h-8 px-3 rounded-2xl text-sm text-stone-600;
+}
+
+.reactions-button.reactions-button-visual {
+    @apply bg-stone-50 hover:bg-stone-100;
+}
+
+.reactions-button.reactions-button-plus {
+    @apply w-8 px-0 mr-auto;
+}
+
+.reactions-button > svg {
+    @apply w-5 h-5;
+}
+
+.reactions-emoji {
+    @apply text-lg;
+}

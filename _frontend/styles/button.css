@@ -1,0 +1,19 @@
+.button {
+    @apply flex flex-row gap-2 items-center justify-center px-3 h-10 min-w-10 transition rounded-lg bg-white hover:bg-stone-50 font-medium;
+}
+
+.button.button-primary {
+    @apply bg-orange-100 hover:bg-orange-200 border border-stone-900/5;
+}
+
+.button-label {
+    @apply truncate;
+}
+
+.button:has(> svg:first-child) {
+    @apply pl-2;
+}
+
+.button:has(> svg:last-child) {
+    @apply pr-2;
+}

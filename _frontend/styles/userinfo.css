@@ -1,0 +1,21 @@
+.userinfo {
+    @apply grid auto-rows-auto gap-x-3 text-sm min-w-0;
+    grid-template-columns: var(--avatar-s, 2.5rem) auto;
+}
+
+.userinfo-image {
+    @apply avatar row-span-2;
+    align-self: center;
+}
+
+.userinfo-name {
+    @apply font-bold;
+}
+
+.userinfo-status {
+    @apply font-normal;
+}
+
+.userinfo-caption {
+    @apply text-stone-400 text-nowrap truncate;
+}

@@ -1,0 +1,25 @@
+.media {
+    @apply block relative aspect-video bg-stone-50 rounded-xl border border-stone-900/5 overflow-hidden;
+}
+
+.media > img {
+    @apply w-full h-full object-cover;
+}
+
+.media-summary {
+    @apply grid auto-rows-auto gap-x-3 absolute left-2 right-2 bottom-2 bg-black/50 p-2 rounded-lg text-white;
+    grid-template-columns: 2.5rem auto;
+}
+
+.media-icon {
+    @apply row-span-2 w-10 h-10 flex items-center justify-center;
+    align-self: center;
+}
+
+.media-title {
+    @apply text-nowrap truncate font-medium;
+}
+
+.media-caption {
+    @apply text-sm text-white/75;
+}
