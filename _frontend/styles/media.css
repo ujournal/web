@@ -7,7 +7,7 @@
 }
 
 .media-summary {
-    @apply grid auto-rows-auto gap-x-3 absolute left-2 right-2 bottom-2 bg-black/50 p-2 rounded-lg text-white;
+    @apply grid auto-rows-auto gap-x-2 absolute left-2 right-2 bottom-2 bg-black/50 p-2 rounded-lg text-white;
     grid-template-columns: 2.5rem auto;
 }
 

@@ -50,7 +50,7 @@ defaults:
       layout: collection
       box_list_item: "collections/box_list_item_feed.html"
   - scope:
-      path: "dev"
+      path: "docs"
     values:
       layout: docs
       aside_after: false
