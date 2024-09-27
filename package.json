@@ -1,7 +1,8 @@
 {
   "dependencies": {
     "alpinejs": "^3.14.1",
-    "tailwindcss": "^3.4.13"
+    "tailwindcss": "^3.4.13",
+    "tocbot": "^4.30.0"
   },
   "optionalDependencies": {
     "@rollup/rollup-darwin-arm64": "^4.21.3"

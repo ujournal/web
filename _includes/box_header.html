@@ -1,3 +1,10 @@
+<!--prettier-ignore-->
+{% if include.title %}
+{% assign title=include.title %}
+{% else %}
+{% assign title=page.title %}
+{% endif %}
+
 <div class="box-header">
     <div class="box-header-start">
         <!--prettier-ignore-->
@@ -5,7 +12,7 @@
         {% include {{include.include_start}} %}
         {% endif %}
     </div>
-    <div class="box-title">{{include.title}}</div>
+    <h1 class="box-title">{{title}}</h1>
     <div class="box-header-end">
         <!--prettier-ignore-->
         {% if include.include_end %}

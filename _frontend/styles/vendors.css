@@ -1,3 +1,2 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "./vendors/tocbot.css";
+@import "./vendors/tailwind.css";

@@ -1,0 +1,23 @@
+.content {
+    @apply flex flex-col gap-4 text-lg;
+}
+
+.content ul {
+    @apply pl-6 list-disc flex flex-col gap-2;
+}
+
+.content a {
+    @apply text-blue-500 hover:text-orange-500;
+}
+
+.content h1 {
+    @apply text-2xl font-bold;
+}
+
+.content h2 {
+    @apply text-xl font-bold;
+}
+
+.content h3 {
+    @apply text-lg font-bold;
+}

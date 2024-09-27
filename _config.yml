@@ -27,7 +27,10 @@ description: >- # this means to ignore newlines until "baseurl:"
 baseurl: "" # the subpath of your site, e.g. /blog
 url: "https://web.ujournal.com.ua" # the base hostname & protocol for your site, e.g. http://example.com
 
-# Build settings
+toc: true
+
+svg:
+  optimize: true
 
 defaults:
   - scope:
@@ -46,11 +49,19 @@ defaults:
     values:
       layout: collection
       box_list_item: "collections/box_list_item_feed.html"
+  - scope:
+      path: "dev"
+    values:
+      layout: docs
+      aside_after: false
+      toc: true
 
 collections:
   collections:
     output: true
     permalink: /:collection/:name
+
+# Build settings
 
 plugins:
   - jekyll/vite
@@ -58,8 +69,6 @@ plugins:
   - jekyll-sitemap
   - jekyll-inline-svg
 
-svg:
-  optimize: true
 # Exclude from processing.
 # The following items will not be processed, by default.
 # Any item listed under the `exclude:` key here will be automatically added to

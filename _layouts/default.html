@@ -36,15 +36,19 @@
 
         <div class="layout-central">
             <div class="layout-container">
+                {% if page.aside_before %}
                 <aside class="layout-aside layout-aside-before">
                     {% include {{ page.aside_before }} %}
                 </aside>
+                {% endif %}
 
                 <main class="layout-main">{{ content }}</main>
 
+                {% if page.aside_after %}
                 <aside class="layout-aside layout-aside-after">
                     {% include {{ page.aside_after }} %}
                 </aside>
+                {% endif %}
             </div>
         </div>
 

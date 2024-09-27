@@ -1,0 +1,25 @@
+@import "tocbot/dist/tocbot.css";
+
+.toc-list {
+    @apply flex flex-col p-0;
+}
+
+.toc-list-item {
+    @apply relative px-4 py-1 text-base;
+}
+
+.toc-list-item a {
+    @apply text-base;
+}
+
+.toc-list-item.is-active-li a.is-active-link {
+    @apply font-medium;
+}
+
+.toc-link:before {
+    @apply absolute left-0 top-0 h-full bg-stone-100;
+}
+
+.toc-link.is-active-link:before {
+    @apply bg-orange-500;
+}

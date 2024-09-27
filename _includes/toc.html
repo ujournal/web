@@ -1,0 +1,13 @@
+<!--prettier-ignore-->
+{% assign enable_toc = false %}
+{% if site.toc and page.toc %}
+  {% if page.content contains '##' or page.content contains '###' %}
+    {% assign enable_toc = true %}
+  {% endif %}
+{% endif %}
+
+{% if enable_toc %}
+<section id="toc-wrapper" class="d-none ps-0 pe-4">
+    <nav id="toc"></nav>
+</section>
+{% endif %}

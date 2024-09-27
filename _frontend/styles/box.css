@@ -17,3 +17,15 @@
 .box-title {
     @apply font-medium truncate;
 }
+
+.box.box-docs {
+    @apply flex-row max-w-none items-start;
+}
+
+.box.box-docs > .content {
+    @apply flex-1;
+}
+
+.box.box-docs #toc-wrapper {
+    @apply sticky top-0 w-56 flex-shrink-0 overflow-hidden;
+}
