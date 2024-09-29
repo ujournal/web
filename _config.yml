@@ -37,12 +37,12 @@ defaults:
       path: "" # an empty string here means all files in the project
     values:
       layout: default
-      header_start: "header_logo.html"
+      header_start: "layout/header_logo.html"
       header_center: false
-      header_end: "header_profile.html"
-      aside_before: "aside_nav.html"
-      aside_after: "aside_activity.html"
-      footer: "footer.html"
+      header_end: "layout/header_profile.html"
+      aside_before: "layout/aside_nav.html"
+      aside_after: "layout/aside_activity.html"
+      footer: "layout/footer.html"
   - scope:
       path: ""
       type: "collections"
