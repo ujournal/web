@@ -1,21 +1,7 @@
 <!--prettier-ignore-->
-{% if include.image %}
 {% assign image = include.image %}
-{% else %}
-{% assign image = 'https://www.gravatar.com/avatar/2c7d99fe281ecd3bcd65ab915bac6dd5?s=250' %}
-{% endif %}
-
-{% if include.name %}
 {% assign name = include.name %}
-{% else %}
-{% assign name = 'Ігор Віговський' %}
-{% endif %}
-
-{% if include.caption %}
 {% assign caption = include.caption %}
-{% else %}
-{% assign caption = '10 хвилин тому' %}
-{% endif %}
 
 <div class="userinfo">
     <a href="#" class="userinfo-image">
@@ -24,5 +10,7 @@
     <div class="userinfo-name">
         <a href="#">{{name}}</a>
     </div>
+    {% if caption %}
     <div class="userinfo-caption">{{caption}}</div>
+    {% endif %}
 </div>

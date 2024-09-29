@@ -1,11 +1,20 @@
 .userinfo {
-    @apply grid auto-rows-auto gap-x-3 text-sm min-w-0;
+    @apply flex flex-row items-center gap-x-3 text-sm min-w-0;
     grid-template-columns: var(--avatar-s, 2.5rem) auto;
 }
 
 .userinfo-image {
-    @apply avatar row-span-2;
+    @apply avatar;
     align-self: center;
+}
+
+.userinfo:has(.userinfo-caption) {
+    @apply grid auto-rows-auto gap-x-3 text-sm min-w-0;
+    grid-template-columns: var(--avatar-s, 2.5rem) auto;
+}
+
+.userinfo:has(.userinfo-caption) .userinfo-image {
+    @apply row-span-2;
 }
 
 .userinfo-name {

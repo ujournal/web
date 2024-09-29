@@ -1,8 +1,11 @@
 ---
 title: Підписки
+box_list_item: "subscriptions/box_list_item.html"
 ---
 
-<div class="box">
-    <!--prettier-ignore-->
-    {% include box_header.html title=page.title %}
-</div>
+<!--prettier-ignore-->
+{% include box_list.html
+        title=page.title
+        list=site.data.subscriptions
+        search_placeholder="Шукати стрічку в підписках"
+%}

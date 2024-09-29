@@ -1,6 +1,6 @@
 ---
 title: API
-back_url: /dev/
+back_url: /docs/
 ---
 
 ## Автентифікація

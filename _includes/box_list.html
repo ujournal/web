@@ -9,16 +9,7 @@
             include_end=include.include_end
     %}
 
-    <form class="search" x-on:submit.prevent>
-        {% svg icons/search.svg %}
-        <input
-            name="q"
-            class="search-input"
-            type="search"
-            placeholder="{{include.search_placeholder}}"
-            x-model="q"
-        />
-    </form>
+    {% include search.html placeholder=include.search_placeholder %}
 
     <!--prettier-ignore-->
     {% if page.box_list_item %}
@@ -27,8 +18,11 @@
     {% assign list_item = "list_item.html" %}
     {% endif %}
 
+    {% assign list_size = include.list | size %}
+
     <nav class="list">
         <!--prettier-ignore-->
+        {% if list_size > 0 %}
         {% for item in include.list %}
         {% include {{list_item}}
                 name=item.title
@@ -37,5 +31,8 @@
                 description=item.description
         %}
         {% endfor %}
+        {% else %}
+        <span class="list-empty">Порожньо</span>
+        {% endif %}
     </nav>
 </div>

@@ -6,11 +6,19 @@
     @apply flex flex-row items-center gap-4 h-11 rounded-lg bg-white transition hover:bg-orange-50 hover:text-orange-500 px-3;
 }
 
+.list-item:hover .button {
+    @apply bg-orange-50;
+}
+
+.list-item > *:is(a, .button):first-child {
+    @apply mr-auto;
+}
+
 .list-item-label {
     @apply text-stone-400;
 }
 
-.list .button {
+.list > .button:first-child {
     @apply bg-transparent !px-0 mr-auto;
 }
 
@@ -27,6 +35,6 @@
     @apply avatar w-6 h-6;
 }
 
-.list-description {
-    @apply text-stone-400;
+.list-empty {
+    @apply px-4 py-8 text-center text-stone-400 bg-stone-50 rounded-lg;
 }

@@ -1,0 +1,14 @@
+<div
+    href="{{include.url}}"
+    class="list-item list-item-feed"
+    x-show="isShowing($el)"
+>
+    <a href="#">
+        {% include userinfo_span.html name=include.name image=include.image %}
+    </a>
+
+    <button type="button" class="button">
+        {% svg icons/circle-check.svg %}
+        <span class="button-label">В підписках</span>
+    </button>
+</div>

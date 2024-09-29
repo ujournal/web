@@ -1,0 +1,10 @@
+<form class="search" x-on:submit.prevent>
+    {% svg icons/search.svg %}
+    <input
+        name="q"
+        class="search-input"
+        type="search"
+        placeholder="{{include.placeholder}}"
+        x-model="q"
+    />
+</form>

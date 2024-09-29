@@ -1,6 +1,6 @@
 ---
 title: Веб-додаток
-back_url: /dev/
+back_url: /docs/
 ---
 
 Інструкції з разгортання Jekyll на сервері:
