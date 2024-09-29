@@ -19,7 +19,7 @@
 }
 
 .box.box-docs {
-    @apply flex-row max-w-none items-start;
+    @apply flex-row max-w-none items-start gap-6;
 }
 
 .box.box-docs > .content {

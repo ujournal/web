@@ -5,15 +5,19 @@
 }
 
 .toc-list-item {
-    @apply relative px-4 py-1 text-base;
+    @apply relative px-4 py-1 text-base leading-5;
 }
 
 .toc-list-item a {
-    @apply text-base;
+    @apply text-sm;
+}
+
+.toc-list-item a::before {
+    @apply m-0;
 }
 
 .toc-list-item.is-active-li a.is-active-link {
-    @apply font-medium;
+    @apply font-medium text-orange-500;
 }
 
 .toc-link:before {

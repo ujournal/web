@@ -25,13 +25,9 @@
 }
 
 .media.media-placeholder {
-    @apply overflow-hidden border-none pointer-events-none;
+    @apply overflow-hidden border-none pointer-events-none animate-pulse;
 }
 
-.media.media-placeholder > img {
+.media.media-placeholder > *:is(img, .media-summary) {
     @apply opacity-0;
-}
-
-.media.media-placeholder::before {
-    @apply absolute top-0 left-0 right-0 bottom-0 bg-stone-50 content-[''] z-10 -m-1;
 }

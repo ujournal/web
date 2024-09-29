@@ -1,0 +1,25 @@
+<!--prettier-ignore-->
+{% if includes.current %}
+{% assign current=includes.current %}
+{% else %}
+{% assign current=page.url %}
+{% endif %}
+
+<nav class="nav {% if include.placeholder %}nav-placeholder{% endif %}">
+    {% for item in include.items %}
+    <!--prettier-ignore-->
+    <a
+        href="{{item.url}}"
+        class="
+            nav-button
+            {% if item.highlight != false and item.url != '/' and current contains item.url %}nav-button-active{% endif %}
+            {% if item.highlight != false and item.url == '/' and current == item.url %}nav-button-active{% endif %}
+        "
+    >
+        <!--prettier-ignore-->
+        {% if item.icon %}{% svg icons/{{item.icon}}.svg %}{% endif %}
+        {% if item.image %}<img src="{{item.image}}" />{% endif %}
+        <span class="nav-button-label">{{item.title}}</span>
+    </a>
+    {% endfor %}
+</nav>

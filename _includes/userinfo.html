@@ -1,16 +1,34 @@
-<!--prettier-ignore-->
-{% assign image = include.image %}
-{% assign name = include.name %}
-{% assign caption = include.caption %}
-
-<div class="userinfo">
-    <a href="#" class="userinfo-image">
-        <img src="{{image}}" />
+<div
+    class="userinfo {% if include.placeholder %}userinfo-placeholder{% endif %}"
+>
+    {% if include.url %}
+    <a href="{{include.url}}" class="userinfo-image">
+        <img src="{{include.image}}" />
     </a>
-    <div class="userinfo-name">
-        <a href="#">{{name}}</a>
+    {% else %}
+    <div class="userinfo-image">
+        <img src="{{include.image}}" />
     </div>
-    {% if caption %}
-    <div class="userinfo-caption">{{caption}}</div>
+    {% endif %}
+    <div class="userinfo-name">
+        {% if include.url %}
+        <a href="{{include.url}}">{{include.name}}</a>
+        {% else %}
+        <span>{{include.name}}</span>
+        {% endif %}
+        <!--prettier-ignore-->
+        {% if include.status %}
+        {% if include.status_url %}
+        <a href="{{include.status_url}}" class="userinfo-status">
+            {{include.status}}
+        </a>
+        {% else %}
+        <span class="userinfo-status">{{include.status}}</span>
+        <!--prettier-ignore-->
+        {% endif %}
+        {% endif %}
+    </div>
+    {% if include.caption %}
+    <div class="userinfo-caption">{{include.caption}}</div>
     {% endif %}
 </div>

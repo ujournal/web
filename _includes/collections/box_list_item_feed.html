@@ -3,8 +3,8 @@
     class="list-item list-item-feed"
     x-show="isShowing($el)"
 >
-    {% include userinfo_span.html name=include.name image=include.image
-    caption=include.description %}
+    {% include userinfo.html name=include.name image=include.image
+    caption=include.description url=false %}
 
     <!--prettier-ignore-->
     {% svg icons/chevron-right.svg %}

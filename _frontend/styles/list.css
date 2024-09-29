@@ -3,10 +3,22 @@
 }
 
 .list-item {
-    @apply flex flex-row items-center gap-4 h-11 rounded-lg bg-white transition hover:bg-orange-50 hover:text-orange-500 px-3;
+    @apply flex flex-row items-center gap-4 h-11 rounded-lg bg-white transition px-3;
 }
 
-.list-item:hover .button {
+div.list-item {
+    @apply hover:bg-stone-50;
+}
+
+div.list-item:hover .button {
+    @apply bg-stone-50;
+}
+
+a.list-item {
+    @apply hover:bg-orange-50 hover:text-orange-500;
+}
+
+a.list-item:hover .button {
     @apply bg-orange-50;
 }
 

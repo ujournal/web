@@ -1,58 +1,7 @@
-<nav class="nav">
-    <a
-        href="/"
-        class="nav-button {% if page.url == '/' %}nav-button-active{% endif %}"
-    >
-        {% svg icons/news.svg %}
-        <span class="nav-button-label">Стрічка</span>
-    </a>
-    <a
-        href="/collections"
-        class="nav-button {% if page.url contains '/collections' %}nav-button-active{% endif %}"
-    >
-        {% svg icons/folders.svg %}
-        <span class="nav-button-label">Колекції</span>
-    </a>
-    <a
-        href="/subscriptions"
-        class="nav-button {% if page.url == '/subscriptions.html' %}nav-button-active{% endif %}"
-    >
-        {% svg icons/circle-check.svg %}
-        <span class="nav-button-label">Підписки</span>
-    </a>
-</nav>
+<!--prettier-ignore-->
 
-<nav class="nav">
-    <a href="#" class="nav-button">
-        <img src="/assets/ujournal-orange.png" />
-        <span class="nav-button-label">UJournal</span>
-    </a>
-    <a href="#" class="nav-button">
-        <img src="/assets/itc.png" />
-        <span class="nav-button-label">ITC.UA</span>
-    </a>
-    <a href="#" class="nav-button">
-        <img src="/assets/up.png" />
-        <span class="nav-button-label">Українська правда</span>
-    </a>
-    <a href="#" class="nav-button">
-        <img src="/assets/nov24.png" />
-        <span class="nav-button-label">Новини24</span>
-    </a>
-    <a href="#" class="nav-button">
-        <img src="/assets/nvua.png" />
-        <span class="nav-button-label">NV.ua</span>
-    </a>
-    <a href="#" class="nav-button">
-        <img src="/assets/ob.png" />
-        <span class="nav-button-label">Обозрєватєль</span>
-    </a>
-    <a href="#" class="nav-button">
-        <img src="/assets/znajua.png" />
-        <span class="nav-button-label">Znaj.ua</span>
-    </a>
-    <a href="#" class="nav-button">
-        {% svg icons/chevron-down.svg %}
-        <span class="nav-button-label">Показати всі</span>
-    </a>
-</nav>
+{% include nav.html items=site.data.nav %}
+
+{% assign subscriptions = site.data.subscriptions | concat: site.data.subscriptions_more %}
+
+{% include nav.html items=subscriptions %}

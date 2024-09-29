@@ -30,3 +30,19 @@
 .nav-emoji {
     @apply text-lg;
 }
+
+.nav.nav-placeholder {
+    @apply pointer-events-none;
+}
+
+.nav.nav-placeholder .nav-button > *:is(img, svg) {
+    @apply hidden;
+}
+
+.nav.nav-placeholder .nav-button:is(:has(img), :has(svg))::before {
+    @apply content-[''] w-6 h-6 bg-stone-50 rounded-full animate-pulse;
+}
+
+.nav.nav-placeholder .nav-button-label {
+    @apply flex-1 bg-stone-50 text-transparent rounded-md animate-pulse;
+}

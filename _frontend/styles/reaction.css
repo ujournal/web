@@ -23,5 +23,5 @@
 }
 
 .reactions.reactions-placeholder .reactions-button {
-    @apply pointer-events-none text-transparent;
+    @apply pointer-events-none text-transparent animate-pulse;
 }

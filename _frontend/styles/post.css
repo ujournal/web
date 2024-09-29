@@ -28,16 +28,20 @@
 }
 
 .post.post-placeholder {
-    @apply border-none shadow-none;
+    @apply border-none shadow-none pointer-events-none select-none;
 }
 
 .post.post-placeholder *:is(.post-title, .post-description) {
-    @apply overflow-hidden text-transparent bg-stone-50 rounded-md pointer-events-none;
+    @apply overflow-hidden text-transparent bg-stone-50 rounded-md pointer-events-none animate-pulse;
     height: 1.5rem;
 }
 
 .post.post-placeholder .post-title {
     height: 1.75rem;
+}
+
+.post.post-placeholder .post-description {
+    width: 75%;
 }
 
 .post.post-placeholder .post-header > .button:last-child {

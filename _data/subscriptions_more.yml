@@ -1,0 +1,4 @@
+- url: /subscriptions
+  title: Показати всі
+  icon: chevron-down
+  highlight: false

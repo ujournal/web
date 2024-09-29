@@ -1,0 +1,9 @@
+- url: /
+  title: Стрічка
+  icon: news
+- url: /collections
+  title: Колекції
+  icon: folders
+- url: /subscriptions
+  title: Підписки
+  icon: circle-check
