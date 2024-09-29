@@ -21,3 +21,7 @@
 .reactions-emoji {
     @apply text-lg;
 }
+
+.reactions.reactions-placeholder .reactions-button {
+    @apply pointer-events-none text-transparent;
+}

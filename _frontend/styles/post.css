@@ -26,3 +26,20 @@
 .post-footer {
     @apply flex flex-row gap-4 justify-between;
 }
+
+.post.post-placeholder {
+    @apply border-none shadow-none;
+}
+
+.post.post-placeholder *:is(.post-title, .post-description) {
+    @apply overflow-hidden text-transparent bg-stone-50 rounded-md pointer-events-none;
+    height: 1.5rem;
+}
+
+.post.post-placeholder .post-title {
+    height: 1.75rem;
+}
+
+.post.post-placeholder .post-header > .button:last-child {
+    @apply pointer-events-none opacity-0;
+}

@@ -1,6 +1,6 @@
-<article class="post">
+<article class="post {% if include.placeholder %}post-placeholder{% endif %}">
     <div class="post-header">
-        {% include userinfo_post.html %}
+        {% include userinfo_post.html placeholder=include.placeholder %}
         <button
             class="button"
             popovertarget="post-popover"
@@ -25,6 +25,9 @@
             </a>
         </p>
     </div>
-    {% include media.html %}
-    <div class="post-footer">{% include reactions.html %}</div>
+    {% include media.html placeholder=include.placeholder %}
+    <div class="post-footer">
+        {% include reactions.html placeholder=include.placeholder id=include.id
+        %}
+    </div>
 </article>

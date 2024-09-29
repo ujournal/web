@@ -10,6 +10,10 @@
     @apply pl-6 list-decimal flex flex-col gap-2;
 }
 
+.content *:is(ol, ul) > li > *:is(ol, ul) {
+    @apply my-2 last:mb-0;
+}
+
 .content a {
     @apply text-blue-500 hover:text-orange-500;
 }

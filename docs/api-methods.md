@@ -1,6 +1,6 @@
 ---
-title: API
-back_url: /docs/
+title: Список методів API
+back_url: /dev/
 ---
 
 ## Автентифікація

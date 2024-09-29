@@ -2,28 +2,17 @@
 title: Розробникам
 ---
 
-* [Загальна інформація](/docs/overview)
-* [Веб-додаток](/docs/web)
-* [API](/docs/api)
+## UJournal Web
 
-## Веб-додаток
+UJournal Web створено на основі статичного генератора сайтів [Jekyll](https://jekyllrb.com/) з використанням фреймворків [TailwindCSS](https://tailwindcss.com/), [AlpineJS](https://alpinejs.dev/). Код застосунку розповсюджується під [ліцензією MIT](https://uk.wikipedia.org/wiki/%D0%9B%D1%96%D1%86%D0%B5%D0%BD%D0%B7%D1%96%D1%8F_MIT).
 
-Веб-додаток створено на базі статичного генератора сайтів [Jekyll](https://jekyllrb.com/). В якості CSS фреймворка використовується [TailwindCSS](https://tailwindcss.com/), в якості JS фреймворка – [AlpineJS](https://alpinejs.dev/).
+[**Github репозиторій UJournal Web →**](https://github.com/ujournal/web)
 
-Код веб-додатка знаходиться у відкритому доступі в Github репозиторії: [github.com/ujournal/web](https://github.com/ujournal/web) і розповсюджується під [ліцензією MIT](https://uk.wikipedia.org/wiki/%D0%9B%D1%96%D1%86%D0%B5%D0%BD%D0%B7%D1%96%D1%8F_MIT).
+## UJournal API
 
-[**Читати окремий розділ про веб-додаток**](/docs/web)
+UJournal API створено на основі [Laravel](https://laravel.com/), база даних [MySQL](https://www.mysql.com/). Автентифікація відбувається через [OAuth провайдер Google](https://developers.google.com/identity/protocols/oauth2).
 
-## API
-
-API створено на базі Laravel (PHP), в якості СУБД – MySQL. Автентифікація відбувається через сторонній OAuth провайдер, Google.
-
-Частина контента знаходиться в статиці в [Cloudflare R2](https://developers.cloudflare.com/r2/):
-
-- Підписки
-- Пости
-
-API відповідальний за наступні функції:
+UJournal API відповідальний за наступні функції:
 
 - Створення постів
 - Створення/читання коментарів
@@ -31,4 +20,4 @@ API відповідальний за наступні функції:
 - Реакції
 - Інформація про кількість реакцій
 
-[**Читати окремий розділ про API**](/docs/api)
+[**Список методів UJournal API →**](/docs/api-methods)

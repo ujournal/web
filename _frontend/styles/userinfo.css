@@ -32,3 +32,21 @@
 .userinfo-caption {
     @apply text-stone-400 text-nowrap truncate;
 }
+
+.userinfo.userinfo-placeholder .userinfo-image {
+    @apply border-none;
+}
+
+.userinfo.userinfo-placeholder .userinfo-image > img {
+    @apply opacity-0;
+}
+
+.userinfo.userinfo-placeholder .userinfo-name {
+    @apply text-transparent pointer-events-none bg-stone-50 overflow-hidden w-52 rounded-t-md rounded-br-md;
+    height: 1.5rem;
+}
+
+.userinfo.userinfo-placeholder .userinfo-caption {
+    @apply text-transparent pointer-events-none bg-stone-50 overflow-hidden w-40 rounded-b-md;
+    height: 1.25rem;
+}
