@@ -4,6 +4,7 @@ export async function onRequest({ request, env }) {
 
     if (!code) {
       const params = new URLSearchParams({
+        response_type: "code",
         client_id: env.CLIENT_ID,
         scope: env.SCOPE,
         redirect_uri: env.REDIRECT_URI,
