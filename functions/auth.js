@@ -150,10 +150,10 @@ async function importKey(key) {
     enc.encode(key),
     {
       name: "HMAC",
-      hash: { name: "SHA-512" },
+      hash: { name: "SHA-256" },
     },
-    false, // export = false
-    ["sign", "verify"], // what this key can do
+    false,
+    ["sign", "verify"],
   );
 }
 
