@@ -10,6 +10,15 @@ export async function onRequest({ request, env }) {
         redirect_uri: env.REDIRECT_URI,
       });
 
+      return new Response(
+        `<a href="${env.AUTHORIZE_URL}?${params}">${env.AUTHORIZE_URL}?${params}</a>`,
+        {
+          headers: {
+            "content-type": "text/html;charset=UTF-8",
+          },
+        },
+      );
+
       return Response.redirect(`${env.AUTHORIZE_URL}?${params}`, 301);
     }
 
