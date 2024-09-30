@@ -52,7 +52,7 @@ function buildHtmlResponse(html) {
 }
 
 function buildPostMessageHtml(data) {
-  return `<script>opener?.postMessage({ type: 'auth', data: ${data} }, '*'); close();</script>`;
+  return `<script>opener?.postMessage({ type: 'auth', data: ${JSON.stringify(data)} }, '*'); close();</script>`;
 }
 
 async function signJwt(
