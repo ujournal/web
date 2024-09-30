@@ -3,7 +3,11 @@
 }
 
 .list-item {
-    @apply flex flex-row items-center gap-4 h-11 rounded-lg bg-white transition px-3;
+    @apply flex flex-row items-center gap-4 h-11 rounded-lg bg-white transition px-2;
+}
+
+.list-item .button:first-child {
+    @apply px-0;
 }
 
 div.list-item {

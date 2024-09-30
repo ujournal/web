@@ -1,8 +1,16 @@
 <article class="post {% if include.placeholder %}post-placeholder{% endif %}">
     <div class="post-header">
-        {% include userinfo.html status='автор Ігор Віговський' name='Кіно
-        серіали та ТБ' image='/assets/topic-cinema.png' caption='10 хвилин тому'
-        url='#' status_url='#' placeholder=include.placeholder %}
+        <!--prettier-ignore-->
+        {% include userinfo.html
+            status=include.author_status
+            name=include.author_name
+            image=include.author_image
+            caption=include.author_caption
+            url=include.author_url
+            status=include.author_status
+            status_url=include.author_status_url
+            placeholder=include.placeholder
+        %}
         <button
             class="button"
             popovertarget="post-popover"
@@ -13,23 +21,31 @@
         </button>
     </div>
     <div class="post-summary">
+        <!--prettier-ignore-->
+        {% if include.title %}
         <h2 class="post-title">
-            <a href="#">
-                Серіал «Володар перснів»: Том Бомбаділ підказує, ким є
-                Незнайомець, шоуранер обіцяє відповідь в цьому сезоні
-            </a>
+            <a href="{{include.url}}">{{include.title}}</a>
         </h2>
+        {% endif %}
+        <!--prettier-ignore-->
+        {% if include.description %}
         <p class="post-description">
-            <a href="#">
-                Схоже, інтрига з особою Незнайомця в серіалі «Володар перснів:
-                Персні влади» завершується. Том Бомбаділ практично назвав Істарі
-                цитатою з Толкіна.
-            </a>
+            <a href="{{include.url}}">{{include.description}}</a>
         </p>
+        {% endif %}
     </div>
-    {% include media.html placeholder=include.placeholder %}
+    <!--prettier-ignore-->
+    {% include media.html
+        title=include.media_title
+        caption=include.media_caption
+        image=include.media_image
+        placeholder=include.placeholder
+    %}
     <div class="post-footer">
-        {% include reactions.html placeholder=include.placeholder id=include.id
+        <!--prettier-ignore-->
+        {% include reactions.html
+            placeholder=include.placeholder
+            id=include.id
         %}
     </div>
 </article>

@@ -1,5 +1,4 @@
 body {
-    @apply flex flex-col items-center bg-stone-100 text-stone-800 overscroll-none;
 }
 
 a {

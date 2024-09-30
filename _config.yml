@@ -37,6 +37,7 @@ defaults:
       path: "" # an empty string here means all files in the project
     values:
       layout: default
+      layout_class: ""
       header_start: "layout/header_logo.html"
       header_center: false
       header_end: "layout/header_profile.html"

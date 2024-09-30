@@ -1,3 +1,7 @@
+.layout {
+    @apply flex flex-col items-center bg-stone-100 text-stone-800 overscroll-none;
+}
+
 .layout-container {
     @apply w-full flex flex-row justify-between max-w-screen-xl gap-6;
 }
@@ -32,7 +36,7 @@
 }
 
 .layout-aside {
-    @apply w-60 flex flex-col gap-6 flex-shrink-0;
+    @apply w-60 flex flex-col gap-6 flex-shrink-0 transition;
 }
 
 .layout-aside.layout-aside-before {
@@ -55,4 +59,8 @@
 
 .layout-footer > .layout-container {
     @apply justify-center;
+}
+
+.layout.layout-post .layout-aside {
+    @apply lg:opacity-25 hover:opacity-100;
 }

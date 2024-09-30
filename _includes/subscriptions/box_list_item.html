@@ -3,8 +3,9 @@
     class="list-item list-item-feed"
     x-show="isShowing($el)"
 >
-    {% include userinfo.html url=include.url name=include.name
-    image=include.image %}
+    <a href="{{include.url}}" class="button">
+        {% include userinfo.html name=include.name image=include.image %}
+    </a>
 
     <button type="button" class="button">
         {% svg icons/circle-check.svg %}

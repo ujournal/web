@@ -20,6 +20,10 @@ export default {
           to: { opacity: 1 },
         },
       },
+
+      backgroundPosition: {
+        "select-arrow": "center right 0.5rem",
+      },
     },
   },
   plugins: [],

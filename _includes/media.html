@@ -2,15 +2,10 @@
     href="#"
     class="media {% if include.placeholder %}media-placeholder{% endif %}"
 >
-    <img
-        src="https://itc.ua/wp-content/uploads/2024/09/opz2TGga2N83DQrupQeuCn-970-80.jpg-1.jpg"
-    />
+    <img src="{{include.image}}" />
     <div class="media-summary">
         <div class="media-icon">{% svg icons/external-link.svg %}</div>
-        <div class="media-title">
-            Серіал «Володар перснів»: Том Бомбаділ підказує, ким є Незнайомець,
-            шоуранер обіцяє відповідь в цьому сезоні
-        </div>
-        <div class="media-caption">youtube.com</div>
+        <div class="media-title">{{include.title}}</div>
+        <div class="media-caption">{{include.caption}}</div>
     </div>
 </a>

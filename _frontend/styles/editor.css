@@ -1,0 +1,27 @@
+.editor {
+    @apply flex flex-col bg-white rounded-lg;
+}
+
+.editor .input {
+    @apply border-t-0 rounded-t-none outline-none;
+}
+
+.editor-actions {
+    @apply flex flex-row items-center gap-1 bg-stone-50 rounded-t-lg border border-b-0 h-12 px-3 border-stone-300 transition;
+}
+
+.editor-actions button {
+    @apply w-8 h-8 flex flex-col items-center justify-center rounded-lg bg-stone-50 border border-transparent hover:bg-white hover:border-stone-200 hover:text-orange-500 transition;
+}
+
+.editor-actions button svg {
+    @apply w-5 h-5;
+}
+
+.editor:has(.input:focus) .editor-actions {
+    @apply border-blue-500 bg-blue-50;
+}
+
+.editor:has(.input:focus) .editor-actions button {
+    @apply bg-blue-50 hover:bg-white hover:border-blue-200;
+}

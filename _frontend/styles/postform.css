@@ -1,0 +1,7 @@
+.postform {
+    @apply box;
+}
+
+.postform-actions {
+    @apply flex flex-row gap-3;
+}

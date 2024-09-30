@@ -1,0 +1,59 @@
+---
+title: Пост
+layout_class: layout-post
+---
+
+<form class="postform">
+    <input
+        type="text"
+        class="input"
+        placeholder="Заголовок або посилання (YouTube, SoundCloud, Telegram, X)..."
+    />
+
+    {% include editor_input.html %}
+
+    <select class="input">
+        <option>Ігор Віговський (власна стрічка)</option>
+        <option>Війна та зброя</option>
+        <option>Гумор</option>
+        <option>Ігри</option>
+        <option>Музика</option>
+        <option>Бізнес та фінанси</option>
+        <option>Кіно серіали та ТБ</option>
+        <option>Історичне</option>
+        <option>Звірі та улюбленці</option>
+        <option>Аніме та манга</option>
+        <option>Программування та розробка</option>
+        <option>Арт та мистецтво</option>
+        <option>Їжа та напої</option>
+        <option>Спорт</option>
+        <option>Наука і техніка</option>
+        <option>Техніка та залізо</option>
+        <option>Місця та подорожі</option>
+        <option>Книги література</option>
+        <option>Програми та софт</option>
+        <option>Крипта</option>
+        <option>Політика</option>
+        <option>Навчання та освіта</option>
+        <option>Настільні ігри</option>
+        <option>Знаменитості</option>
+        <option>Автотранспорт</option>
+        <option>Зроби сам</option>
+        <option>Культура та етничність</option>
+        <option>Мода та стиль</option>
+        <option>Хобі та захоплення</option>
+        <option>Закон</option>
+        <option>Подкасти та стріми</option>
+    </select>
+
+    <div class="postform-actions">
+        <button class="button button-primary">
+            {% svg icons/send-2.svg %}
+            <span class="button-label">Відправити</span>
+        </button>
+        <button class="button">
+            {% svg icons/history.svg %}
+            <span class="button-label">Відкласти</span>
+        </button>
+    </div>
+</form>

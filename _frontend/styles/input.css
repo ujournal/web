@@ -1,0 +1,16 @@
+.input {
+    @apply border border-stone-300 h-11 px-3 rounded-lg placeholder:text-stone-400 outline-none transition;
+}
+
+.input:focus {
+    @apply border-blue-500;
+}
+
+select.input {
+    @apply appearance-none bg-select-arrow bg-no-repeat;
+    background-image: url("data:image/svg+xml,%0A%3Csvg width='24' height='24' viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M6 9L12 15L18 9' stroke='%23292524' stroke-width='1.75' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+}
+
+textarea.input {
+    @apply resize-y py-3 min-h-32;
+}
