@@ -24,7 +24,7 @@ async function fetchUserinfo(env, access_token) {
   return await response.json();
 }
 
-async function fetchToken(env) {
+async function fetchToken(env, code) {
   const params = new URLSearchParams({
     grant_type: "authorization_code",
     client_id: env.CLIENT_ID,
@@ -154,7 +154,7 @@ export async function onRequest({ request, env }) {
       return Response.redirect(url, 301);
     }
 
-    const { access_token } = await fetchToken(env);
+    const { access_token } = await fetchToken(env, code);
     const { email, locale } = await fetchUserinfo(env, access_token);
 
     return buildHtmlResponse(
