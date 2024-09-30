@@ -40,7 +40,7 @@ export async function onRequest({ request, env }) {
     const data = await response.json();
 
     return new Response(
-      `<script>parent.postMessage({ type: 'auth', data: ${JSON.stringify(data)} }, '*'); close();</script>`,
+      `<script>opener?.postMessage({ type: 'auth', data: ${JSON.stringify(data)} }, '*'); close();</script>`,
       {
         headers: {
           "content-type": "text/html;charset=UTF-8",
