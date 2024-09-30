@@ -156,12 +156,13 @@ export async function onRequest({ request, env }) {
 
     const { access_token } = await fetchToken(env, code);
     const { email, locale } = await fetchUserinfo(env, access_token);
-
-    return buildHtmlResponse(
-      buildPostMessageHtml(
-        signJwt({ email, locale }, { id: email }, env.JWT_SECRET),
-      ),
+    const token = await signJwt(
+      { email, locale },
+      { id: email },
+      env.JWT_SECRET,
     );
+
+    return buildHtmlResponse(buildPostMessageHtml({ type: "auth", token }));
   } catch (error) {
     return buildHtmlResponse(String(error));
   }
