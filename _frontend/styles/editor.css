@@ -3,7 +3,7 @@
 }
 
 .editor .input {
-    @apply border-t-0 rounded-t-none outline-none;
+    @apply max-h-96 border-t-0 rounded-t-none outline-none;
 }
 
 .editor-actions {

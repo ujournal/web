@@ -12,5 +12,17 @@ select.input {
 }
 
 textarea.input {
-    @apply resize-y py-3 min-h-32;
+    @apply !overflow-x-hidden resize-y py-3 min-h-32;
+}
+
+textarea.input::-webkit-scrollbar-thumb {
+    @apply bg-stone-200 border-4 border-solid border-transparent rounded-lg bg-clip-padding;
+}
+
+textarea.input:focus::-webkit-scrollbar-thumb {
+    @apply bg-blue-200;
+}
+
+textarea.input::-webkit-scrollbar {
+    @apply w-4;
 }
