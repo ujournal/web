@@ -142,6 +142,21 @@ function uint8ArrayToString(unsignedArray) {
   return base64string.replace(/=/g, "").replace(/\+/g, "-").replace(/\//g, "_");
 }
 
+async function importKey(key) {
+  const enc = new TextEncoder("utf-8");
+
+  return await crypto.subtle.importKey(
+    "raw",
+    enc.encode(key),
+    {
+      name: "HMAC",
+      hash: { name: "SHA-512" },
+    },
+    false, // export = false
+    ["sign", "verify"], // what this key can do
+  );
+}
+
 export async function onRequest({ request, env }) {
   try {
     const code = new URL(request.url).searchParams.get("code");
@@ -159,7 +174,11 @@ export async function onRequest({ request, env }) {
     const token = await signJwt(
       { email, locale },
       { id: email },
-      env.JWT_SECRET,
+      await importKey(env.JWT_SECRET),
+      {
+        name: "HMAC",
+        hash: "SHA-512",
+      },
     );
 
     return buildHtmlResponse(buildPostMessageHtml({ type: "auth", token }));
