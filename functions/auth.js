@@ -149,7 +149,6 @@ async function importKey(key) {
     "raw",
     enc.encode(key),
     {
-      algorithm: "HS256",
       name: "HMAC",
       hash: { name: "SHA-256" },
     },
@@ -177,6 +176,7 @@ export async function onRequest({ request, env }) {
       { id: email },
       await importKey(env.JWT_SECRET),
       {
+        algorithm: "HS256",
         name: "HMAC",
         hash: "SHA-512",
       },
