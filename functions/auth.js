@@ -1,17 +1,17 @@
 export async function onRequest({ request, env }) {
-  const code = new URL(request.url).searchParams.get("code");
-
-  if (!code) {
-    const params = new URLSearchParams({
-      client_id: env.CLIENT_ID,
-      scope: env.SCOPE,
-      redirect_uri: env.REDIRECT_URI,
-    });
-
-    return Response.redirect(`${env.AUTHORIZE_URL}?${params}`, 301);
-  }
-
   try {
+    const code = new URL(request.url).searchParams.get("code");
+
+    if (!code) {
+      const params = new URLSearchParams({
+        client_id: env.CLIENT_ID,
+        scope: env.SCOPE,
+        redirect_uri: env.REDIRECT_URI,
+      });
+
+      return Response.redirect(`${env.AUTHORIZE_URL}?${params}`, 301);
+    }
+
     const params = new URLSearchParams({
       grant_type: "authorization_code",
       client_id: env.CLIENT_ID,
