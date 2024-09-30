@@ -5,3 +5,7 @@
 .postform-actions {
     @apply flex flex-row gap-3;
 }
+
+.postform-actions .button {
+    @apply h-11;
+}
