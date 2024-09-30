@@ -149,6 +149,7 @@ async function importKey(key) {
     "raw",
     enc.encode(key),
     {
+      algorithm: "HS256",
       name: "HMAC",
       hash: { name: "SHA-256" },
     },
