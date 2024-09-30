@@ -1,0 +1,5 @@
+{
+    "require": {
+        "flarum-lang/ukrainian": "^1.48"
+    }
+}

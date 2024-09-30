@@ -1,5 +1,5 @@
 .postform {
-    @apply box;
+    @apply form box;
 }
 
 .postform-actions {

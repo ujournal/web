@@ -1,9 +1,9 @@
 .input {
-    @apply border border-stone-300 h-11 px-3 rounded-lg placeholder:text-stone-400 outline-none transition;
+    @apply bg-white border border-stone-300 h-11 px-3 rounded-lg placeholder:text-stone-400 outline-none transition;
 }
 
 .input:focus {
-    @apply border-blue-500;
+    @apply border-blue-500 shadow-sm shadow-blue-50;
 }
 
 select.input {

@@ -1,4 +1,6 @@
+html,
 body {
+    @apply min-h-screen;
 }
 
 a {

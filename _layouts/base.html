@@ -1,0 +1,21 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+
+        <title>{{ page.title }}</title>
+
+        <!-- prettier-ignore -->
+        {% include meta/favicon.html %}
+        {% include meta/env.html %}
+        {% vite_client_tag %}
+        {% vite_javascript_tag application %}
+        {% vite_stylesheet_tag application %}
+    </head>
+    <body
+        class="layout {{layout.layout_class}} {{page.layout_class}}"
+        x-data="app"
+    >
+        {{content}}
+    </body>
+</html>

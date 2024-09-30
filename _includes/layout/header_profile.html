@@ -1,25 +1,48 @@
-<a href="/post" class="button button-primary">
-    {% svg icons/plus.svg %}
-    <span class="button-label">Пост</span>
-</a>
+<template x-if="!logged">
+    <button class="button button-primary" x-on:click="login">
+        {% svg icons/plus.svg %}
+        <span class="button-label">Пост</span>
+    </button>
+</template>
 
-<button
-    class="button"
-    popovertarget="notifications-popover"
-    style="anchor-name: --notifications-button-anchor"
->
-    {% svg icons/bell.svg %}
-</button>
+<template x-if="logged">
+    <a class="button button-primary" href="/post">
+        {% svg icons/plus.svg %}
+        <span class="button-label">Пост</span>
+    </a>
+</template>
 
-<button
-    class="avatar"
-    popovertarget="profile-popover"
-    style="anchor-name: --profile-button-anchor"
->
-    <img
-        src="https://www.gravatar.com/avatar/2c7d99fe281ecd3bcd65ab915bac6dd5?s=250"
-    />
-</button>
+<template x-if="!logged">
+    <button class="button" x-on:click="login">{% svg icons/bell.svg %}</button>
+</template>
+
+<template x-if="logged">
+    <button
+        class="button"
+        popovertarget="notifications-popover"
+        style="anchor-name: --notifications-button-anchor"
+    >
+        {% svg icons/bell.svg %}
+    </button>
+</template>
+
+<template x-if="!logged">
+    <button class="button" x-on:click="login">
+        {% svg icons/user-circle.svg %}
+    </button>
+</template>
+
+<template x-if="logged">
+    <button
+        class="avatar"
+        popovertarget="profile-popover"
+        style="anchor-name: --profile-button-anchor"
+    >
+        <img
+            src="https://www.gravatar.com/avatar/2c7d99fe281ecd3bcd65ab915bac6dd5?s=250"
+        />
+    </button>
+</template>
 
 <!--prettier-ignore-->
 {% include popovers/profile_popover.html %}

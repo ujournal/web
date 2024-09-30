@@ -18,5 +18,7 @@
 @import "../styles/search.css";
 @import "../styles/content.css";
 @import "../styles/input.css";
+@import "../styles/form.css";
 @import "../styles/postform.css";
 @import "../styles/editor.css";
+@import "../styles/modal.css";

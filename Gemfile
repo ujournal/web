@@ -20,6 +20,7 @@ group :jekyll_plugins do
   gem "sass-embedded", "~> 1.78.0"
   gem "jekyll-sitemap"
   gem "jekyll-inline-svg"
+  gem "jekyll-environment-variables"
 end
 
 # Windows and JRuby does not include zoneinfo files, so bundle the tzinfo-data gem

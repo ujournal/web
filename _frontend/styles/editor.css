@@ -3,7 +3,7 @@
 }
 
 .editor .input {
-    @apply max-h-96 border-t-0 rounded-t-none outline-none;
+    @apply max-h-96 border-t-0 rounded-t-none bg-white outline-none shadow-none;
 }
 
 .editor-actions {
@@ -16,6 +16,10 @@
 
 .editor-actions button svg {
     @apply w-5 h-5;
+}
+
+.editor:has(.input:focus) {
+    @apply shadow-sm shadow-blue-50;
 }
 
 .editor:has(.input:focus) .editor-actions {

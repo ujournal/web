@@ -1,17 +1,26 @@
 <div class="editor">
     <div class="editor-actions">
-        <button type="button">{% svg icons/bold.svg %}</button>
-        <button type="button">{% svg icons/italic.svg %}</button>
-        <button type="button">{% svg icons/quote.svg %}</button>
-        <button type="button">{% svg icons/list.svg %}</button>
-        <button type="button">{% svg icons/list-numbers.svg %}</button>
-        <button type="button">{% svg icons/link.svg %}</button>
-        <button type="button">{% svg icons/photo.svg %}</button>
+        <button type="button" tabindex="-1">{% svg icons/bold.svg %}</button>
+        <button type="button" tabindex="-1">{% svg icons/italic.svg %}</button>
+        <button type="button" tabindex="-1">{% svg icons/quote.svg %}</button>
+        <button type="button" tabindex="-1">{% svg icons/list.svg %}</button>
+        <button type="button" tabindex="-1">
+            {% svg icons/list-numbers.svg %}
+        </button>
+        <button type="button" tabindex="-1">{% svg icons/link.svg %}</button>
+        <button type="button" tabindex="-1">{% svg icons/photo.svg %}</button>
     </div>
+    <!--prettier-ignore-->
     <textarea
         class="input"
         placeholder="Почніть писати..."
         x-data
         x-autosize
+        {% if include.minlength %}
+        minlength="{{include.minlength}}"
+        {% endif %}
+        {% if include.maxlength %}
+        maxlength="{{include.maxlength}}"
+        {% endif %}
     ></textarea>
 </div>

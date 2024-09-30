@@ -1,59 +1,41 @@
-<!doctype html>
-<html>
-    <head>
-        <meta charset="utf-8" />
-        <title>{{ page.title }}</title>
-        <!-- <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-        <link
-            href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
-            rel="stylesheet"
-        /> -->
+---
+layout: base
+---
 
-        {% include favicon_meta.html %}
-
-        <!-- prettier-ignore -->
-        {% vite_client_tag %}
-        {% vite_javascript_tag application %}
-        {% vite_stylesheet_tag application %}
-    </head>
-    <body class="layout {{page.layout_class}}">
-        <header class="layout-header">
-            <div class="layout-container">
-                <div class="layout-header-start">
-                    {% include {{ page.header_start }} %}
-                </div>
-                {% if page.header_center %}
-                <div class="layout-header-center">
-                    {% include {{ page.header_center }} %}
-                </div>
-                {% endif %}
-                <div class="layout-header-end">
-                    {% include {{ page.header_end }} %}
-                </div>
-            </div>
-        </header>
-
-        <div class="layout-central">
-            <div class="layout-container">
-                {% if page.aside_before %}
-                <aside class="layout-aside layout-aside-before">
-                    {% include {{ page.aside_before }} %}
-                </aside>
-                {% endif %}
-
-                <main class="layout-main">{{ content }}</main>
-
-                {% if page.aside_after %}
-                <aside class="layout-aside layout-aside-after">
-                    {% include {{ page.aside_after }} %}
-                </aside>
-                {% endif %}
-            </div>
+<header class="layout-header">
+    <div class="layout-container">
+        <div class="layout-header-start">
+            {% include {{ page.header_start }} %}
         </div>
+        {% if page.header_center %}
+        <div class="layout-header-center">
+            {% include {{ page.header_center }} %}
+        </div>
+        {% endif %}
+        <div class="layout-header-end">{% include {{ page.header_end }} %}</div>
+    </div>
+</header>
 
-        <footer class="layout-footer">
-            <div class="layout-container">{% include {{ page.footer }} %}</div>
-        </footer>
-    </body>
-</html>
+<div class="layout-central">
+    <div class="layout-container">
+        {% if page.aside_before %}
+        <aside class="layout-aside layout-aside-before">
+            {% include {{ page.aside_before }} %}
+        </aside>
+        {% endif %}
+
+        <main class="layout-main">{{ content }}</main>
+
+        {% if page.aside_after %}
+        <aside class="layout-aside layout-aside-after">
+            {% include {{ page.aside_after }} %}
+        </aside>
+        {% endif %}
+    </div>
+</div>
+
+<footer class="layout-footer">
+    <div class="layout-container">{% include {{ page.footer }} %}</div>
+</footer>
+
+{% include modal.html %}

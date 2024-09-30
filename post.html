@@ -3,15 +3,17 @@ title: Пост
 layout_class: layout-post
 ---
 
-<form class="postform">
+<form class="postform" x-data="postform" x-on:submit.prevent="submit">
     <input
         type="text"
         class="input"
-        placeholder="Заголовок або посилання (YouTube, SoundCloud, Telegram, X)..."
+        placeholder="Заголовок або посилання (YouTube, SoundCloud, Reddit, Telegram, X)..."
         autofocus
+        minlength="2"
+        maxlength="256"
     />
 
-    {% include editor.html %}
+    {% include editor.html maxlength=5000 %}
 
     <select class="input">
         <option>Ігор Віговський (власна стрічка)</option>

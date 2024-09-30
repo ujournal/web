@@ -1,0 +1,9 @@
+.modal[open] {
+    @apply w-full h-full flex flex-col md:rounded-xl shadow-xl;
+    max-width: 40rem;
+    max-height: 30rem;
+}
+
+.modal iframe {
+    @apply w-full h-full md:rounded-md;
+}
