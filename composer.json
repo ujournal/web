@@ -1,5 +1,6 @@
 {
     "require": {
-        "flarum-lang/ukrainian": "^1.48"
+        "flarum-lang/ukrainian": "^1.48",
+        "laravel/socialite": "^5.16"
     }
 }

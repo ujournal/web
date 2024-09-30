@@ -1,5 +1,5 @@
 <template x-if="!logged">
-    <button class="button button-primary" x-on:click="login">
+    <button class="button button-primary" x-on:click="login('/post')">
         {% svg icons/plus.svg %}
         <span class="button-label">Пост</span>
     </button>
@@ -13,7 +13,9 @@
 </template>
 
 <template x-if="!logged">
-    <button class="button" x-on:click="login">{% svg icons/bell.svg %}</button>
+    <button class="button" x-on:click="login()">
+        {% svg icons/bell.svg %}
+    </button>
 </template>
 
 <template x-if="logged">
@@ -27,7 +29,7 @@
 </template>
 
 <template x-if="!logged">
-    <button class="button" x-on:click="login">
+    <button class="button" x-on:click="login()">
         {% svg icons/user-circle.svg %}
     </button>
 </template>
