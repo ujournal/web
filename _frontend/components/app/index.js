@@ -1,46 +1,42 @@
-import getMetaContent from "../../utils/get_meta_content";
+import auth from "../../utils/auth";
 
 export default () => {
-  let postMessageListener = null;
+  let stopListenForToken = null;
 
   return {
     logged: false,
     redirectAfterLogin: null,
 
     init() {
-      postMessageListener = (event) => {
-        if (event.data.type === "auth") {
-          localStorage["token"] = event.data.token;
-          this.logged = this.check();
+      stopListenForToken = auth.listen((token) => this.handleAuth(token));
+      this.logged = auth.check();
+    },
 
-          if (this.redirectAfterLogin) {
-            location.href = this.redirectAfterLogin;
-          }
-        }
-      };
+    handleAuth(token) {
+      auth.set(token);
+      this.logged = auth.check();
 
-      this.logged = this.check();
-
-      addEventListener("message", postMessageListener);
+      if (this.redirectAfterLogin) {
+        location.href = this.redirectAfterLogin;
+      }
     },
 
     destroy() {
-      removeEventListener("message", postMessageListener);
-    },
-
-    check() {
-      return Boolean(localStorage["token"]);
+      stopListenForToken();
     },
 
     login(redirectAfterLogin = null) {
       this.redirectAfterLogin = redirectAfterLogin;
-      window.open(getMetaContent("auth-url"), "auth");
+      auth.open();
     },
 
     logout() {
-      delete localStorage["token"];
-      this.logged = this.check();
+      auth.delete();
+      this.logged = auth.check();
+      this.hideProfilePopover();
+    },
 
+    hideProfilePopover() {
       try {
         document.getElementById("profile-popover").hidePopover();
       } catch (error) {
