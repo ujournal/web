@@ -10,6 +10,7 @@ const instance = axios.create({
   },
 });
 
+// Hook that attach authorization token to each API request
 instance.interceptors.request.use(
   async (config) => {
     if (auth.check()) {
@@ -23,6 +24,7 @@ instance.interceptors.request.use(
   },
 );
 
+// Hook that catch 401 Unauthorized error and try to refresh token
 instance.interceptors.response.use(
   (response) => response,
   async (error) => {

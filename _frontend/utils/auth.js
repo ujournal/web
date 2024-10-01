@@ -47,7 +47,7 @@ export default {
   },
 
   open() {
-    return window.open(getMetaContent("auth-url"), "auth");
+    return window.open(`${getMetaContent("api-url")}/auth`, "auth");
   },
 
   listen(callback) {
