@@ -16,6 +16,10 @@
         placeholder="Почніть писати..."
         x-data
         x-autosize
+        x-on:input="$el.setCustomValidity('')"
+        {% if include.name %}
+        name="{{include.name}}"
+        {% endif %}
         {% if include.minlength %}
         minlength="{{include.minlength}}"
         {% endif %}

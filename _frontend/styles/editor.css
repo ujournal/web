@@ -22,6 +22,10 @@
     @apply shadow-sm shadow-blue-50;
 }
 
+.editor:has(.input:invalid) .editor-actions {
+    @apply border-orange-500;
+}
+
 .editor:has(.input:focus) .editor-actions {
     @apply border-blue-500 bg-blue-50;
 }

@@ -1,47 +1,41 @@
 import auth from "../../utils/auth";
 
 export default () => {
-  let stopListenForToken = null;
+  let stopListen = null;
 
   return {
     logged: false,
-    redirectAfterLogin: null,
+    redirectUrl: null,
 
     init() {
-      stopListenForToken = auth.listen((token) => this.handleAuth(token));
+      stopListen = auth.listen((token) => this.handleAuth(token));
       this.logged = auth.check();
     },
 
     handleAuth(token) {
       auth.set(token);
       this.logged = auth.check();
+      this.$dispatch("login");
 
-      if (this.redirectAfterLogin) {
-        location.href = this.redirectAfterLogin;
+      if (this.redirectUrl) {
+        location.href = this.redirectUrl;
       }
     },
 
     destroy() {
-      stopListenForToken();
+      stopListen();
     },
 
-    login(redirectAfterLogin = null) {
-      this.redirectAfterLogin = redirectAfterLogin;
+    login(redirectUrl = null) {
+      this.redirectUrl = redirectUrl;
       auth.open();
     },
 
     logout() {
       auth.delete();
       this.logged = auth.check();
-      this.hideProfilePopover();
-    },
 
-    hideProfilePopover() {
-      try {
-        document.getElementById("profile-popover").hidePopover();
-      } catch (error) {
-        console.info(error);
-      }
+      this.$dispatch("logout");
     },
   };
 };

@@ -3,6 +3,8 @@
     class="popover"
     popover
     style="--popover-anchor: --profile-button-anchor"
+    x-data
+    x-on:logout.window="$el.hidePopover()"
 >
     <nav class="nav nav-white">
         <a href="#/settings" class="nav-button">

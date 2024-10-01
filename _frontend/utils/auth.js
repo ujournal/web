@@ -3,6 +3,7 @@ import getMetaContent from "./get_meta_content";
 export default {
   set(token) {
     localStorage["token"] = token;
+    return this;
   },
 
   get() {
@@ -11,6 +12,7 @@ export default {
 
   delete() {
     delete localStorage["token"];
+    return this;
   },
 
   check() {
@@ -18,7 +20,7 @@ export default {
   },
 
   open() {
-    window.open(getMetaContent("auth-url"), "auth");
+    return window.open(getMetaContent("auth-url"), "auth");
   },
 
   listen(callback) {

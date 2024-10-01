@@ -1,5 +1,5 @@
 .input {
-    @apply bg-white border border-stone-300 h-11 px-3 rounded-lg placeholder:text-stone-400 outline-none transition;
+    @apply bg-white border border-stone-300 h-11 px-3 rounded-lg placeholder:text-stone-400 outline-none transition invalid:border-orange-500;
 }
 
 .input:focus {
