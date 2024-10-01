@@ -1,22 +1,49 @@
 import getMetaContent from "./get_meta_content";
 
 export default {
-  set(token) {
-    localStorage["token"] = token;
+  set(data) {
+    localStorage["auth"] = JSON.stringify({
+      date: new Date().getTime(),
+      data,
+    });
+
     return this;
   },
 
-  get() {
-    return localStorage["token"];
+  get(key = null) {
+    if (!localStorage["auth"]) {
+      return null;
+    }
+
+    const { data } = JSON.parse(localStorage["auth"]);
+
+    if (!key) {
+      return data;
+    }
+
+    return data[key];
   },
 
   delete() {
-    delete localStorage["token"];
+    delete localStorage["auth"];
     return this;
   },
 
   check() {
-    return Boolean(localStorage["token"]);
+    return Boolean(localStorage["auth"]);
+  },
+
+  expiresAt() {
+    if (!localStorage["auth"]) {
+      return null;
+    }
+
+    const {
+      data: { expires_in },
+      date,
+    } = JSON.parse(localStorage["auth"]);
+
+    return new Date(new Date(date).getTime() + expires_in * 1000);
   },
 
   open() {
@@ -25,8 +52,8 @@ export default {
 
   listen(callback) {
     const postMessageListener = (event) => {
-      if (event.data.type === "auth") {
-        callback(event.data.token);
+      if (event.data.access_token) {
+        callback(event.data);
       }
     };
 

@@ -62,7 +62,7 @@
 }
 
 .layout.layout-post .layout-aside {
-    @apply lg:opacity-10 hover:opacity-100;
+    @apply lg:opacity-10 hover:opacity-100 delay-1000;
 }
 
 .layout.layout-centered {

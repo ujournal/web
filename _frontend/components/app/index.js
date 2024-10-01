@@ -8,12 +8,12 @@ export default () => {
     redirectUrl: null,
 
     init() {
-      stopListen = auth.listen((token) => this.handleAuth(token));
+      stopListen = auth.listen((data) => this.handleAuth(data));
       this.logged = auth.check();
     },
 
-    handleAuth(token) {
-      auth.set(token);
+    handleAuth(data) {
+      auth.set(data);
       this.logged = auth.check();
       this.$dispatch("login");
 

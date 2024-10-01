@@ -35,6 +35,10 @@ export async function sendForm(url, form) {
       form.setAttribute("data-message", message);
 
       setFormErrors(form, errors);
+
+      form.reportValidity();
+    } else {
+      throw error;
     }
   } finally {
     form.toggleAttribute("data-busy", false);
