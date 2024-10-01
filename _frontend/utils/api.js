@@ -4,7 +4,7 @@ import auth from "./auth";
 
 const instance = axios.create({
   baseURL: getMetaContent("api-url"),
-  timeout: 1000,
+  timeout: 5000,
   headers: {
     accept: "application/json",
   },
