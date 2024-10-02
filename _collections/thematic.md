@@ -52,7 +52,7 @@ feeds:
     image: /assets/topics/anime.png
 
   - url: /t/programming
-    title: Программування та розробка
+    title: Програмування та розробка
     description: "Програмування, код, мови, алгоритми, розробка, фреймворки, проекти, тестування"
     image: /assets/topics/programming.png
 
@@ -61,10 +61,10 @@ feeds:
     description: "Мистецтво, творчість, художники, техніки, стилі, виставки, галереї, інсталяції"
     image: /assets/topics/art.png
 
-  - url: /t/food
+  - url: /t/food-drinks
     title: Їжа та напої
     description: "Їжа, рецепти, кулінарія, інгредієнти, напої, гастрономія, смак, кухні"
-    image: /assets/topics/food.png
+    image: /assets/topics/food-drinks.png
 
   - url: /t/sport
     title: Спорт
@@ -116,10 +116,10 @@ feeds:
     description: "Транспорт, автомобілі, громадський, маршрути, інфраструктура, перевезення, пасажири, безпека"
     image: /assets/topics/transport.png
 
-  - url: /t/hobby
+  - url: /t/hobbies
     title: Колекціонування та хобі
     description: "Колекціонування, хобі, предмети, цінності, інтереси, гуртки, виставки, обмін"
-    image: /assets/topics/hobby.png
+    image: /assets/topics/hobbies.png
 
   - url: /t/fashion
     title: Мода та краса
@@ -146,8 +146,8 @@ feeds:
     description: "Дім, сад, город, рослини, догляд, вирощування, ландшафт, інтер'єр"
     image: /assets/topics/home.png
 
-  - url: /t/spooky
+  - url: /t/creepy
     title: Моторошне
     description: "Моторошні фото, жахи, страшні образи, атмосферність, містифікація, темрява, візуальний страх"
-    image: /assets/topics/spooky.png
+    image: /assets/topics/creepy.png
 ---

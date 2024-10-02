@@ -2,6 +2,19 @@
 
 {% include nav.html items=site.data.nav %}
 
-{% assign subscriptions = site.data.subscriptions | concat: site.data.subscriptions_more %}
-
-{% include nav.html items=subscriptions %}
+<nav class="nav">
+    <template x-for="subscription in subscriptions.slice(0, 5)">
+        <!--prettier-ignore-->
+        <a
+        x-bind:href="subscription.alias"
+        class="nav-button"
+    >
+        <img x-bind:src="subscription.image" />
+        <span class="nav-button-label" x-text="subscription.name"></span>
+    </a>
+    </template>
+    <a href="/subscriptions" class="nav-button">
+        {% svg icons/chevron-down.svg %}
+        <span class="nav-button-label">Показати усі</span>
+    </a>
+</nav>

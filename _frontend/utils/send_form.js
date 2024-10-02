@@ -1,5 +1,4 @@
 import { AxiosError } from "axios";
-import api from "./api";
 
 function setFormErrors(form, errors) {
   Array.from(form.elements).forEach((element) => {
@@ -10,8 +9,6 @@ function setFormErrors(form, errors) {
     }
 
     if (errors[name]) {
-      console.log(element, errors[name]);
-
       element.setCustomValidity(errors[name][0]);
     } else {
       element.setCustomValidity("");
@@ -19,7 +16,7 @@ function setFormErrors(form, errors) {
   });
 }
 
-export async function sendForm(url, form) {
+export async function sendForm(url, form, api) {
   form.removeAttribute("data-message");
   form.toggleAttribute("data-busy", true);
 
@@ -37,9 +34,9 @@ export async function sendForm(url, form) {
       setFormErrors(form, errors);
 
       form.reportValidity();
-    } else {
-      throw error;
     }
+
+    throw error;
   } finally {
     form.toggleAttribute("data-busy", false);
   }

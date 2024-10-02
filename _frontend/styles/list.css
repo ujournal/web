@@ -19,11 +19,11 @@ div.list-item:hover .button {
 }
 
 a.list-item {
-    @apply hover:bg-orange-50 hover:text-orange-500;
+    @apply hover:bg-stone-50 hover:text-orange-500;
 }
 
 a.list-item:hover .button {
-    @apply bg-orange-50;
+    @apply bg-slate-50;
 }
 
 .list-item > *:is(a, .button):first-child {
@@ -32,6 +32,10 @@ a.list-item:hover .button {
 
 .list-item-label {
     @apply text-stone-400;
+}
+
+.list-item > .button:last-child {
+    @apply flex-shrink-0;
 }
 
 .list > .button:first-child {

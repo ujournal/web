@@ -1,4 +1,10 @@
-import { computePosition, autoUpdate, offset } from "@floating-ui/dom";
+import {
+  computePosition,
+  autoUpdate,
+  offset,
+  flip,
+  shift,
+} from "@floating-ui/dom";
 
 export default () => {
   let removeAutoUpdate = () => {};
@@ -21,7 +27,7 @@ export default () => {
           const { x, y } = await computePosition(referenceEl, floatingEl, {
             strategy: "fixed",
             placement,
-            middleware: [offset(offsetValue)],
+            middleware: [offset(offsetValue), flip(), shift()],
           });
 
           Object.assign(floatingEl.style, {

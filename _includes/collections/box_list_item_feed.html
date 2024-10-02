@@ -1,7 +1,7 @@
 <a
     href="/feed?url={{include.url}}"
     class="list-item list-item-feed"
-    x-show="isShowing($el)"
+    x-show="isShowedBySearch($el)"
 >
     {% include userinfo.html name=include.name image=include.image
     caption=include.description url=false %}

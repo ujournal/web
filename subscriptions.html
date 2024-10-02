@@ -3,10 +3,42 @@ title: Підписки
 box_list_item: "subscriptions/box_list_item.html"
 ---
 
-<!--prettier-ignore-->
-{% include box_list.html
-        title=page.title
-        list=site.data.subscriptions
-        search_placeholder="Шукати стрічку в підписках"
-        include_end='subscriptions/header_end.html'
-%}
+<div class="box" x-data="inline_search">
+    <!--prettier-ignore-->
+    {% include box_header.html title=include.title %}
+
+    {% include search.html placeholder='Шукати стрічку в підписках' %}
+
+    <nav class="list">
+        <template x-for="subscription in subscriptions">
+            <div
+                x-bind:href="subscription.alias"
+                class="list-item list-item-feed"
+                x-show="isShowedBySearch($el)"
+            >
+                <a x-bind:href="subscription.alias" class="button">
+                    <div class="userinfo">
+                        <div class="userinfo-image">
+                            <img x-bind:src="subscription.image" />
+                        </div>
+                        <div class="userinfo-name">
+                            <span x-text="subscription.name"></span>
+                        </div>
+                        <div
+                            class="userinfo-caption"
+                            x-text="subscription.description"
+                        ></div>
+                    </div>
+                </a>
+
+                <button type="button" class="button">
+                    {% svg icons/circle-check.svg %}
+                    <span class="button-label">В підписках</span>
+                </button>
+            </div>
+        </template>
+        <template x-if="subscriptions.length === 0">
+            <span class="list-empty">Порожньо</span>
+        </template>
+    </nav>
+</div>

@@ -38,11 +38,11 @@
 }
 
 .userinfo.userinfo-placeholder .userinfo-image {
-    @apply border-none animate-pulse;
+    @apply border-none animate-pulse outline-none;
 }
 
 .userinfo.userinfo-placeholder .userinfo-image > img {
-    @apply opacity-0;
+    @apply opacity-0 outline-none;
 }
 
 .userinfo.userinfo-placeholder .userinfo-name {

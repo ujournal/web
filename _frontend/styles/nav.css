@@ -23,7 +23,7 @@
 }
 
 .nav-button > img {
-    @apply w-6 h-6 rounded-full object-cover outline-1 outline-stone-900/5;
+    @apply w-6 h-6 rounded-full object-cover outline outline-1 -outline-offset-1 outline-stone-950/5;
     outline-style: inset;
 }
 

@@ -1,12 +1,12 @@
 <template x-if="!logged">
-    <button class="button button-primary" x-on:click="login('/post')">
+    <button class="button button-primary" x-on:click="login('/create')">
         {% svg icons/plus.svg %}
         <span class="button-label">Пост</span>
     </button>
 </template>
 
 <template x-if="logged">
-    <a class="button button-primary" href="/post">
+    <a class="button button-primary" href="/create">
         {% svg icons/plus.svg %}
         <span class="button-label">Пост</span>
     </a>

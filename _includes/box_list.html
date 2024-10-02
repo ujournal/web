@@ -1,7 +1,4 @@
-<div
-    class="box"
-    x-data="{ q: '', isShowing(el) { return !this.q || el.firstElementChild.innerText.toUpperCase().includes(this.q.toUpperCase()); } }"
->
+<div class="box" x-data="inline_search">
     <!--prettier-ignore-->
     {% include box_header.html
             title=include.title
