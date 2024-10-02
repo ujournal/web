@@ -30,7 +30,7 @@
 }
 
 .userinfo-caption {
-    @apply text-stone-400 text-nowrap truncate;
+    @apply text-stone-400 text-nowrap truncate font-normal;
 }
 
 .userinfo.userinfo-placeholder {
