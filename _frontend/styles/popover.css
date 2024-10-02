@@ -1,5 +1,5 @@
 .popover:popover-open {
-    @apply flex flex-col gap-2 bg-white p-2 my-1 mx-0 border border-stone-200 border-opacity-60 rounded-lg shadow-md shadow-stone-200/45 animate-fade;
+    @apply flex flex-col gap-2 bg-white p-2 m-0 border border-stone-200 border-opacity-60 rounded-lg shadow-md shadow-stone-200/45 animate-fade;
 }
 
 .popover.popover-top-center:popover-open {

@@ -1,4 +1,4 @@
-import { computePosition, autoUpdate } from "@floating-ui/dom";
+import { computePosition, autoUpdate, offset } from "@floating-ui/dom";
 
 export default () => {
   let removeAutoUpdate = () => {};
@@ -12,10 +12,16 @@ export default () => {
 
         removeAutoUpdate();
 
+        const placement =
+          this.$root.getAttribute("data-popover-placement") || "bottom-end";
+        const offsetValue =
+          parseInt(this.$root.getAttribute("data-popover-offset"), 10) || 4;
+
         removeAutoUpdate = autoUpdate(referenceEl, floatingEl, async () => {
           const { x, y } = await computePosition(referenceEl, floatingEl, {
             strategy: "fixed",
-            placement: "bottom-end",
+            placement,
+            middleware: [offset(offsetValue)],
           });
 
           Object.assign(floatingEl.style, {
