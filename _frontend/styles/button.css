@@ -6,6 +6,10 @@
     @apply bg-orange-100 hover:bg-orange-200 border border-stone-900/5;
 }
 
+.button.button-secondary {
+    @apply bg-stone-50 hover:bg-orange-50;
+}
+
 .button-label {
     @apply truncate;
 }

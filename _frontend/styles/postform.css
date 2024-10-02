@@ -9,3 +9,19 @@
 .postform-actions .button {
     @apply h-11;
 }
+
+.postform-title {
+    @apply flex flex-row gap-4;
+}
+
+.postform-title > .input {
+    @apply flex-1;
+}
+
+.postform-title > .button {
+    @apply w-11 h-11;
+}
+
+.postform-description {
+    @apply text-stone-400;
+}

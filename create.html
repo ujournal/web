@@ -4,52 +4,44 @@ layout_class: layout-post
 ---
 
 <form class="postform" x-data="postform" x-on:submit.prevent="submit">
-    <input
-        type="text"
-        class="input"
-        placeholder="Заголовок або посилання (YouTube, SoundCloud, Reddit, Telegram, X)..."
-        autofocus
-        minlength="2"
-        maxlength="256"
-        name="title"
-        x-on:input="$el.setCustomValidity('')"
-    />
+    <div class="postform-title">
+        <input
+            type="text"
+            class="input"
+            placeholder="Заголовок або URL (YouTube, SoundCloud, Reddit, Telegram, X)..."
+            autofocus
+            minlength="2"
+            maxlength="256"
+            name="title"
+            x-on:input="$el.setCustomValidity('')"
+        />
+        <button type="button" class="button button-secondary">
+            {% svg icons/paperclip.svg %}
+        </button>
+    </div>
 
     {% include editor.html maxlength=5000 name='body' %}
 
-    <select class="input" name="feed_id" x-on:input="$el.setCustomValidity('')">
-        <option>Ігор Віговський (власна стрічка)</option>
-        <option>Війна та зброя</option>
-        <option>Гумор</option>
-        <option>Ігри</option>
-        <option>Музика</option>
-        <option>Бізнес та фінанси</option>
-        <option>Кіно серіали та ТБ</option>
-        <option>Історичне</option>
-        <option>Звірі та улюбленці</option>
-        <option>Аніме та манга</option>
-        <option>Программування та розробка</option>
-        <option>Арт та мистецтво</option>
-        <option>Їжа та напої</option>
-        <option>Спорт</option>
-        <option>Наука і техніка</option>
-        <option>Техніка та залізо</option>
-        <option>Місця та подорожі</option>
-        <option>Книги література</option>
-        <option>Програми та софт</option>
-        <option>Крипта</option>
-        <option>Політика</option>
-        <option>Навчання та освіта</option>
-        <option>Настільні ігри</option>
-        <option>Знаменитості</option>
-        <option>Автотранспорт</option>
-        <option>Зроби сам</option>
-        <option>Культура та етничність</option>
-        <option>Мода та стиль</option>
-        <option>Хобі та захоплення</option>
-        <option>Закон</option>
-        <option>Подкасти та стріми</option>
+    <select
+        class="input"
+        name="feed_id"
+        x-on:input="$el.setCustomValidity('')"
+        x-model="feed_id"
+    >
+        <template x-for="feed in feeds">
+            <option
+                x-bind:value="feed.id"
+                x-text="`${feed.name}${feed.alias.startsWith('/u/') ? ' (власна стрічка)' : ''}`"
+            ></option>
+        </template>
     </select>
+
+    <template x-if="feeds.find(feed => feed.id == feed_id)?.description">
+        <div
+            x-text="feeds.find(feed => feed.id == feed_id).description"
+            class="postform-description"
+        ></div>
+    </template>
 
     <div class="postform-actions">
         <button class="button button-primary">
