@@ -1,4 +1,4 @@
-import { sendForm } from "../../utils/send_form_via_api";
+import { sendForm } from "../utils/send_form_via_api";
 
 export default () => {
   return {

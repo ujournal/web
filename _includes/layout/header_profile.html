@@ -19,11 +19,7 @@
 </template>
 
 <template x-if="logged">
-    <button
-        class="button"
-        popovertarget="notifications-popover"
-        style="anchor-name: --notifications-button-anchor"
-    >
+    <button class="button" popovertarget="notifications-popover">
         {% svg icons/bell.svg %}
     </button>
 </template>
@@ -35,11 +31,7 @@
 </template>
 
 <template x-if="logged">
-    <button
-        class="avatar"
-        popovertarget="profile-popover"
-        style="anchor-name: --profile-button-anchor"
-    >
+    <button class="avatar" popovertarget="profile-popover">
         <img
             src="https://www.gravatar.com/avatar/2c7d99fe281ecd3bcd65ab915bac6dd5?s=250"
         />

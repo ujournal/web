@@ -4,7 +4,7 @@ import Autosize from "@marcreichel/alpine-autosize";
 import "../vendors/css-anchor-positioning";
 
 registerModules(
-  import.meta.glob("../components/**/index.js", {
+  import.meta.glob("../components/*.js", {
     eager: true,
   }),
 );

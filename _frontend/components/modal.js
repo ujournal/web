@@ -1,4 +1,4 @@
-import addClicksListener from "../../utils/add_clicks_listener";
+import addClicksListener from "../utils/add_clicks_listener";
 
 export default () => {
   let removeClicksListener = null;

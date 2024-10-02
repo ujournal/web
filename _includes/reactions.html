@@ -17,8 +17,6 @@
         type="button"
         class="reactions-button reactions-button-visual reactions-button-plus"
         popovertarget="reactions-popover"
-        onclick="document.body.style = '--reactions-popover-anchor: --reactions-{{ include.id }}-button-anchor';"
-        style="anchor-name: --reactions-{{ include.id }}-button-anchor"
     >
         {% svg icons/plus.svg %}
     </button>
@@ -38,8 +36,6 @@
         type="button"
         class="reactions-button"
         popovertarget="views-popover"
-        onclick="document.body.style = '--views-popover-anchor: --views-{{ include.id }}-button-anchor';"
-        style="anchor-name: --views-{{ include.id }}-button-anchor"
     >
         {% svg icons/eye.svg %}
         <span class="reactions-count">2.5K</span>

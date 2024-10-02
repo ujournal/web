@@ -1,16 +1,12 @@
 <div
     id="notifications-popover"
-    class="popover popover-notifications popover-bottom-end"
+    class="popover popover-notifications"
     popover
-    style="--popover-anchor: --notifications-button-anchor"
+    x-data="popover"
 >
     <div class="popover-header">
         <span class="popover-title">Сповіщення</span>
-        <button
-            class="button"
-            popovertarget="notifications-options-popover"
-            style="anchor-name: --notifications-options-button-anchor"
-        >
+        <button class="button" popovertarget="notifications-options-popover">
             {% svg icons/dots.svg %}
         </button>
     </div>

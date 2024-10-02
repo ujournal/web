@@ -11,12 +11,7 @@
             status_url=include.author_status_url
             placeholder=include.placeholder
         %}
-        <button
-            class="button"
-            popovertarget="post-popover"
-            onclick="document.body.style = '--post-popover-anchor: --post-{{ include.id }}-button-anchor';"
-            style="anchor-name: --post-{{ include.id }}-button-anchor"
-        >
+        <button class="button" popovertarget="post-popover">
             {% svg icons/dots.svg %}
         </button>
     </div>
