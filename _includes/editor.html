@@ -13,7 +13,9 @@
     <!--prettier-ignore-->
     <textarea
         class="input"
-        placeholder="Почніть писати..."
+        {% if include.placeholder %}
+        placeholder="{{include.placeholder}}"
+        {% endif %}
         x-data
         x-autosize
         x-on:input="$el.setCustomValidity('')"

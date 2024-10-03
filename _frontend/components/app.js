@@ -1,5 +1,6 @@
 import auth from "../utils/auth";
 import api from "../utils/api";
+import parseJwt from "../utils/parse_jwt";
 
 export default () => {
   let stopListen = null;
@@ -44,6 +45,12 @@ export default () => {
     async loadSubscriptions() {
       const { data } = await api.get("/subscriptions");
       this.subscriptions = data;
+    },
+
+    user() {
+      const { access_token } = auth.get();
+
+      return parseJwt(access_token);
     },
   };
 };

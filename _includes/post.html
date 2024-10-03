@@ -15,20 +15,12 @@
             {% svg icons/dots.svg %}
         </button>
     </div>
-    <div class="post-summary">
-        <!--prettier-ignore-->
-        {% if include.title %}
-        <h2 class="post-title">
-            <a href="{{include.url}}">{{include.title}}</a>
-        </h2>
-        {% endif %}
-        <!--prettier-ignore-->
-        {% if include.description %}
-        <p class="post-description">
-            <a href="{{include.url}}">{{include.description}}</a>
-        </p>
-        {% endif %}
-    </div>
+    <!--prettier-ignore-->
+    {% if include.title %}
+    <h2 class="post-title">
+        <a href="{{include.url}}">{{include.title}}</a>
+    </h2>
+    {% endif %}
     <!--prettier-ignore-->
     {% include media.html
         title=include.media_title
@@ -36,6 +28,12 @@
         image=include.media_image
         placeholder=include.placeholder
     %}
+    <!--prettier-ignore-->
+    {% if include.description %}
+    <p class="post-description">
+        {{include.description}} <a href="#">Більше&hellip;</a>
+    </p>
+    {% endif %}
     <div class="post-footer">
         <!--prettier-ignore-->
         {% include reactions.html

@@ -16,11 +16,18 @@ layout_class: layout-post
             x-on:input="$el.setCustomValidity('')"
         />
         <button type="button" class="button button-secondary">
-            {% svg icons/paperclip.svg %}
+            {% svg icons/photo-up.svg %}
         </button>
     </div>
 
-    {% include editor.html maxlength=5000 name='body' %}
+    <!--prettier-ignore-->
+    {% include media.html
+        image='https://itc.ua/wp-content/uploads/2024/09/opz2TGga2N83DQrupQeuCn-970-80.jpg-1.jpg'
+        title='Серіал «Володар перснів»: Том Бомбаділ підказує, ким є Незнайомець, шоуранер обіцяє відповідь в цьому сезоні'
+        caption='youtube.com'
+    %}
+
+    {% include editor.html maxlength=5000 name='body' placeholder='Текст...' %}
 
     <select
         class="input"
@@ -54,3 +61,5 @@ layout_class: layout-post
         </button>
     </div>
 </form>
+
+{% include popovers/postform_attachment_popover.html %}

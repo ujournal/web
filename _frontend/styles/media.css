@@ -1,5 +1,5 @@
 .media {
-    @apply block relative aspect-video bg-stone-50 rounded-xl outline outline-1 -outline-offset-1 outline-stone-950/5 overflow-hidden;
+    @apply block relative aspect-video bg-stone-50 rounded-lg outline outline-1 -outline-offset-1 outline-stone-950/5 overflow-hidden;
 }
 
 .media > img {

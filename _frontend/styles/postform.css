@@ -23,5 +23,5 @@
 }
 
 .postform-description {
-    @apply text-stone-400;
+    @apply text-stone-400 text-sm;
 }

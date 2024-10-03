@@ -6,17 +6,29 @@
     x-on:logout.window="$el.hidePopover()"
 >
     <nav class="nav nav-white">
-        <a href="#/settings" class="nav-button">
-            {% svg icons/settings.svg %}
-            <span class="nav-button-label">Налаштування</span>
-        </a>
-        <a href="#/postponed" class="nav-button">
-            {% svg icons/history.svg %}
-            <span class="nav-button-label">Відкладені пости</span>
-        </a>
-        <button type="button" class="nav-button" x-on:click="logout">
-            {% svg icons/logout.svg %}
-            <span class="nav-button-label">Вийти</span>
-        </button>
+        <template x-if="logged">
+            <a x-bind:href="`/u/${user().identifier}`" class="nav-button">
+                {% svg icons/user-circle.svg %}
+                <span class="nav-button-label">Профіль</span>
+            </a>
+        </template>
+        <template x-if="logged">
+            <a href="/settings" class="nav-button">
+                {% svg icons/settings.svg %}
+                <span class="nav-button-label">Налаштування</span>
+            </a>
+        </template>
+        <template x-if="logged">
+            <a href="/postponed" class="nav-button">
+                {% svg icons/history.svg %}
+                <span class="nav-button-label">Відкладені пости</span>
+            </a>
+        </template>
+        <template x-if="logged">
+            <button type="button" class="nav-button" x-on:click="logout">
+                {% svg icons/logout.svg %}
+                <span class="nav-button-label">Вийти</span>
+            </button>
+        </template>
     </nav>
 </div>

@@ -29,3 +29,15 @@
 .content h3 {
     @apply text-lg font-bold;
 }
+
+.content code {
+    @apply text-sm bg-stone-50 p-1 rounded-md;
+}
+
+.content pre.highlight {
+    @apply text-sm bg-stone-50 p-4 rounded-lg leading-6;
+}
+
+.content pre.highlight code {
+    @apply p-0 bg-none;
+}
