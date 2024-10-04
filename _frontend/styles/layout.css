@@ -68,3 +68,7 @@
 .layout.layout-centered {
     @apply justify-center;
 }
+
+.layout-logo {
+    @apply transition active:scale-75;
+}
