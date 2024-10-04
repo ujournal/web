@@ -7,3 +7,11 @@
 .avatar > img {
     @apply w-full h-full object-cover;
 }
+
+.avatar {
+    @apply transition;
+}
+
+.avatar:active {
+    @apply scale-75;
+}

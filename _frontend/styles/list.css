@@ -2,6 +2,14 @@
     @apply flex flex-col gap-2;
 }
 
+a.list-item .avatar {
+    @apply transition;
+}
+
+a.list-item:active .avatar {
+    @apply scale-75;
+}
+
 .list-item {
     @apply flex flex-row items-center gap-4 h-11 rounded-lg bg-white transition px-2;
 }

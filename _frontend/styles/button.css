@@ -21,3 +21,11 @@
 .button:has(> svg:last-child) {
     @apply pr-2;
 }
+
+.button *:is(svg, .userinfo-image) {
+    @apply transition;
+}
+
+.button:active *:is(svg, .userinfo-image) {
+    @apply scale-75;
+}

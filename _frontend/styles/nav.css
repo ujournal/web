@@ -27,6 +27,14 @@
     outline-style: inset;
 }
 
+.nav-button > *:is(img, svg) {
+    @apply transition;
+}
+
+.nav-button:active > *:is(img, svg) {
+    @apply scale-75;
+}
+
 .nav-emoji {
     @apply text-lg;
 }

@@ -6,6 +6,14 @@
     @apply flex flex-row gap-4 items-center justify-between;
 }
 
+.post-summary {
+    @apply flex flex-col gap-2;
+}
+
+.post-summary:has(.media) {
+    @apply gap-3;
+}
+
 .post-title {
     @apply text-xl font-bold;
 }
