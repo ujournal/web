@@ -9,7 +9,7 @@ box_list_item: "subscriptions/box_list_item.html"
 
     {% include search.html placeholder='Шукати стрічку в підписках' %}
 
-    <nav class="list">
+    <nav class="list" x-data="subscriptions">
         <template x-for="subscription in subscriptions">
             <div
                 x-bind:href="subscription.alias"

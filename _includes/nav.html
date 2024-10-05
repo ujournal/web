@@ -5,7 +5,16 @@
 {% assign current=page.url %}
 {% endif %}
 
-<nav class="nav {% if include.placeholder %}nav-placeholder{% endif %}">
+<!--prettier-ignore-->
+<nav
+    class="nav {% if include.placeholder %}nav-placeholder{% endif %}"
+    {% if include.id %}
+    id="{{include.id}}"
+    {% endif %}
+    {% if include.permanent %}
+    data-turbo-permanent
+    {% endif %}
+>
     {% for item in include.items %}
     <!--prettier-ignore-->
     <a

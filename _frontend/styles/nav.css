@@ -2,10 +2,6 @@
     @apply flex flex-col gap-2;
 }
 
-.nav.nav-emoji-grid {
-    @apply grid grid-cols-4;
-}
-
 .nav-button {
     @apply flex flex-row gap-2 items-center justify-start px-3 h-11 min-w-10 transition rounded-lg bg-stone-100 hover:bg-white hover:text-orange-500 font-medium;
 }
@@ -53,4 +49,12 @@
 
 .nav.nav-placeholder .nav-button-label {
     @apply flex-1 bg-stone-50 text-transparent rounded-md animate-pulse;
+}
+
+.nav.nav-emoji-grid {
+    @apply grid grid-cols-4;
+}
+
+.nav.nav-emoji-grid .nav-button {
+    @apply justify-center;
 }

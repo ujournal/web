@@ -1,8 +1,13 @@
 <!--prettier-ignore-->
 
-{% include nav.html items=site.data.nav %}
+{% include nav.html items=site.data.nav id='main-nav' permanent=true %}
 
-<nav class="nav">
+<nav
+    class="nav"
+    id="subscriptions-nav"
+    x-data="subscriptions"
+    data-turbo-permanent
+>
     <template x-for="subscription in subscriptions.slice(0, 5)">
         <!--prettier-ignore-->
         <a
