@@ -18,8 +18,10 @@
         <span class="nav-button-label" x-text="subscription.name"></span>
     </a>
     </template>
-    <a href="/subscriptions" class="nav-button">
-        {% svg icons/chevron-down.svg %}
-        <span class="nav-button-label">Показати усі</span>
-    </a>
+    <template x-if="subscriptions.length > 0">
+        <a href="/subscriptions" class="nav-button">
+            {% svg icons/chevron-down.svg %}
+            <span class="nav-button-label">Показати усі</span>
+        </a>
+    </template>
 </nav>

@@ -1,19 +1,18 @@
 import api from "../utils/api";
+import storage from "../utils/storage";
 
 export default () => {
   return {
-    subscriptions: [],
+    subscriptions: storage.get("subscriptions", []),
 
     async init() {
-      if (this.$root.hasAttribute("data-cache")) {
-        this.subscriptions = JSON.parse(this.$root.getAttribute("data-cache"));
-      } else {
-        const { data } = await api.get("/subscriptions");
+      requestIdleCallback(() => this.load());
+    },
 
-        this.subscriptions = data;
-
-        this.$root.setAttribute("data-cache", JSON.stringify(data));
-      }
+    async load() {
+      const { data } = await api.get("/subscriptions");
+      this.subscriptions = data;
+      storage.set("subscriptions", data);
     },
   };
 };
