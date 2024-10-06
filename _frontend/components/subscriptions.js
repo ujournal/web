@@ -1,5 +1,5 @@
 import api from "../utils/api";
-import storage from "../utils/storage";
+import storage from "../utils/sesson_store";
 
 export default () => {
   return {

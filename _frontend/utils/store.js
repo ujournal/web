@@ -1,5 +1,9 @@
-export default {
-  storage: sessionStorage,
+export class Store {
+  storage;
+
+  constructor(storage = sessionStorage) {
+    this.storage = storage;
+  }
 
   get(key, defaultValue = null) {
     if (this.storage[key]) {
@@ -7,9 +11,9 @@ export default {
     }
 
     return defaultValue;
-  },
+  }
 
   set(key, value) {
     this.storage.setItem(key, JSON.stringify(value));
-  },
-};
+  }
+}
