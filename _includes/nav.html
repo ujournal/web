@@ -14,6 +14,9 @@
     {% if include.permanent %}
     data-turbo-permanent
     {% endif %}
+    {% if include.cmp %}
+    x-data="{{ include.cmp }}"
+    {% endif %}
 >
     {% for item in include.items %}
     <!--prettier-ignore-->
