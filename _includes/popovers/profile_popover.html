@@ -3,17 +3,18 @@
     class="popover"
     popover
     x-data="popover"
+    x-on:login.window="$el.hidePopover()"
     x-on:logout.window="$el.hidePopover()"
 >
     <nav class="nav nav-white">
         <template x-if="!logged">
-            <button type="button" class="nav-button" x-on:click="login">
+            <button type="button" class="nav-button" x-on:click="login()">
                 {% svg icons/brand-google.svg %}
                 <span class="nav-button-label">Увійти через Google</span>
             </button>
         </template>
         <template x-if="logged">
-            <a x-bind:href="`/u/${user().identifier}`" class="nav-button">
+            <a x-bind:href="`/u/${user.identifier}`" class="nav-button">
                 {% svg icons/user-circle.svg %}
                 <span class="nav-button-label">Профіль</span>
             </a>
@@ -33,7 +34,7 @@
         <template x-if="logged">
             <a href="/postponed" class="nav-button">
                 {% svg icons/history.svg %}
-                <span class="nav-button-label">Відкладені пости</span>
+                <span class="nav-button-label">Відкладені</span>
             </a>
         </template>
         <template x-if="logged">

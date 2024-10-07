@@ -1,5 +1,5 @@
 import auth from "../utils/auth";
-import parseJwt from "../utils/parse_jwt";
+import jwtParser from "../utils/jwt_parser";
 
 export default () => {
   let stopListen = null;
@@ -7,15 +7,18 @@ export default () => {
   return {
     logged: false,
     redirectUrl: null,
+    user: null,
 
     init() {
       stopListen = auth.listen((data) => this.handleAuth(data));
       this.logged = auth.check();
+      this.user = this.logged ? this.parseUser() : null;
     },
 
     handleAuth(data) {
       auth.set(data);
       this.logged = auth.check();
+      this.user = this.parseUser();
       this.$dispatch("login");
 
       if (this.redirectUrl) {
@@ -35,14 +38,25 @@ export default () => {
     logout() {
       auth.delete();
       this.logged = auth.check();
-
       this.$dispatch("logout");
     },
 
-    user() {
+    parseUser() {
       const { access_token } = auth.get();
+      return jwtParser.parse(access_token);
+    },
 
-      return parseJwt(access_token);
+    avatar() {
+      if (!this.user) {
+        return null;
+      }
+
+      const params = new URLSearchParams({
+        s: 250,
+        d: `https://${new URL(location).host}/assets/images/user.png`,
+      });
+
+      return `https://gravatar.com/avatar/${this.user.hash}?${params}`;
     },
   };
 };

@@ -1,3 +1,5 @@
+import { AxiosError } from "axios";
+
 export default {
   setFormErrors(form, errors) {
     Array.from(form.elements).forEach((element) => {
@@ -29,7 +31,7 @@ export default {
         const errors = error.response?.data?.errors || {};
 
         form.setAttribute("data-message", message);
-
+        console.log(form, errors);
         this.setFormErrors(form, errors);
 
         form.reportValidity();
