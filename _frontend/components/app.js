@@ -43,8 +43,7 @@ export default () => {
     },
 
     parseUser() {
-      const { access_token } = auth.get();
-      return jwtParser.parse(access_token);
+      return jwtParser.parse(auth.get("access_token"));
     },
 
     avatar() {

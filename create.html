@@ -32,14 +32,13 @@ layout_class: layout-post
     <select
         class="input"
         name="feed_id"
-        x-on:input="$el.setCustomValidity('')"
         x-model="feed_id"
+        x-on:input="$el.setCustomValidity('')"
+        x-on:change="handleFeedIdChange"
     >
+        <option value="" x-text="`${user.name} (власна стрічка)`"></option>
         <template x-for="feed in feeds">
-            <option
-                x-bind:value="feed.id"
-                x-text="`${feed.name}${feed.alias.startsWith('/u/') ? ' (власна стрічка)' : ''}`"
-            ></option>
+            <option x-bind:value="feed.id" x-text="feed.name"></option>
         </template>
     </select>
 

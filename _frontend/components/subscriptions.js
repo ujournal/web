@@ -6,7 +6,7 @@ export default () => {
     subscriptions: store.get("subscriptions", []),
 
     init() {
-      requestIdleCallback(() => this.load());
+      this.load();
     },
 
     async load() {

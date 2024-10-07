@@ -1,10 +1,11 @@
 import formSender from "../utils/form_sender";
 import api from "../utils/api";
+import store from "../utils/session_store";
 
 export default () => {
   return {
-    feeds: [],
-    feed_id: null,
+    feeds: store.get("feeds", []),
+    feed_id: store.get("feed_id"),
 
     init() {
       this.loadFeeds();
@@ -17,7 +18,7 @@ export default () => {
     async loadFeeds() {
       const { data } = await api.get("/feeds");
       this.feeds = data;
-      this.feed_id = data.find((feed) => feed.alias.startsWith("/u/"))?.id;
+      store.set("feeds", data);
     },
   };
 };
