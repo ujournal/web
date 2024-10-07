@@ -52,14 +52,9 @@ export default () => {
         return null;
       }
 
-      const defaultImage =
-        metaReader.get("environment") === "development"
-          ? ""
-          : `https://${new URL(location).host}/assets/images/user.png`;
-
       const params = new URLSearchParams({
         s: 250,
-        d: defaultImage,
+        d: "robohash",
       });
 
       return `https://gravatar.com/avatar/${this.user.hash}?${params}`;
