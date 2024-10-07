@@ -1,9 +1,9 @@
 import axios from "axios";
-import getMetaContent from "./get_meta_content";
 import auth from "./auth";
+import metaReader from "./meta_reader";
 
 const instance = axios.create({
-  baseURL: getMetaContent("api-url"),
+  baseURL: metaReader.get("api-url"),
   timeout: 5000,
   headers: {
     accept: "application/json",

@@ -1,5 +1,5 @@
 <template x-if="!logged">
-    <button class="button button-primary" x-on:click="login('/create')">
+    <button class="button button-primary" popovertarget="profile-popover">
         {% svg icons/plus.svg %}
         <span class="button-label">Пост</span>
     </button>
@@ -13,7 +13,7 @@
 </template>
 
 <template x-if="!logged">
-    <button class="button" x-on:click="login()">
+    <button class="button" popovertarget="profile-popover">
         {% svg icons/bell.svg %}
     </button>
 </template>
@@ -25,7 +25,7 @@
 </template>
 
 <template x-if="!logged">
-    <button class="button" x-on:click="login()">
+    <button class="button" popovertarget="profile-popover">
         {% svg icons/user-circle.svg %}
     </button>
 </template>

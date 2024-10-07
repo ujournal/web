@@ -1,8 +1,9 @@
-import getMetaContent from "./get_meta_content";
+import metaReader from "./meta_reader";
+import store from "./local_store";
 
 export default {
   set(data) {
-    localStorage["auth"] = JSON.stringify({
+    store.set("auth", {
       date: new Date().getTime(),
       data,
     });
@@ -11,11 +12,11 @@ export default {
   },
 
   get(key = null) {
-    if (!localStorage["auth"]) {
+    if (!store.has("auth")) {
       return null;
     }
 
-    const { data } = JSON.parse(localStorage["auth"]);
+    const { data } = store.get("auth");
 
     if (!key) {
       return data;
@@ -25,29 +26,29 @@ export default {
   },
 
   delete() {
-    delete localStorage["auth"];
+    store.remove("auth");
     return this;
   },
 
   check() {
-    return Boolean(localStorage["auth"]);
+    return store.has("auth");
   },
 
   expiresAt() {
-    if (!localStorage["auth"]) {
+    if (!store.has("auth")) {
       return null;
     }
 
     const {
       data: { expires_in },
       date,
-    } = JSON.parse(localStorage["auth"]);
+    } = store.get("auth");
 
     return new Date(new Date(date).getTime() + expires_in * 1000);
   },
 
   open() {
-    return window.open(`${getMetaContent("api-url")}/auth`, "auth");
+    return window.open(`${metaReader.get("api-url")}/auth`, "auth");
   },
 
   listen(callback) {

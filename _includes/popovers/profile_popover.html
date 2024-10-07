@@ -6,6 +6,12 @@
     x-on:logout.window="$el.hidePopover()"
 >
     <nav class="nav nav-white">
+        <template x-if="!logged">
+            <button type="button" class="nav-button" x-on:click="login">
+                {% svg icons/brand-google.svg %}
+                <span class="nav-button-label">Увійти через Google</span>
+            </button>
+        </template>
         <template x-if="logged">
             <a x-bind:href="`/u/${user().identifier}`" class="nav-button">
                 {% svg icons/user-circle.svg %}
@@ -16,6 +22,12 @@
             <a href="/settings" class="nav-button">
                 {% svg icons/settings.svg %}
                 <span class="nav-button-label">Налаштування</span>
+            </a>
+        </template>
+        <template x-if="logged">
+            <a href="/bookmarked" class="nav-button">
+                {% svg icons/bookmark.svg %}
+                <span class="nav-button-label">Закладки</span>
             </a>
         </template>
         <template x-if="logged">

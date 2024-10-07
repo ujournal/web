@@ -1,4 +1,4 @@
-import { sendForm } from "../utils/send_form";
+import formSender from "../utils/form_sender";
 import api from "../utils/api";
 
 export default () => {
@@ -11,7 +11,7 @@ export default () => {
     },
 
     async submit() {
-      await sendForm("/posts", this.$root, api);
+      await formSender.sendForm("/posts", this.$root, api);
     },
 
     async loadFeeds() {

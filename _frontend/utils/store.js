@@ -1,4 +1,4 @@
-export class Store {
+export default class Store {
   storage;
 
   constructor(storage = sessionStorage) {
@@ -15,5 +15,13 @@ export class Store {
 
   set(key, value) {
     this.storage.setItem(key, JSON.stringify(value));
+  }
+
+  has(key) {
+    return this.storage.getItem(key) !== null;
+  }
+
+  remove(key) {
+    this.storage.removeItem(key);
   }
 }
