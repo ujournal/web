@@ -1,5 +1,6 @@
 import auth from "../utils/auth";
 import jwtParser from "../utils/jwt_parser";
+import metaReader from "../utils/meta_reader";
 
 export default () => {
   let stopListen = null;
@@ -51,9 +52,14 @@ export default () => {
         return null;
       }
 
+      const defaultImage =
+        metaReader.get("environment") === "development"
+          ? ""
+          : `https://${new URL(location).host}/assets/images/user.png`;
+
       const params = new URLSearchParams({
         s: 250,
-        d: `https://${new URL(location).host}/assets/images/user.png`,
+        d: defaultImage,
       });
 
       return `https://gravatar.com/avatar/${this.user.hash}?${params}`;
