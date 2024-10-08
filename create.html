@@ -3,7 +3,15 @@ title: Пост
 layout_class: layout-post
 ---
 
-<form class="postform" x-data="postform" x-on:submit.prevent="submit">
+<form
+    class="postform"
+    x-data="postform"
+    x-on:submit.prevent="submit"
+    x-on:input="clearErrors"
+    x-bind:data-busy="busy"
+>
+    <input type="hidden" name="url" />
+
     <div class="postform-title">
         <input
             type="text"
@@ -13,7 +21,10 @@ layout_class: layout-post
             minlength="2"
             maxlength="256"
             name="title"
-            x-on:input="$el.setCustomValidity('')"
+            x-model="title"
+            x-on:paste="handleTitlePaste"
+            x-on:change="handleTitleChange"
+            x-bind:readonly="busy"
         />
         <button type="button" class="button button-secondary">
             {% svg icons/photo-up.svg %}
@@ -21,19 +32,34 @@ layout_class: layout-post
     </div>
 
     <!--prettier-ignore-->
+    {% comment %}
     {% include media.html
         image='https://itc.ua/wp-content/uploads/2024/09/opz2TGga2N83DQrupQeuCn-970-80.jpg-1.jpg'
         title='Серіал «Володар перснів»: Том Бомбаділ підказує, ким є Незнайомець, шоуранер обіцяє відповідь в цьому сезоні'
         caption='youtube.com'
     %}
+    {% endcomment %}
 
-    {% include editor.html maxlength=5000 name='body' placeholder='Текст...' %}
+    <template x-if="externalData">
+        <div class="postform-external">
+            <div x-data="external(null, externalData)" x-html="template"></div>
+            <button
+                type="button"
+                class="postform-external-remove"
+                x-on:click="removeExternal"
+            >
+                {% svg icons/x.svg %}
+            </button>
+        </div>
+    </template>
+
+    {% include editor.html maxlength=5000 name='body' model='body'
+    placeholder='Текст...' %}
 
     <select
         class="input"
         name="feed_id"
         x-model="feed_id"
-        x-on:input="$el.setCustomValidity('')"
         x-on:change="handleFeedIdChange"
     >
         <option value="" x-text="`${user.name} (власна стрічка)`"></option>

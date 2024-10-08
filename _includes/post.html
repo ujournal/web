@@ -23,13 +23,8 @@
         </h2>
         {% endif %}
         <!--prettier-ignore-->
-        {% if include.media_url %}
-        {% include media.html
-            title=include.media_title
-            caption=include.media_caption
-            image=include.media_image
-            placeholder=include.placeholder
-        %}
+        {% if include.url %}
+        {% include external.html url=include.url placeholder=include.placeholder %}
         {% endif %}
         <!--prettier-ignore-->
         {% if include.description %}

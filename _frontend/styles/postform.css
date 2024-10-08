@@ -25,3 +25,15 @@
 .postform-description {
     @apply text-stone-400 text-sm;
 }
+
+.postform-external {
+    @apply relative;
+}
+
+.postform-external-remove {
+    @apply absolute right-2 top-2 text-white p-1 bg-stone-950/50 rounded-full;
+}
+
+.postform-external-remove > svg {
+    @apply w-5 h-5;
+}

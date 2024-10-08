@@ -7,6 +7,10 @@
     @apply relative transition pointer-events-none;
 }
 
+.form[data-busy] * {
+    @apply pointer-events-none;
+}
+
 .form[data-busy]::after {
     @apply content-[''] absolute top-0 right-0 bottom-0 left-0 rounded-xl bg-white/75 bg-center bg-no-repeat transition;
     background-image: url("data:image/svg+xml,%0A%3Csvg width='24' height='24' viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'%3E%3Cstyle%3E.spinner_b2T7%7Banimation:spinner_xe7Q .8s linear infinite%7D.spinner_YRVV%7Banimation-delay:-.65s%7D.spinner_c9oY%7Banimation-delay:-.5s%7D@keyframes spinner_xe7Q%7B93.75%25,100%25%7Br:3px%7D46.875%25%7Br:.2px%7D%7D%3C/style%3E%3Ccircle class='spinner_b2T7' cx='4' cy='12' r='3' fill='%23FF4B24'/%3E%3Ccircle class='spinner_b2T7 spinner_YRVV' cx='12' cy='12' r='3' fill='%23FF4B24'/%3E%3Ccircle class='spinner_b2T7 spinner_c9oY' cx='20' cy='12' r='3' fill='%23FF4B24'/%3E%3C/svg%3E");
