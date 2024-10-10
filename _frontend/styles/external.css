@@ -2,6 +2,14 @@
     @apply relative flex flex-col bg-white rounded-lg outline outline-1 -outline-offset-1 outline-stone-950/10;
 }
 
+.external-wrapper.external-placeholder {
+    @apply overflow-hidden text-transparent bg-stone-50 rounded-lg pointer-events-none animate-pulse;
+}
+
+.external-wrapper.external-placeholder * {
+    @apply opacity-0;
+}
+
 .external-author {
     @apply flex flex-row items-center gap-3 text-sm font-bold pt-4 pl-4 pr-4;
 }
@@ -30,7 +38,11 @@
 }
 
 .external-image {
-    @apply aspect-video rounded-lg object-cover bg-stone-50 bg-no-repeat bg-cover bg-center;
+    @apply aspect-video rounded-lg object-cover bg-stone-800 bg-no-repeat bg-cover bg-center;
+    background:
+        linear-gradient(rgba(12, 10, 9, 0.9), rgba(12, 10, 9, 0.9)),
+        var(--image) center no-repeat;
+    background-size: auto, cover;
 }
 
 .external:has(.external-image) .external-summary {

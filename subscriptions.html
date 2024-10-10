@@ -5,7 +5,7 @@ box_list_item: "subscriptions/box_list_item.html"
 
 <div class="box" x-data="inline_search">
     <!--prettier-ignore-->
-    {% include box_header.html title=include.title %}
+    {% include box_header.html title=include.title include_end="subscriptions/header_end.html" %}
 
     {% include search.html placeholder='Шукати стрічку в підписках' %}
 

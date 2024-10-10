@@ -10,7 +10,7 @@
     @apply flex flex-col gap-2;
 }
 
-.post-summary:has(.media) {
+.post-summary:has(.external) {
     @apply gap-3;
 }
 

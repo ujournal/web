@@ -19,11 +19,10 @@ export default (url = null, data = null) => {
                 target="_blank"
                 rel="noreferrer"
                 x-bind:href="data.url"
+                x-bind:title="titleFormatted"
               >
                   <template x-if="data.icon">
-                      <div class="external-icon">
-                          <img x-bind:src="data.icon" />
-                      </div>
+                      <img class="external-icon" x-bind:src="data.icon" />
                   </template>
                   <template x-if="hasTitle">
                       <div
@@ -37,7 +36,12 @@ export default (url = null, data = null) => {
                   ></div>
               </a>
               <template x-if="data.image">
-                <img x-bind:src="data.image" class="external-image" />
+                <img
+                  x-bind:src="data.image"
+                  x-bind:style="{ '--image': 'url(' + data.image + ')' }"
+                  class="external-image"
+                  x-on:load="handleImageLoad"
+                />
               </template>
           </div>
       </template>`;
@@ -67,6 +71,13 @@ export default (url = null, data = null) => {
 
     caption() {
       return new URL(this.data.url).host;
+    },
+
+    handleImageLoad(event) {
+      const ratio = event.target.naturalWidth / event.target.naturalHeight;
+      console.log(ratio);
+      const isCover = ratio > 1.49 && ratio < 2.2;
+      event.target.style.objectFit = isCover ? "cover" : "contain";
     },
   };
 };
