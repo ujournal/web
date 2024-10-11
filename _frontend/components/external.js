@@ -1,14 +1,13 @@
 import externals from "../utils/externals";
 
-export default (url = null, data = null) => {
+export default (url = null, canBeRemoved = false) => {
   return {
     url,
-    data,
+    data: null,
+    canBeRemoved,
 
-    init() {
-      if (this.url) {
-        this.resolveUrl();
-      }
+    async init() {
+      await this.load();
     },
 
     template() {
@@ -43,12 +42,37 @@ export default (url = null, data = null) => {
                   x-on:load="handleImageLoad"
                 />
               </template>
+              <template x-if="canBeRemoved">
+                <button
+                    type="button"
+                    class="external-remove"
+                    x-on:click="remove"
+                ></button>
+              </template>
           </div>
       </template>`;
     },
 
-    async resolveUrl() {
-      this.data = await externals.resolve(this.url);
+    async load() {
+      dispatchEvent(
+        new CustomEvent("external-started", { detail: { url: this.url } }),
+      );
+
+      try {
+        const data = await externals.resolve(this.url);
+
+        this.data = data;
+
+        dispatchEvent(
+          new CustomEvent("external-completed", {
+            detail: { url: this.url, data },
+          }),
+        );
+      } catch (error) {
+        dispatchEvent(
+          new CustomEvent("external-failed", { detail: { url: this.url } }),
+        );
+      }
     },
 
     hasTitle() {
@@ -70,7 +94,11 @@ export default (url = null, data = null) => {
     },
 
     host() {
-      return new URL(this.data.url).host;
+      if (this.data?.url) {
+        return new URL(this.data.url).host;
+      }
+
+      return "";
     },
 
     caption() {
@@ -81,6 +109,12 @@ export default (url = null, data = null) => {
       const ratio = event.target.naturalWidth / event.target.naturalHeight;
       const isCover = ratio > 1.49 && ratio < 2.2;
       event.target.style.objectFit = isCover ? "cover" : "contain";
+    },
+
+    remove() {
+      dispatchEvent(
+        new CustomEvent("external-remove", { detail: { url: this.url } }),
+      );
     },
   };
 };

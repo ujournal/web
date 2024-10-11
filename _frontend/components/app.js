@@ -1,9 +1,8 @@
 import auth from "../utils/auth";
 import jwtParser from "../utils/jwt_parser";
-import metaReader from "../utils/meta_reader";
 
 export default () => {
-  let stopListen = null;
+  let cleanup;
 
   return {
     logged: false,
@@ -11,9 +10,14 @@ export default () => {
     user: null,
 
     init() {
-      stopListen = auth.listen((data) => this.handleAuth(data));
+      const stopListenAuth = auth.listen((data) => this.handleAuth(data));
+
       this.logged = auth.check();
       this.user = this.logged ? this.parseUser() : null;
+
+      cleanup = () => {
+        stopListenAuth();
+      };
     },
 
     handleAuth(data) {
@@ -28,7 +32,7 @@ export default () => {
     },
 
     destroy() {
-      stopListen();
+      cleanup();
     },
 
     login(redirectUrl = null) {

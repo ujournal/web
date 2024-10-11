@@ -27,6 +27,7 @@ export default () => {
       addEventListener("carousel-resize", handleScroll);
 
       cleanup = () => {
+        clearTimeout(timer);
         this.$refs.items.removeEventListener("scroll", handleScroll);
         removeEventListener("resize", handleScroll);
         removeEventListener("carousel-resize", handleScroll);
@@ -62,6 +63,10 @@ export default () => {
         left,
         behavior: "smooth",
       });
+    },
+
+    remove(index) {
+      dispatchEvent(new CustomEvent("gallery-remove", { detail: { index } }));
     },
 
     handleImageLoad(event) {

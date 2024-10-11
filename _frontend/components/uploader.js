@@ -1,18 +1,33 @@
+import imageCompression from "browser-image-compression";
 import api from "../utils/api";
 
-export default () => {
+export default (fieldName = "image", isImages = true, size = 1024) => {
   return {
     async handleInputChange(event) {
+      const files = event.currentTarget.files;
       dispatchEvent(new CustomEvent("uploader-started"));
 
-      const promises = Array.from(event.currentTarget.files).map((file) => {
-        const formData = new FormData();
-        formData.append("image", file);
+      const promises = [];
 
-        return api.post("/externals", formData, {
-          validateStatus: () => true,
-        });
-      });
+      for (let i = 0; i < files.length; i++) {
+        let file = files[i];
+
+        if (isImages && file.size > 1024) {
+          file = await imageCompression(file, {
+            maxSizeMB: Math.floor((size / 1024) * 10) / 10,
+            maxWidthOrHeight: 2000,
+          });
+        }
+
+        const formData = new FormData();
+        formData.append(fieldName, file);
+
+        promises.push(
+          api.post("/externals", formData, {
+            validateStatus: () => true,
+          }),
+        );
+      }
 
       this.$refs.input.value = "";
 

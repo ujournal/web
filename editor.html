@@ -6,20 +6,24 @@ layout_class: layout-post
 <form
     class="editor"
     x-data="editor"
+    x-bind:data-busy="busy"
     x-on:submit.prevent="submit"
     x-on:input="clearErrors"
-    x-bind:data-busy="busy"
+    x-on:gallery-remove.window="handleImageRemove"
     x-on:uploader-started.window="handleUploadStarted"
     x-on:uploader-completed.window="handleUploadCompleted"
-    x-on:carousel-remove="handleImageRemove"
+    x-on:external-started.window="handleExternalStarted"
+    x-on:external-completed.window="handleExternalCompleted"
+    x-on:external-failed.window="handleExternalFailed"
+    x-on:external-remove.window="handleExternalRemove"
 >
-    <input type="hidden" name="url" />
+    <input type="hidden" name="url" x-model="url" />
 
     <div class="editor-title">
         <input
             type="text"
             class="input"
-            x-bind:placeholder="images.length > 0 || Boolean(url) ? 'Заголовок' : 'Заголовок або URL (YouTube, SoundCloud, Reddit, Telegram, X)...'"
+            x-bind:placeholder="gallery.length > 0 || Boolean(url) ? 'Заголовок' : 'Заголовок або URL'"
             autofocus
             minlength="2"
             maxlength="256"
@@ -40,28 +44,22 @@ layout_class: layout-post
         </template>
     </div>
 
-    <template x-if="externalData">
-        <div class="editor-external">
-            <div
-                x-data="external(null, externalData)"
-                x-html="template"
-                x-bind:data-host="host"
-            ></div>
-            <button
-                type="button"
-                class="editor-external-remove"
-                x-on:click="removeExternal"
-            >
-                {% svg icons/x.svg %}
-            </button>
-        </div>
+    <template x-if="url">
+        <div
+            x-data="external(url, true)"
+            x-html="template"
+            x-bind:data-host="host"
+        ></div>
     </template>
 
     <!--prettier-ignore-->
-    {% include carousel.html %}
+    {% include gallery.html %}
 
-    {% include marke.html maxlength=5000 name='body' model='body'
-    placeholder='Текст...' %}
+    {% include marke.html
+        maxlength=5000
+        name='body'
+        model='body'
+        placeholder='Текст...' %}
 
     <select
         class="input"

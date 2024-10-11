@@ -4,6 +4,10 @@ export default () => {
   return {
     message: null,
 
+    destroy() {
+      clearTimeout(timer);
+    },
+
     show(event) {
       clearTimeout(timer);
 

@@ -1,13 +1,11 @@
 import addClicksListener from "../utils/add_clicks_listener";
 
 export default () => {
-  let removeClicksListener = null;
-  let dialog = null;
-  let frame = null;
+  let dialog, frame, cleanup;
 
   return {
     init() {
-      removeClicksListener = addClicksListener("modal", (element) => {
+      const removeClicksListener = addClicksListener("modal", (element) => {
         this.open(
           element.getAttribute("href"),
           parseInt(element.getAttribute("data-modal-height"), 10) || null,
@@ -18,10 +16,14 @@ export default () => {
       frame = document.createElement("iframe");
 
       dialog.appendChild(frame);
+
+      cleanup = () => {
+        removeClicksListener();
+      };
     },
 
     destroy() {
-      removeClicksListener();
+      cleanup();
     },
 
     open(url, height = null) {

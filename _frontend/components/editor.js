@@ -1,87 +1,85 @@
+import { Alpine } from "alpinejs";
 import isUrl from "is-url";
 import formSender from "../utils/form_sender";
 import api from "../utils/api";
 import store from "../utils/session_store";
 import auth from "../utils/auth";
-import externals from "../utils/externals";
 
 export default () => {
   return {
     feeds: store.get("feeds", []),
+    feed_id: store.get("feed_id"),
+    id: null,
     title: "",
     body: "",
     url: "",
-    feed_id: store.get("feed_id"),
-    busy: false,
-    externalData: null,
     images: [],
+    busy: false,
 
     init() {
       if (!auth.check()) {
         location.href = "/";
       }
 
+      const id = new URL(location.href).searchParams.get("id");
+
+      if (id) {
+        this.busy = true;
+        this.loadPost(id);
+        this.busy = false;
+      }
+
       this.loadFeeds();
     },
 
     async submit() {
+      await this.storeGallery();
       await formSender.sendForm("/posts", this.$root, api);
+    },
+
+    async loadPost(id) {
+      const { data } = await api.get(`/posts/${id}`);
+      this.id = data.id;
+      this.title = data.title;
+      this.body = data.body;
+      this.url = data.url;
     },
 
     async loadFeeds() {
       const { data } = await api.get("/feeds");
+
       this.feeds = data;
+
       store.set("feeds", data);
     },
 
-    clearErrors() {
-      formSender.setFormErrors(this.$root, {});
-    },
-
-    handleTitlePaste() {
-      requestAnimationFrame(() => this.checkTitleForUrlAndResolve());
-    },
-
-    handleTitleChange() {
-      this.checkTitleForUrlAndResolve();
-    },
-
-    async checkTitleForUrlAndResolve() {
-      if (this.busy || this.images.length > 0) {
+    async storeGallery() {
+      if (this.images.length === 0) {
         return;
       }
 
-      this.busy = true;
+      this.url = (
+        await api.post("/externals", {
+          gallery: Alpine.raw(this.images).map((image) => image.url),
+        })
+      ).data.url;
+    },
+
+    async resolveTitleAsUrlIfNeeded() {
+      if (this.busy || this.images.length > 0) {
+        return;
+      }
 
       const title = this.title.trim();
 
       if (isUrl(title)) {
         this.title = "";
-
-        try {
-          const external = await externals.resolve(title);
-          this.externalData = external;
-          this.title = external.title;
-          this.url = external.url;
-
-          if (this.body === "") {
-            this.body = external.description;
-            this.triggerTextareaResize();
-          }
-        } catch (error) {
-          console.warn(error);
-
-          dispatchEvent(
-            new CustomEvent("toast-show", {
-              detail: {
-                message: "Не вдалося опрацювати URL. Спробуйте ще раз",
-              },
-            }),
-          );
-        }
+        this.url = title;
       }
+    },
 
-      this.busy = false;
+    clearErrors() {
+      formSender.setFormErrors(this.$root, {});
     },
 
     triggerTextareaResize() {
@@ -92,9 +90,12 @@ export default () => {
       );
     },
 
-    removeExternal() {
-      this.externalData = null;
-      this.url = null;
+    handleTitlePaste() {
+      requestAnimationFrame(() => this.resolveTitleAsUrlIfNeeded());
+    },
+
+    handleTitleChange() {
+      this.resolveTitleAsUrlIfNeeded();
     },
 
     handleUploadStarted() {
@@ -120,6 +121,41 @@ export default () => {
     handleImageRemove(event) {
       this.images.splice(event.detail.index, 1);
       dispatchEvent(new CustomEvent("carousel-resize"));
+    },
+
+    handleExternalStarted() {
+      this.busy = true;
+    },
+
+    handleExternalCompleted(event) {
+      const { title, url, description } = event.detail.data;
+
+      this.busy = false;
+
+      this.title = title;
+      this.url = url;
+
+      if (this.body === "") {
+        this.body = description;
+        this.triggerTextareaResize();
+      }
+    },
+
+    handleExternalFailed() {
+      this.busy = false;
+      this.url = null;
+
+      dispatchEvent(
+        new CustomEvent("toast-show", {
+          detail: {
+            message: "Не вдалося опрацювати URL. Спробуйте ще раз",
+          },
+        }),
+      );
+    },
+
+    handleExternalRemove() {
+      this.url = null;
     },
   };
 };

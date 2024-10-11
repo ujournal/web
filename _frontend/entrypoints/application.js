@@ -12,6 +12,4 @@ registerModules(
 
 Alpine.plugin(Autosize);
 
-window.Alpine = Alpine;
-
 Alpine.start();

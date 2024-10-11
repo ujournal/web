@@ -8,7 +8,7 @@ import {
 
 export default () => {
   let removeAutoUpdate = () => {};
-  let removeToggleListener = () => {};
+  let cleanup;
 
   return {
     init() {
@@ -39,14 +39,14 @@ export default () => {
 
       this.$root.addEventListener("toggle", listener);
 
-      removeToggleListener = () => {
+      cleanup = () => {
         this.$root.removeEventListener("toggle", listener);
       };
     },
 
     destroy() {
       removeAutoUpdate();
-      removeToggleListener();
+      cleanup();
     },
   };
 };

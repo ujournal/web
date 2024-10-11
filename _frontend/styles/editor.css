@@ -15,7 +15,7 @@
 }
 
 .editor-title > .input {
-    @apply flex-1;
+    @apply flex-1 font-bold;
 }
 
 .editor-title > .button {
@@ -24,16 +24,4 @@
 
 .editor-description {
     @apply text-stone-400 text-sm;
-}
-
-.editor-external {
-    @apply relative;
-}
-
-.editor-external-remove {
-    @apply absolute right-2 top-2 text-white p-1 bg-stone-950/50 rounded-full transition active:scale-75;
-}
-
-.editor-external-remove > svg {
-    @apply w-5 h-5;
 }

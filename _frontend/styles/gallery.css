@@ -1,0 +1,56 @@
+.gallery {
+    @apply relative -mx-6;
+}
+
+.gallery-items {
+    @apply w-full flex flex-row overflow-x-scroll overflow-y-hidden gap-3 px-6;
+    scrollbar-width: none;
+    scroll-snap-type: x mandatory;
+}
+
+.gallery-items > .gallery-item:first-child {
+}
+
+.gallery-items::-webkit-scrollbar {
+    @apply hidden;
+}
+
+.gallery-item {
+    @apply relative min-w-full;
+}
+
+.gallery-item > img {
+    @apply min-w-full aspect-video rounded-lg outline outline-1 -outline-offset-1 outline-stone-950/10 object-cover bg-stone-800 bg-no-repeat bg-cover bg-center;
+    scroll-snap-align: center;
+    background:
+        linear-gradient(rgba(12, 10, 9, 0.9), rgba(12, 10, 9, 0.9)),
+        var(--image) center no-repeat;
+    background-size: auto, cover;
+}
+
+.gallery-remove {
+    @apply absolute right-2 top-2 w-8 h-8 text-white p-1 bg-stone-950/50 rounded-full transition active:scale-75 bg-no-repeat bg-center;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='1.75' stroke-linecap='round' stroke-linejoin='round' class='icon icon-tabler icons-tabler-outline icon-tabler-x'%3E%3Cpath stroke='none' d='M0 0h24v24H0z' fill='none' /%3E%3Cpath d='M18 6l-12 12' /%3E%3Cpath d='M6 6l12 12' /%3E%3C/svg%3E");
+}
+
+.gallery-remove > svg {
+    @apply w-5 h-5;
+}
+
+.gallery-button {
+    @apply absolute top-0 bottom-0 mt-auto mb-auto w-8 h-8 text-white bg-stone-950/50 rounded-full transition active:scale-75 bg-no-repeat bg-center;
+}
+
+.gallery-button.gallery-button-start {
+    @apply left-8;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='1.75' stroke-linecap='round' stroke-linejoin='round' class='icon icon-tabler icons-tabler-outline icon-tabler-chevron-left'%3E%3Cpath stroke='none' d='M0 0h24v24H0z' fill='none' /%3E%3Cpath d='M15 6l-6 6l6 6' /%3E%3C/svg%3E");
+}
+
+.gallery-button.gallery-button-end {
+    @apply right-8;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='1.75' stroke-linecap='round' stroke-linejoin='round' class='icon icon-tabler icons-tabler-outline icon-tabler-chevron-right'%3E%3Cpath stroke='none' d='M0 0h24v24H0z' fill='none' /%3E%3Cpath d='M9 6l6 6l-6 6' /%3E%3C/svg%3E");
+}
+
+.gallery-button:disabled {
+    @apply opacity-0 pointer-events-none;
+}
