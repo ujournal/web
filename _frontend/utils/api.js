@@ -1,14 +1,17 @@
 import axios from "axios";
 import auth from "./auth";
 import metaReader from "./meta_reader";
+import axiosRetry from "axios-retry";
 
 const instance = axios.create({
   baseURL: metaReader.get("api-url"),
-  timeout: 5000,
+  timeout: 20000,
   headers: {
     accept: "application/json",
   },
 });
+
+axiosRetry(instance, { retries: 3 });
 
 // Hook that attach authorization token to each API request
 instance.interceptors.request.use(
@@ -28,7 +31,7 @@ instance.interceptors.request.use(
 instance.interceptors.response.use(
   (response) => response,
   async (error) => {
-    if (error.response.status === 401) {
+    if (error.response?.status === 401) {
       const response = await instance.post("/auth");
 
       if (response.status === 200) {

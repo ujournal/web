@@ -4,19 +4,22 @@ layout_class: layout-post
 ---
 
 <form
-    class="postform"
-    x-data="postform"
+    class="editor"
+    x-data="editor"
     x-on:submit.prevent="submit"
     x-on:input="clearErrors"
     x-bind:data-busy="busy"
+    x-on:uploader-started.window="handleUploadStarted"
+    x-on:uploader-completed.window="handleUploadCompleted"
+    x-on:carousel-remove="handleImageRemove"
 >
     <input type="hidden" name="url" />
 
-    <div class="postform-title">
+    <div class="editor-title">
         <input
             type="text"
             class="input"
-            placeholder="Заголовок або URL (YouTube, SoundCloud, Reddit, Telegram, X)..."
+            x-bind:placeholder="images.length > 0 || Boolean(url) ? 'Заголовок' : 'Заголовок або URL (YouTube, SoundCloud, Reddit, Telegram, X)...'"
             autofocus
             minlength="2"
             maxlength="256"
@@ -26,26 +29,27 @@ layout_class: layout-post
             x-on:change="handleTitleChange"
             x-bind:readonly="busy"
         />
-        <button type="button" class="button button-secondary">
-            {% svg icons/photo-up.svg %}
-        </button>
+        <template x-if="!Boolean(url)">
+            <label
+                type="button"
+                class="button button-secondary"
+                for="uploader-input"
+            >
+                {% svg icons/photo-up.svg %}
+            </label>
+        </template>
     </div>
 
-    <!--prettier-ignore-->
-    {% comment %}
-    {% include media.html
-        image='https://itc.ua/wp-content/uploads/2024/09/opz2TGga2N83DQrupQeuCn-970-80.jpg-1.jpg'
-        title='Серіал «Володар перснів»: Том Бомбаділ підказує, ким є Незнайомець, шоуранер обіцяє відповідь в цьому сезоні'
-        caption='youtube.com'
-    %}
-    {% endcomment %}
-
     <template x-if="externalData">
-        <div class="postform-external">
-            <div x-data="external(null, externalData)" x-html="template"></div>
+        <div class="editor-external">
+            <div
+                x-data="external(null, externalData)"
+                x-html="template"
+                x-bind:data-host="host"
+            ></div>
             <button
                 type="button"
-                class="postform-external-remove"
+                class="editor-external-remove"
                 x-on:click="removeExternal"
             >
                 {% svg icons/x.svg %}
@@ -53,7 +57,10 @@ layout_class: layout-post
         </div>
     </template>
 
-    {% include editor.html maxlength=5000 name='body' model='body'
+    <!--prettier-ignore-->
+    {% include carousel.html %}
+
+    {% include marke.html maxlength=5000 name='body' model='body'
     placeholder='Текст...' %}
 
     <select
@@ -71,11 +78,11 @@ layout_class: layout-post
     <template x-if="feeds.find(feed => feed.id == feed_id)?.description">
         <div
             x-text="feeds.find(feed => feed.id == feed_id).description"
-            class="postform-description"
+            class="editor-description"
         ></div>
     </template>
 
-    <div class="postform-actions">
+    <div class="editor-actions">
         <button class="button button-primary">
             {% svg icons/send-2.svg %}
             <span class="button-label">Опублікувати</span>
@@ -87,4 +94,6 @@ layout_class: layout-post
     </div>
 </form>
 
-{% include popovers/postform_attachment_popover.html %}
+<!--prettier-ignore-->
+{% include popovers/editor_attachment_popover.html %}
+{% include uploader.html %}

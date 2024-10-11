@@ -1,0 +1,38 @@
+<template x-if="images.length > 0">
+    <div class="carousel" x-data="carousel">
+        <div class="carousel-items" x-ref="items">
+            <template x-for="(image, index) in images">
+                <div class="carousel-item">
+                    <img
+                        x-bind:src="image.url"
+                        x-bind:style="{ '--image': 'url(' + image.url + ')' }"
+                        x-on:load="handleImageLoad"
+                    />
+                    <button
+                        type="button"
+                        class="carousel-remove"
+                        x-on:click="$dispatch('carousel-remove', { index })"
+                    >
+                        {% svg icons/x.svg %}
+                    </button>
+                </div>
+            </template>
+        </div>
+        <button
+            type="button"
+            class="carousel-button carousel-button-start"
+            x-bind:disabled="scrolledStart"
+            x-on:click="prev"
+        >
+            {% svg icons/chevron-left.svg %}
+        </button>
+        <button
+            type="button"
+            class="carousel-button carousel-button-end"
+            x-bind:disabled="scrolledEnd"
+            x-on:click="next"
+        >
+            {% svg icons/chevron-right.svg %}
+        </button>
+    </div>
+</template>

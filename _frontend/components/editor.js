@@ -14,6 +14,7 @@ export default () => {
     feed_id: store.get("feed_id"),
     busy: false,
     externalData: null,
+    images: [],
 
     init() {
       if (!auth.check()) {
@@ -46,7 +47,7 @@ export default () => {
     },
 
     async checkTitleForUrlAndResolve() {
-      if (this.busy) {
+      if (this.busy || this.images.length > 0) {
         return;
       }
 
@@ -69,6 +70,14 @@ export default () => {
           }
         } catch (error) {
           console.warn(error);
+
+          dispatchEvent(
+            new CustomEvent("toast-show", {
+              detail: {
+                message: "Не вдалося опрацювати URL. Спробуйте ще раз",
+              },
+            }),
+          );
         }
       }
 
@@ -86,6 +95,31 @@ export default () => {
     removeExternal() {
       this.externalData = null;
       this.url = null;
+    },
+
+    handleUploadStarted() {
+      this.busy = true;
+    },
+
+    handleUploadCompleted(event) {
+      this.busy = false;
+
+      this.images = [...this.images, ...event.detail.succeed];
+
+      if (event.detail.failed.length > 0) {
+        dispatchEvent(
+          new CustomEvent("toast-show", {
+            detail: {
+              message: "Не вдалося завантажити деякі зорбаження",
+            },
+          }),
+        );
+      }
+    },
+
+    handleImageRemove(event) {
+      this.images.splice(event.detail.index, 1);
+      dispatchEvent(new CustomEvent("carousel-resize"));
     },
   };
 };

@@ -1,0 +1,10 @@
+<form x-data="uploader" hidden>
+    <input
+        type="file"
+        x-ref="input"
+        x-on:change="handleInputChange"
+        multiple
+        accept="image/jpg,image/png,image/webp"
+        id="uploader-input"
+    />
+</form>

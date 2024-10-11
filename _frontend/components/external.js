@@ -37,9 +37,9 @@ export default (url = null, data = null) => {
               </a>
               <template x-if="data.image">
                 <img
+                  class="external-image"
                   x-bind:src="data.image"
                   x-bind:style="{ '--image': 'url(' + data.image + ')' }"
-                  class="external-image"
                   x-on:load="handleImageLoad"
                 />
               </template>
@@ -69,13 +69,16 @@ export default (url = null, data = null) => {
       return null;
     },
 
-    caption() {
+    host() {
       return new URL(this.data.url).host;
+    },
+
+    caption() {
+      return this.host();
     },
 
     handleImageLoad(event) {
       const ratio = event.target.naturalWidth / event.target.naturalHeight;
-      console.log(ratio);
       const isCover = ratio > 1.49 && ratio < 2.2;
       event.target.style.objectFit = isCover ? "cover" : "contain";
     },

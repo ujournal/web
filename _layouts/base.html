@@ -16,6 +16,9 @@
         class="layout {{layout.layout_class}} {{page.layout_class}}"
         x-data="app"
     >
+        <!-- prettier-ignore -->
         {{content}}
+
+        {% include toast.html %}
     </body>
 </html>

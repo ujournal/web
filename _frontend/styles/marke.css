@@ -1,0 +1,35 @@
+.marke {
+    @apply flex flex-col bg-white rounded-lg;
+}
+
+.marke .input {
+    @apply max-h-96 border-t-0 rounded-t-none bg-white outline-none shadow-none;
+}
+
+.marke-actions {
+    @apply flex flex-row items-center gap-1 bg-stone-50 rounded-t-lg border border-b-0 h-12 px-3 border-stone-300 transition;
+}
+
+.marke-actions button {
+    @apply w-8 h-8 flex flex-col items-center justify-center rounded-lg bg-stone-50 border border-transparent hover:bg-white hover:border-stone-200 hover:text-orange-500 transition;
+}
+
+.marke-actions button svg {
+    @apply w-5 h-5;
+}
+
+.marke:has(.input:focus) {
+    @apply shadow-sm shadow-blue-50;
+}
+
+.marke:has(.input:invalid) .marke-actions {
+    @apply border-orange-500;
+}
+
+.marke:has(.input:focus) .marke-actions {
+    @apply border-blue-500 bg-blue-50;
+}
+
+.marke:has(.input:focus) .marke-actions button {
+    @apply bg-blue-50 hover:bg-white hover:border-blue-200;
+}

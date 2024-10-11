@@ -69,3 +69,7 @@
 .external-summary:has(.external-caption) .external-icon {
     @apply row-span-2 self-center;
 }
+
+.external-summary:active .external-icon {
+    @apply scale-75;
+}

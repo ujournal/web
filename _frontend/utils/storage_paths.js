@@ -1,8 +1,7 @@
-import metaReader from "./meta_reader";
-import sha256 from "./sha256";
+import digest from "./digest";
 
 export default {
   async external(url) {
-    return `/e/${await sha256(url)}.json`;
+    return `/e/${await digest(url, "SHA-1")}.json`;
   },
 };

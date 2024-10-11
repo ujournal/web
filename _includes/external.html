@@ -1,5 +1,6 @@
 <div
+    class="external-wrapper {% if include.placeholder %}external-placeholder{% endif %}"
     x-data="external('{{include.url}}')"
     x-html="template"
-    class="external-wrapper {% if include.placeholder %}external-placeholder{% endif %}"
+    x-bind:data-host="host"
 ></div>
