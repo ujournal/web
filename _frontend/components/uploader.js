@@ -23,7 +23,7 @@ export default (fieldName = "image", isImages = true, size = 1024) => {
         formData.append(fieldName, file);
 
         promises.push(
-          api.post("/externals", formData, {
+          api.post("/images", formData, {
             validateStatus: () => true,
           }),
         );
@@ -34,9 +34,11 @@ export default (fieldName = "image", isImages = true, size = 1024) => {
       const results = await Promise.all(promises);
 
       const succeed = results
-        .filter((result) => result.status === 200)
+        .filter((result) => result.status === 200 || result.status === 201)
         .map((result) => result.data);
-      const failed = results.filter((result) => result.status !== 200);
+      const failed = results.filter(
+        (result) => result.status !== 200 && result.status !== 201,
+      );
 
       this.$dispatch("uploader-completed", { succeed, failed });
     },

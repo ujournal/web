@@ -19,6 +19,8 @@ layout_class: layout-post
     x-on:gallery-failed.window="handleGalleryFailed"
 >
     <input type="hidden" name="url" x-model="url" />
+    <input type="hidden" name="external_id" x-model="external_id" />
+    <input type="hidden" name="gallery_id" x-model="gallery_id" />
 
     <div class="editor-title">
         <input
@@ -45,12 +47,13 @@ layout_class: layout-post
         </template>
     </div>
 
-    <div
-        x-data="external(url, true)"
-        x-on:external-resolve.window="handleResolve"
-        x-html="template"
-        x-show="Boolean(url) && url.startsWith('https:') && data"
-    ></div>
+    <template x-if="Boolean(url) && url.startsWith('https:')">
+        <div
+            x-data="external(url, true)"
+            x-on:external-resolve.window="handleResolve"
+            x-html="template"
+        ></div>
+    </template>
 
     <div
         x-data="gallery(url, true)"

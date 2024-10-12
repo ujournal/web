@@ -22,29 +22,30 @@ export default () => {
         location.href = "/";
       }
 
-      const id = new URL(location.href).searchParams.get("id");
-
-      if (id) {
-        this.busy = true;
-        this.loadPost(id);
-        this.busy = false;
-      }
-
+      this.loadPost();
       this.loadFeeds();
     },
 
     async submit() {
-      await this.storeGallery();
       await formSender.sendForm("/posts", this.$root, api);
     },
 
-    async loadPost(id) {
+    async loadPost() {
+      const id = new URL(location.href).searchParams.get("id");
+
+      if (!id) {
+        return;
+      }
+
       const { data } = await api.get(`/posts/${id}`);
 
       this.id = data.id;
       this.title = data.title;
       this.body = data.body;
       this.url = data.url;
+      this.feed_id = data.feed_id;
+      this.external_id = data.external_id;
+      this.gallery_id = data.gallery_id;
     },
 
     async loadFeeds() {
