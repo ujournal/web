@@ -9,13 +9,14 @@ layout_class: layout-post
     x-bind:data-busy="busy"
     x-on:submit.prevent="submit"
     x-on:input="clearErrors"
-    x-on:gallery-remove.window="handleImageRemove"
     x-on:uploader-started.window="handleUploadStarted"
     x-on:uploader-completed.window="handleUploadCompleted"
     x-on:external-started.window="handleExternalStarted"
-    x-on:external-completed.window="handleExternalCompleted"
+    x-on:external-succeed.window="handleExternalCompleted"
     x-on:external-failed.window="handleExternalFailed"
-    x-on:external-remove.window="handleExternalRemove"
+    x-on:external-removed.window="handleExternalRemoved"
+    x-on:gallery-succeed.window="handleGallerySucceed"
+    x-on:gallery-failed.window="handleGalleryFailed"
 >
     <input type="hidden" name="url" x-model="url" />
 
@@ -23,7 +24,7 @@ layout_class: layout-post
         <input
             type="text"
             class="input"
-            x-bind:placeholder="gallery.length > 0 || Boolean(url) ? 'Заголовок' : 'Заголовок або URL'"
+            x-bind:placeholder="Boolean(url) ? 'Заголовок' : 'Заголовок або URL'"
             autofocus
             minlength="2"
             maxlength="256"
@@ -33,7 +34,7 @@ layout_class: layout-post
             x-on:change="handleTitleChange"
             x-bind:readonly="busy"
         />
-        <template x-if="!Boolean(url)">
+        <template x-if="!Boolean(url) || url.startsWith('gallery:')">
             <label
                 type="button"
                 class="button button-secondary"
@@ -44,16 +45,25 @@ layout_class: layout-post
         </template>
     </div>
 
-    <template x-if="url">
-        <div
-            x-data="external(url, true)"
-            x-html="template"
-            x-bind:data-host="host"
-        ></div>
-    </template>
+    <div
+        x-data="external(url, true)"
+        x-on:external-resolve.window="handleResolve"
+        x-html="template"
+        x-show="Boolean(url) && url.startsWith('https:') && data"
+    ></div>
+
+    <div
+        x-data="gallery(url, true)"
+        x-on:gallery-add.window="handleAdd"
+        x-html="template"
+        x-show="Boolean(url) && url.startsWith('gallery:') && images.length > 0"
+    ></div>
+
+    {% comment %}
 
     <!--prettier-ignore-->
     {% include gallery.html %}
+    {% endcomment %}
 
     {% include marke.html
         maxlength=5000

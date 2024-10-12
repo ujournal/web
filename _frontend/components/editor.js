@@ -1,4 +1,3 @@
-import { Alpine } from "alpinejs";
 import isUrl from "is-url";
 import formSender from "../utils/form_sender";
 import api from "../utils/api";
@@ -7,14 +6,16 @@ import auth from "../utils/auth";
 
 export default () => {
   return {
-    feeds: store.get("feeds", []),
-    feed_id: store.get("feed_id"),
     id: null,
     title: "",
     body: "",
     url: "",
-    images: [],
+    external_id: null,
+    gallery_id: null,
+    feed_id: store.get("feed_id"),
+    feeds: store.get("feeds", []),
     busy: false,
+    editing: true,
 
     init() {
       if (!auth.check()) {
@@ -39,6 +40,7 @@ export default () => {
 
     async loadPost(id) {
       const { data } = await api.get(`/posts/${id}`);
+
       this.id = data.id;
       this.title = data.title;
       this.body = data.body;
@@ -53,20 +55,8 @@ export default () => {
       store.set("feeds", data);
     },
 
-    async storeGallery() {
-      if (this.images.length === 0) {
-        return;
-      }
-
-      this.url = (
-        await api.post("/externals", {
-          gallery: Alpine.raw(this.images).map((image) => image.url),
-        })
-      ).data.url;
-    },
-
     async resolveTitleAsUrlIfNeeded() {
-      if (this.busy || this.images.length > 0) {
+      if (this.busy) {
         return;
       }
 
@@ -75,6 +65,8 @@ export default () => {
       if (isUrl(title)) {
         this.title = "";
         this.url = title;
+
+        this.$dispatch("external-resolve", { url: title });
       }
     },
 
@@ -105,22 +97,17 @@ export default () => {
     handleUploadCompleted(event) {
       this.busy = false;
 
-      this.images = [...this.images, ...event.detail.succeed];
+      if (event.detail.succeed.length > 0) {
+        this.$dispatch("gallery-add", {
+          images: event.detail.succeed.map((item) => item.url),
+        });
+      }
 
       if (event.detail.failed.length > 0) {
-        dispatchEvent(
-          new CustomEvent("toast-show", {
-            detail: {
-              message: "Не вдалося завантажити деякі зорбаження",
-            },
-          }),
-        );
+        this.$dispatch("toast-show", {
+          message: "Не вдалося завантажити деякі зорбаження",
+        });
       }
-    },
-
-    handleImageRemove(event) {
-      this.images.splice(event.detail.index, 1);
-      dispatchEvent(new CustomEvent("carousel-resize"));
     },
 
     handleExternalStarted() {
@@ -128,10 +115,11 @@ export default () => {
     },
 
     handleExternalCompleted(event) {
-      const { title, url, description } = event.detail.data;
+      const { id, title, url, description } = event.detail.data;
 
       this.busy = false;
 
+      this.external_id = id;
       this.title = title;
       this.url = url;
 
@@ -145,17 +133,32 @@ export default () => {
       this.busy = false;
       this.url = null;
 
-      dispatchEvent(
-        new CustomEvent("toast-show", {
-          detail: {
-            message: "Не вдалося опрацювати URL. Спробуйте ще раз",
-          },
-        }),
-      );
+      this.$dispatch("toast-show", {
+        message: "Не вдалося опрацювати URL. Спробуйте ще раз",
+      });
     },
 
-    handleExternalRemove() {
+    handleExternalRemoved() {
+      this.external_id = null;
       this.url = null;
+    },
+
+    handleGallerySucceed(event) {
+      const { url, gallery } = event.detail;
+
+      if (gallery.images.length > 0) {
+        this.gallery_id = gallery.id;
+        this.url = url;
+      } else {
+        this.gallery_id = null;
+        this.url = "";
+      }
+    },
+
+    handleGalleryFailed() {
+      this.$dispatch("toast-show", {
+        message: "Не вдалося створити або оновити галерею",
+      });
     },
   };
 };

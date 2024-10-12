@@ -16,12 +16,12 @@ export default () => {
 
       this.$root.showPopover();
 
-      dispatchEvent(new CustomEvent("toast-showed"));
+      this.$dispatch("toast-showed");
 
       timer = setTimeout(() => {
         this.$root.hidePopover();
 
-        dispatchEvent(new CustomEvent("toast-hided"));
+        this.$dispatch("toast-hided");
       }, delay);
     },
   };

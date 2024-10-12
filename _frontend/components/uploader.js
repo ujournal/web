@@ -5,7 +5,7 @@ export default (fieldName = "image", isImages = true, size = 1024) => {
   return {
     async handleInputChange(event) {
       const files = event.currentTarget.files;
-      dispatchEvent(new CustomEvent("uploader-started"));
+      this.$dispatch("uploader-started");
 
       const promises = [];
 
@@ -38,9 +38,7 @@ export default (fieldName = "image", isImages = true, size = 1024) => {
         .map((result) => result.data);
       const failed = results.filter((result) => result.status !== 200);
 
-      dispatchEvent(
-        new CustomEvent("uploader-completed", { detail: { succeed, failed } }),
-      );
+      this.$dispatch("uploader-completed", { succeed, failed });
     },
   };
 };

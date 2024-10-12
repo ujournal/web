@@ -1,17 +1,19 @@
 import externals from "../utils/externals";
 
-export default (url = null, canBeRemoved = false) => {
+export default (url = null, removable = false) => {
   return {
     url,
     data: null,
-    canBeRemoved,
+    removable,
 
     async init() {
-      await this.load();
+      if (this.url) {
+        await this.load();
+      }
     },
 
     template() {
-      return `<template x-if="data">
+      return `<template x-if="Boolean(url) && Boolean(data)">
           <div class="external">
               <a
                 class="external-summary"
@@ -42,7 +44,7 @@ export default (url = null, canBeRemoved = false) => {
                   x-on:load="handleImageLoad"
                 />
               </template>
-              <template x-if="canBeRemoved">
+              <template x-if="removable">
                 <button
                     type="button"
                     class="external-remove"
@@ -54,24 +56,19 @@ export default (url = null, canBeRemoved = false) => {
     },
 
     async load() {
-      dispatchEvent(
-        new CustomEvent("external-started", { detail: { url: this.url } }),
-      );
+      this.$dispatch("external-started", { url: this.url });
 
       try {
         const data = await externals.resolve(this.url);
 
         this.data = data;
 
-        dispatchEvent(
-          new CustomEvent("external-completed", {
-            detail: { url: this.url, data },
-          }),
-        );
+        this.$dispatch("external-succeed", { url: this.url, data });
       } catch (error) {
-        dispatchEvent(
-          new CustomEvent("external-failed", { detail: { url: this.url } }),
-        );
+        this.url = null;
+        this.data = null;
+
+        this.$dispatch("external-failed", { url: this.url, error });
       }
     },
 
@@ -105,16 +102,22 @@ export default (url = null, canBeRemoved = false) => {
       return this.host();
     },
 
+    remove() {
+      this.url = null;
+
+      this.$dispatch("external-removed", { url: this.url });
+    },
+
     handleImageLoad(event) {
       const ratio = event.target.naturalWidth / event.target.naturalHeight;
       const isCover = ratio > 1.49 && ratio < 2.2;
       event.target.style.objectFit = isCover ? "cover" : "contain";
     },
 
-    remove() {
-      dispatchEvent(
-        new CustomEvent("external-remove", { detail: { url: this.url } }),
-      );
+    handleResolve(event) {
+      this.url = event.detail.url;
+
+      this.load();
     },
   };
 };
