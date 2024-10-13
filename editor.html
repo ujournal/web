@@ -33,11 +33,11 @@ layout_class: layout-post
             name="title"
             x-model="title"
             x-bind:readonly="busy"
-            x-bind:placeholder="Boolean(url) ? 'Заголовок' : 'Заголовок або URL'"
+            x-bind:placeholder="canPasteUrl() ?  'Заголовок або URL' : 'Заголовок'"
             x-on:paste="handleTitlePaste"
             x-on:change="handleTitleChange"
         />
-        <template x-if="!Boolean(url) || url.startsWith('gallery:')">
+        <template x-if="canUpload">
             <label
                 type="button"
                 class="button button-secondary"
@@ -48,7 +48,7 @@ layout_class: layout-post
         </template>
     </div>
 
-    <template x-if="url">
+    <template x-if="shouldShowExternal">
         <div
             x-data="external(url, true)"
             x-html="template"

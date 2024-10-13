@@ -57,7 +57,7 @@ export default () => {
     },
 
     async resolveTitleAsUrlIfNeeded() {
-      if (this.busy) {
+      if (this.busy || !this.canPasteUrl()) {
         return;
       }
 
@@ -95,6 +95,18 @@ export default () => {
       }
 
       return { id: null, alias: `/u/${user.identifier}`, image: avatar(user) };
+    },
+
+    canUpload() {
+      return !Boolean(this.url) || this.url.startsWith("gallery:");
+    },
+
+    canPasteUrl() {
+      return !this.url.startsWith("gallery:");
+    },
+
+    shouldShowExternal() {
+      return Boolean(this.url) && !url.startsWith("gallery:");
     },
 
     handleTitlePaste() {
