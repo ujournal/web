@@ -35,6 +35,6 @@
 }
 
 .editor-feed-image {
-    @apply avatar !absolute top-0 bottom-0 left-2 my-auto;
+    @apply avatar !absolute top-0 bottom-0 left-2 my-auto pointer-events-none;
     --avatar-s: 1.75rem;
 }
