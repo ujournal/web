@@ -3,6 +3,7 @@ import formSender from "../utils/form_sender";
 import api from "../utils/api";
 import store from "../utils/session_store";
 import auth from "../utils/auth";
+import avatar from "../utils/avatar";
 
 export default () => {
   return {
@@ -80,6 +81,20 @@ export default () => {
           .querySelector("textarea")
           .dispatchEvent(new CustomEvent("autosize")),
       );
+    },
+
+    feed() {
+      const user = auth.user();
+
+      const feed = this.feeds.find(
+        (feed) => feed.id === parseInt(this.feed_id, 10),
+      );
+
+      if (feed) {
+        return feed;
+      }
+
+      return { id: null, alias: `/u/${user.identifier}`, image: avatar(user) };
     },
 
     handleTitlePaste() {

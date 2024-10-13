@@ -1,5 +1,5 @@
 import auth from "../utils/auth";
-import jwtParser from "../utils/jwt_parser";
+import avatar from "../utils/avatar";
 
 export default () => {
   let cleanup;
@@ -13,7 +13,7 @@ export default () => {
       const stopListenAuth = auth.listen((data) => this.handleAuth(data));
 
       this.logged = auth.check();
-      this.user = this.logged ? this.parseUser() : null;
+      this.user = this.logged ? auth.user() : null;
 
       cleanup = () => {
         stopListenAuth();
@@ -46,21 +46,8 @@ export default () => {
       this.$dispatch("logout");
     },
 
-    parseUser() {
-      return jwtParser.parse(auth.get("access_token"));
-    },
-
     avatar() {
-      if (!this.user) {
-        return null;
-      }
-
-      const params = new URLSearchParams({
-        s: 250,
-        d: "robohash",
-      });
-
-      return `https://gravatar.com/avatar/${this.user.hash}?${params}`;
+      return avatar(this.user);
     },
   };
 };

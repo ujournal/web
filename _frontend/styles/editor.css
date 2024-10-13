@@ -25,3 +25,16 @@
 .editor-description {
     @apply text-stone-400 text-sm;
 }
+
+.editor-feed-field {
+    @apply relative flex flex-row;
+}
+
+.editor-feed-field > .input {
+    @apply flex-1 pl-11;
+}
+
+.editor-feed-image {
+    @apply avatar !absolute top-0 bottom-0 left-2 my-auto;
+    --avatar-s: 1.75rem;
+}

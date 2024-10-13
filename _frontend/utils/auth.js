@@ -1,5 +1,6 @@
 import metaReader from "./meta_reader";
 import store from "./local_store";
+import jwtParser from "./jwt_parser";
 
 export default {
   set(data) {
@@ -63,5 +64,9 @@ export default {
     return () => {
       removeEventListener("message", postMessageListener);
     };
+  },
+
+  user() {
+    return jwtParser.parse(this.get("access_token"));
   },
 };

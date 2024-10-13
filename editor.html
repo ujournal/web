@@ -27,15 +27,15 @@ layout_class: layout-post
         <input
             type="text"
             class="input"
-            x-bind:placeholder="Boolean(url) ? 'Заголовок' : 'Заголовок або URL'"
             autofocus
             minlength="2"
             maxlength="256"
             name="title"
             x-model="title"
+            x-bind:readonly="busy"
+            x-bind:placeholder="Boolean(url) ? 'Заголовок' : 'Заголовок або URL'"
             x-on:paste="handleTitlePaste"
             x-on:change="handleTitleChange"
-            x-bind:readonly="busy"
         />
         <template x-if="!Boolean(url) || url.startsWith('gallery:')">
             <label
@@ -48,18 +48,20 @@ layout_class: layout-post
         </template>
     </div>
 
-    <div
-        x-data="external(url, true)"
-        x-on:external-resolve.window="handleResolve"
-        x-html="template"
-        x-show="Boolean(url) && url.startsWith('https:') && Boolean(data)"
-    ></div>
+    <template x-if="url">
+        <div
+            x-data="external(url, true)"
+            x-html="template"
+            x-show="Boolean(url) && url.startsWith('https:') && Boolean(data)"
+            x-on:external-resolve.window="handleResolve"
+        ></div>
+    </template>
 
     <div
         x-data="gallery(url, true)"
-        x-on:gallery-add.window="handleAdd"
         x-html="template"
         x-show="Boolean(url) && url.startsWith('gallery:') && images.length > 0"
+        x-on:gallery-add.window="handleAdd"
     ></div>
 
     <!--prettier-ignore-->
@@ -70,17 +72,15 @@ layout_class: layout-post
         model='body'
         placeholder='Текст...' %}
 
-    <select
-        class="input"
-        name="feed_id"
-        x-model="feed_id"
-        x-on:change="handleFeedIdChange"
-    >
-        <option value="" x-text="`${user.name} (власна стрічка)`"></option>
-        <template x-for="feed in feeds">
-            <option x-bind:value="feed.id" x-text="feed.name"></option>
-        </template>
-    </select>
+    <div class="editor-feed-field">
+        <img x-bind:src="feed()?.image" class="editor-feed-image" />
+        <select class="input" name="feed_id" x-model="feed_id">
+            <option value="" x-text="`${user.name} (власна стрічка)`"></option>
+            <template x-for="feed in feeds">
+                <option x-bind:value="feed.id" x-text="feed.name"></option>
+            </template>
+        </select>
+    </div>
 
     <template x-if="feeds.find(feed => feed.id == feed_id)?.description">
         <div
