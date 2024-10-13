@@ -15,6 +15,7 @@ layout_class: layout-post
     x-on:external-succeed.window="handleExternalCompleted"
     x-on:external-failed.window="handleExternalFailed"
     x-on:external-removed.window="handleExternalRemoved"
+    x-on:gallery-started.window="handleGalleryStarted"
     x-on:gallery-succeed.window="handleGallerySucceed"
     x-on:gallery-failed.window="handleGalleryFailed"
 >
@@ -47,13 +48,12 @@ layout_class: layout-post
         </template>
     </div>
 
-    <template x-if="Boolean(url) && url.startsWith('https:')">
-        <div
-            x-data="external(url, true)"
-            x-on:external-resolve.window="handleResolve"
-            x-html="template"
-        ></div>
-    </template>
+    <div
+        x-data="external(url, true)"
+        x-on:external-resolve.window="handleResolve"
+        x-html="template"
+        x-show="Boolean(url) && url.startsWith('https:') && Boolean(data)"
+    ></div>
 
     <div
         x-data="gallery(url, true)"
@@ -62,11 +62,7 @@ layout_class: layout-post
         x-show="Boolean(url) && url.startsWith('gallery:') && images.length > 0"
     ></div>
 
-    {% comment %}
-
     <!--prettier-ignore-->
-    {% include gallery.html %}
-    {% endcomment %}
 
     {% include marke.html
         maxlength=5000

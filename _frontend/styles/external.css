@@ -66,7 +66,7 @@
     grid-template-columns: var(--avatar-s, 2rem) auto;
 }
 
-.external-summary:has(.external-caption) .external-icon {
+.external-summary:has(.external-caption):has(.external-title) .external-icon {
     @apply row-span-2 self-center;
 }
 

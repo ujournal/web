@@ -15,7 +15,6 @@ export default () => {
     feed_id: store.get("feed_id"),
     feeds: store.get("feeds", []),
     busy: false,
-    editing: true,
 
     init() {
       if (!auth.check()) {
@@ -98,13 +97,15 @@ export default () => {
     handleUploadCompleted(event) {
       this.busy = false;
 
-      if (event.detail.succeed.length > 0) {
+      const { succeed, failed } = event.detail;
+
+      if (succeed.length > 0) {
         this.$dispatch("gallery-add", {
-          images: event.detail.succeed.map((item) => item.url),
+          images: succeed.map((item) => item.url),
         });
       }
 
-      if (event.detail.failed.length > 0) {
+      if (failed.length > 0) {
         this.$dispatch("toast-show", {
           message: "Не вдалося завантажити деякі зорбаження",
         });
@@ -116,9 +117,9 @@ export default () => {
     },
 
     handleExternalCompleted(event) {
-      const { id, title, url, description } = event.detail.data;
-
       this.busy = false;
+
+      const { id, title, url, description } = event.detail.data;
 
       this.external_id = id;
       this.title = title;
@@ -144,7 +145,13 @@ export default () => {
       this.url = null;
     },
 
+    handleGalleryStarted() {
+      this.busy = true;
+    },
+
     handleGallerySucceed(event) {
+      this.busy = false;
+
       const { url, gallery } = event.detail;
 
       if (gallery.images.length > 0) {
@@ -157,6 +164,8 @@ export default () => {
     },
 
     handleGalleryFailed() {
+      this.busy = false;
+
       this.$dispatch("toast-show", {
         message: "Не вдалося створити або оновити галерею",
       });
