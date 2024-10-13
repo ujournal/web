@@ -106,7 +106,7 @@ export default () => {
     },
 
     shouldShowExternal() {
-      return Boolean(this.url) && !url.startsWith("gallery:");
+      return Boolean(this.url) && !this.url.startsWith("gallery:");
     },
 
     handleTitlePaste() {
