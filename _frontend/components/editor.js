@@ -4,6 +4,7 @@ import api from "../utils/api";
 import store from "../utils/session_store";
 import auth from "../utils/auth";
 import avatar from "../utils/avatar";
+import translate, { ENGLISH_REGEXP } from "../utils/translate";
 
 export default () => {
   return {
@@ -97,6 +98,31 @@ export default () => {
       return { id: null, alias: `/u/${user.identifier}`, image: avatar(user) };
     },
 
+    async translate() {
+      try {
+        this.busy = true;
+
+        const [title, body] = await Promise.all([
+          this.canTranslateTitle() ? translate(this.title) : null,
+          this.canTranslateBody() ? translate(this.body) : null,
+        ]);
+
+        if (title) {
+          this.title = title.text;
+        }
+
+        if (body) {
+          this.body = body.text;
+        }
+      } catch (error) {
+        this.$dispatch("toast-show", {
+          message: "Не вдалося перекласти",
+        });
+      } finally {
+        this.busy = false;
+      }
+    },
+
     canUpload() {
       return !Boolean(this.url) || this.url.startsWith("gallery:");
     },
@@ -111,6 +137,24 @@ export default () => {
 
     shouldShowGallery() {
       return Boolean(this.url) && this.url.startsWith("gallery:");
+    },
+
+    shouldShowTranslate() {
+      return this.canTranslateTitle() || this.canTranslateBody();
+    },
+
+    canTranslateTitle() {
+      return (
+        this.title.length > 0 &&
+        ENGLISH_REGEXP.test(this.title.replace(/[^\p{L}]/gu, ""))
+      );
+    },
+
+    canTranslateBody() {
+      return (
+        this.body.length > 0 &&
+        ENGLISH_REGEXP.test(this.body.replace(/[^\p{L}]/gu, ""))
+      );
     },
 
     handleTitlePaste() {

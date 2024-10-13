@@ -37,6 +37,15 @@ layout_class: layout-post
             x-on:paste="handleTitlePaste"
             x-on:change="handleTitleChange"
         />
+        <template x-if="shouldShowTranslate">
+            <button
+                type="button"
+                class="button button-secondary"
+                x-on:click="translate"
+            >
+                {% svg icons/language.svg %}
+            </button>
+        </template>
         <template x-if="canUpload">
             <label
                 type="button"
