@@ -106,7 +106,11 @@ export default () => {
     },
 
     shouldShowExternal() {
-      return Boolean(this.url) && !this.url.startsWith("gallery:");
+      return Boolean(this.url) && this.url.startsWith("https:");
+    },
+
+    shouldShowGallery() {
+      return Boolean(this.url) && this.url.startsWith("gallery:");
     },
 
     handleTitlePaste() {

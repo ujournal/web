@@ -23,7 +23,7 @@ export default () => {
     handleAuth(data) {
       auth.set(data);
       this.logged = auth.check();
-      this.user = this.parseUser();
+      this.user = auth.user();
       this.$dispatch("login");
 
       if (this.redirectUrl) {
@@ -47,7 +47,7 @@ export default () => {
     },
 
     avatar() {
-      return avatar(this.user);
+      return this.user ? avatar(this.user) : null;
     },
   };
 };

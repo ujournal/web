@@ -52,7 +52,7 @@ layout_class: layout-post
         <div
             x-data="external(url, true)"
             x-html="template"
-            x-show="Boolean(url) && url.startsWith('https:') && Boolean(data)"
+            x-show="Boolean(data)"
             x-on:external-resolve.window="handleResolve"
         ></div>
     </template>
@@ -60,7 +60,7 @@ layout_class: layout-post
     <div
         x-data="gallery(url, true)"
         x-html="template"
-        x-show="Boolean(url) && url.startsWith('gallery:') && images.length > 0"
+        x-show="shouldShowGallery() && images.length > 0"
         x-on:gallery-add.window="handleAdd"
     ></div>
 
