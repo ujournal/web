@@ -102,7 +102,7 @@ export default () => {
     },
 
     canPasteUrl() {
-      return !this.url.startsWith("gallery:");
+      return !this.url?.startsWith("gallery:");
     },
 
     shouldShowExternal() {

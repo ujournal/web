@@ -74,13 +74,13 @@ export default (url = null, removable = false) => {
 
     hasTitle() {
       return Boolean(
-        this.data.title || this.data.authorName || this.data.description,
+        this.data.title || this.data.author_name || this.data.description,
       );
     },
 
     titleFormatted() {
-      if (this.data.title || this.data.authorName) {
-        return this.data.title || this.data.authorName;
+      if (this.data.title || this.data.author_name) {
+        return this.data.title || this.data.author_name;
       }
 
       if (this.data.description) {
