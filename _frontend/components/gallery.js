@@ -1,20 +1,17 @@
 import Alpine from "alpinejs";
 import api from "../utils/api";
 
-export default (url = null, removable = false) => {
+export default (id = null, removable = false) => {
   return {
     scrolledStart: false,
     scrolledEnd: false,
-    id: null,
-    url,
+    id,
     images: [],
     removable,
 
     async init() {
-      if (this.url) {
-        const id = parseInt(new URL(this.url).pathname, 10);
-
-        const { data } = await api.get(`/galleries/${id}`);
+      if (this.id) {
+        const { data } = await api.get(`/galleries/${this.id}`);
 
         this.id = data.id;
         this.images = data.images;
@@ -22,7 +19,7 @@ export default (url = null, removable = false) => {
     },
 
     async store(images) {
-      this.$dispatch("gallery-started", { url: this.url });
+      this.$dispatch("gallery-started", { id: this.id });
 
       try {
         const { data } = this.id
@@ -31,17 +28,20 @@ export default (url = null, removable = false) => {
 
         this.id = data.id;
         this.images = data.images;
-        this.url = `gallery:${data.id}`;
 
-        this.$dispatch("gallery-succeed", { url: this.url, gallery: data });
+        this.$dispatch("gallery-succeed", { gallery: data });
       } catch (error) {
-        this.$dispatch("gallery-failed", { url: this.url, error });
+        this.$dispatch("gallery-failed", { error });
       }
     },
 
     template() {
+      if (this.images.length === 0) {
+        return "";
+      }
+
       return `<div
-        class="gallery" x-show="images.length > 0"
+        class="gallery"
         x-on:gallery-remove="handleRemove"
       >
         <div
@@ -86,11 +86,11 @@ export default (url = null, removable = false) => {
     },
 
     prev() {
-      this.$dispatch("carousel-prev", { url: this.url });
+      this.$dispatch("carousel-prev", { id: this.id });
     },
 
     next() {
-      this.$dispatch("carousel-next", { url: this.url });
+      this.$dispatch("carousel-next", { id: this.id });
     },
 
     handleRemove(event) {
@@ -100,6 +100,11 @@ export default (url = null, removable = false) => {
 
     handleAdd(event) {
       this.store([...this.images, ...event.detail.images]);
+    },
+
+    handleSet(event) {
+      this.id = event.detail.data.id;
+      this.images = event.detail.data.images;
     },
   };
 };

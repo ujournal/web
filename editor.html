@@ -7,6 +7,8 @@ layout_class: layout-post
     class="editor"
     x-data="editor"
     x-bind:data-busy="busy"
+    x-bind:action="id ? `/posts/${id}` : '/posts'"
+    x-bind:method="id ? 'put' : 'post'"
     x-on:input="clearErrors"
     x-on:submit.prevent="handleSubmit"
     x-on:uploader-started.window="handleUploadStarted"
@@ -57,20 +59,20 @@ layout_class: layout-post
         </template>
     </div>
 
-    <template x-if="shouldShowExternal">
-        <div
-            x-data="external(url, true)"
-            x-html="template"
-            x-show="Boolean(data)"
-            x-on:external-resolve.window="handleResolve"
-        ></div>
-    </template>
+    <div
+        x-data="external(null, true)"
+        x-html="template"
+        x-show="shouldShowExternal() && Boolean(data)"
+        x-on:external-resolve.window="handleResolve"
+        x-on:external-set.window="handleSet"
+    ></div>
 
     <div
-        x-data="gallery(url, true)"
+        x-data="gallery(null, true)"
         x-html="template"
         x-show="shouldShowGallery() && images.length > 0"
         x-on:gallery-add.window="handleAdd"
+        x-on:gallery-set.window="handleSet"
     ></div>
 
     <!--prettier-ignore-->

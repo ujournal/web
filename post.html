@@ -2,4 +2,24 @@
 title: Пост
 ---
 
-<div class="box">Сторінка посту</div>
+<article class="post" x-data="post">
+    <div class="post-header">
+        <div class="userinfo">
+            <a href="" class="userinfo-image">
+                <img src="" />
+            </a>
+            <div class="userinfo-name">
+                <a href=""></a>
+                <a href="" class="userinfo-status"></a>
+            </div>
+            <div class="userinfo-caption"></div>
+        </div>
+        <button class="button" popovertarget="post-popover">
+            {% svg icons/dots.svg %}
+        </button>
+    </div>
+    <div class="post-summary">
+        <h2 class="post-title" x-text="title"></h2>
+    </div>
+    <div class="post-footer">{% include reactions.html %}</div>
+</article>

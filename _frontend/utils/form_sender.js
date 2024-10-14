@@ -17,14 +17,25 @@ export default {
     });
   },
 
-  async sendForm(url, form, api) {
+  async sendForm(form, api) {
     form.removeAttribute("data-message");
     form.toggleAttribute("data-busy", true);
 
     this.setFormErrors(form, {});
 
     try {
-      return await api.post(url, new FormData(form));
+      const data = new FormData(form);
+
+      data.set(
+        "_method",
+        (form.getAttribute("method") ?? "post").toLowerCase(),
+      );
+
+      return await api.request({
+        url: form.getAttribute("action"),
+        method: "post",
+        data,
+      });
     } catch (error) {
       if (error instanceof AxiosError) {
         const message = error.response?.data?.message || error.message;
