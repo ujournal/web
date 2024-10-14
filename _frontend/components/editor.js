@@ -85,11 +85,11 @@ export default () => {
     },
 
     triggerTextareaResize() {
-      requestAnimationFrame(() =>
-        this.$root
-          .querySelector("textarea")
-          .dispatchEvent(new CustomEvent("autosize")),
-      );
+      const element = this.$root.querySelector("textarea");
+
+      requestAnimationFrame(() => {
+        element.dispatchEvent(new CustomEvent("autosize"));
+      });
     },
 
     feed() {
@@ -127,6 +127,7 @@ export default () => {
           message: "Не вдалося перекласти",
         });
       } finally {
+        this.triggerTextareaResize();
         this.busy = false;
       }
     },
@@ -214,6 +215,7 @@ export default () => {
 
       if (this.body === "") {
         this.body = description;
+
         this.triggerTextareaResize();
       }
     },
