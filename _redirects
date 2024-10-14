@@ -1,1 +1,1 @@
-/p/* /post.html 200
+/p/* /post.html?id=:splat 200
