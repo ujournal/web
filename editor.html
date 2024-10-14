@@ -64,15 +64,15 @@ layout_class: layout-post
         x-html="template"
         x-show="shouldShowExternal() && Boolean(data)"
         x-on:external-resolve.window="handleResolve"
-        x-on:external-set.window="handleSet"
+        x-on:external-set-data.window="handleSetData"
     ></div>
 
     <div
         x-data="gallery(null, true)"
         x-html="template"
-        x-show="shouldShowGallery() && images.length > 0"
+        x-show="shouldShowGallery() && Boolean(data)"
         x-on:gallery-add.window="handleAdd"
-        x-on:gallery-set.window="handleSet"
+        x-on:gallery-set-data.window="handleSetData"
     ></div>
 
     <!--prettier-ignore-->

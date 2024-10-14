@@ -1,33 +1,25 @@
 import Alpine from "alpinejs";
 import api from "../utils/api";
 
-export default (id = null, removable = false) => {
+export default (data = null, removable = false) => {
   return {
     scrolledStart: false,
     scrolledEnd: false,
-    id,
-    images: [],
+    data,
     removable,
 
-    async init() {
-      if (this.id) {
-        const { data } = await api.get(`/galleries/${this.id}`);
-
-        this.id = data.id;
-        this.images = data.images;
-      }
-    },
-
     async store(images) {
-      this.$dispatch("gallery-started", { id: this.id });
+      this.$dispatch("gallery-started", { id: this.data?.id });
 
       try {
         const { data } = this.id
-          ? await api.put(`/galleries/${this.id}`, { images })
+          ? await api.post(`/galleries/${this.data.id}`, {
+              images,
+              _method: "put",
+            })
           : await api.post("/galleries", { images });
 
-        this.id = data.id;
-        this.images = data.images;
+        this.data = data;
 
         this.$dispatch("gallery-succeed", { gallery: data });
       } catch (error) {
@@ -36,7 +28,7 @@ export default (id = null, removable = false) => {
     },
 
     template() {
-      if (this.images.length === 0) {
+      if (!Boolean(this.data)) {
         return "";
       }
 
@@ -45,7 +37,7 @@ export default (id = null, removable = false) => {
         x-on:gallery-remove="handleRemove"
       >
         <div
-          x-data="carousel(images, removable)"
+          x-data="carousel(data.images, removable)"
           x-bind:class="{
             'gallery-carousel': true,
             'gallery-scrolled-start': scrolledStart,
@@ -54,7 +46,7 @@ export default (id = null, removable = false) => {
           x-on:carousel-prev.window="handlePrev"
           x-on:carousel-next.window="handleNext"
         >
-            <template x-for="(image, index) in images">
+            <template x-for="(image, index) in data.images">
                 <div class="gallery-item">
                     <img
                         x-bind:src="image"
@@ -86,25 +78,24 @@ export default (id = null, removable = false) => {
     },
 
     prev() {
-      this.$dispatch("carousel-prev", { id: this.id });
+      this.$dispatch("carousel-prev", { id: this.data.id });
     },
 
     next() {
-      this.$dispatch("carousel-next", { id: this.id });
+      this.$dispatch("carousel-next", { id: this.data.id });
     },
 
     handleRemove(event) {
       const url = event.detail.image;
-      this.store(Alpine.raw(this.images).filter((image) => image !== url));
+      this.store(Alpine.raw(this.data.images).filter((image) => image !== url));
     },
 
     handleAdd(event) {
-      this.store([...this.images, ...event.detail.images]);
+      this.store([...this.data.images, ...event.detail.images]);
     },
 
-    handleSet(event) {
-      this.id = event.detail.data.id;
-      this.images = event.detail.data.images;
+    handleSetData(event) {
+      this.data = event.detail.data;
     },
   };
 };

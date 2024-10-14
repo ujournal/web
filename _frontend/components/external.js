@@ -1,19 +1,12 @@
 import externals from "../utils/externals";
 
-export default (url = null, removable = false) => {
+export default (data = null, removable = false) => {
   return {
-    url,
-    data: null,
+    data,
     removable,
 
-    async init() {
-      if (this.url) {
-        await this.load();
-      }
-    },
-
     template() {
-      if (!Boolean(this.url) || !Boolean(this.data)) {
+      if (!Boolean(this.data)) {
         return "";
       }
 
@@ -57,20 +50,19 @@ export default (url = null, removable = false) => {
       </div>`;
     },
 
-    async load() {
-      this.$dispatch("external-started", { url: this.url });
+    async resolve(url) {
+      this.$dispatch("external-started", { id: this.data?.id });
 
       try {
-        const data = await externals.resolve(this.url);
+        const data = await externals.resolve(url);
 
         this.data = data;
 
-        this.$dispatch("external-succeed", { url: this.url, data });
+        this.$dispatch("external-succeed", { id: this.data.id, data });
       } catch (error) {
-        this.url = null;
         this.data = null;
 
-        this.$dispatch("external-failed", { url: this.url, error });
+        this.$dispatch("external-failed", { id: this.data.id, error });
       }
     },
 
@@ -105,8 +97,7 @@ export default (url = null, removable = false) => {
     },
 
     remove() {
-      this.url = null;
-      this.$dispatch("external-removed", { url: this.url });
+      this.$dispatch("external-removed", { id: this.data.id });
     },
 
     handleImageLoad(event) {
@@ -116,12 +107,10 @@ export default (url = null, removable = false) => {
     },
 
     handleResolve(event) {
-      this.url = event.detail.url;
-      this.load();
+      this.resolve(event.detail.url);
     },
 
-    handleSet(event) {
-      this.url = event.detail.data.url;
+    handleSetData(event) {
       this.data = event.detail.data;
     },
   };

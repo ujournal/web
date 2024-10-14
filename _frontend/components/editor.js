@@ -58,11 +58,11 @@ export default () => {
       this.gallery_id = data.gallery?.id;
 
       if (data.external) {
-        this.$dispatch("external-set", { data: data.external });
+        this.$dispatch("external-set-data", { data: data.external });
       }
 
       if (data.gallery) {
-        this.$dispatch("gallery-set", { data: data.gallery });
+        this.$dispatch("gallery-set-data", { data: data.gallery });
       }
 
       resizeTextarea();
