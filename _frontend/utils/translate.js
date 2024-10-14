@@ -1,6 +1,10 @@
 import api from "./api";
 
-export const ENGLISH_REGEXP = /^[A-Za-z0-9]*$/;
+export function isItEnglish(text) {
+  const english = /^[A-Za-z0-9]*$/;
+
+  return english.test(text.replace(/[^\p{L}]/gu, ""));
+}
 
 export default async function translate(text) {
   return (

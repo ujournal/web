@@ -4,7 +4,8 @@ import api from "../utils/api";
 import store from "../utils/session_store";
 import auth from "../utils/auth";
 import avatar from "../utils/avatar";
-import translate, { ENGLISH_REGEXP } from "../utils/translate";
+import translate, { isItEnglish } from "../utils/translate";
+import { visit } from "@hotwired/turbo";
 
 export default () => {
   return {
@@ -18,17 +19,24 @@ export default () => {
     feeds: store.get("feeds", []),
     busy: false,
 
-    init() {
+    async init() {
       if (!auth.check()) {
-        location.href = "/";
+        this.$dispatch("toast-show", {
+          message: "Не авторизовані",
+        });
+
+        visit("/");
       }
 
-      this.loadPost();
-      this.loadFeeds();
-    },
+      try {
+        await Promise.all([this.loadPost(), this.loadFeeds()]);
+      } catch (error) {
+        this.$dispatch("toast-show", {
+          message: "Не вдалося завантажити пост або стрічки",
+        });
 
-    async submit() {
-      await formSender.sendForm("/posts", this.$root, api);
+        visit("/");
+      }
     },
 
     async loadPost() {
@@ -144,17 +152,21 @@ export default () => {
     },
 
     canTranslateTitle() {
-      return (
-        this.title.length > 0 &&
-        ENGLISH_REGEXP.test(this.title.replace(/[^\p{L}]/gu, ""))
-      );
+      return this.title.length > 0 && isItEnglish(this.title);
     },
 
     canTranslateBody() {
-      return (
-        this.body.length > 0 &&
-        ENGLISH_REGEXP.test(this.body.replace(/[^\p{L}]/gu, ""))
-      );
+      return this.body.length > 0 && isItEnglish(this.body);
+    },
+
+    async handleSubmit() {
+      const { data } = await formSender.sendForm("/posts", this.$root, api);
+
+      this.$dispatch("toast-show", {
+        message: "Пост збережено",
+      });
+
+      visit(`?id=${data.id}`);
     },
 
     handleTitlePaste() {
