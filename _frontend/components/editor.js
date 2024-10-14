@@ -55,6 +55,8 @@ export default () => {
       this.feed_id = data.feed_id;
       this.external_id = data.external_id;
       this.gallery_id = data.gallery_id;
+
+      this.triggerTextareaResize();
     },
 
     async loadFeeds() {
@@ -153,11 +155,11 @@ export default () => {
     },
 
     canTranslateTitle() {
-      return this.title.length > 0 && isItEnglish(this.title);
+      return this.title?.length > 0 && isItEnglish(this.title);
     },
 
     canTranslateBody() {
-      return this.body.length > 0 && isItEnglish(this.body);
+      return this.body?.length > 0 && isItEnglish(this.body);
     },
 
     async handleSubmit() {
@@ -209,9 +211,13 @@ export default () => {
 
       const { id, title, url, description } = event.detail.data;
 
+      if (this.external_id === id) {
+        return;
+      }
+
       this.external_id = id;
-      this.title = title;
       this.url = url;
+      this.title = title;
 
       if (this.body === "") {
         this.body = description;
