@@ -19,7 +19,7 @@ export default (data = null, removable = false) => {
             x-bind:title="titleFormatted"
           >
               <template x-if="data.icon">
-                  <img class="external-icon" x-bind:src="data.icon" />
+                  <img class="external-icon" alt=" " x-bind:src="data.icon" />
               </template>
               <template x-if="hasTitle">
                   <div
@@ -35,6 +35,7 @@ export default (data = null, removable = false) => {
           <template x-if="data.image">
             <img
               class="external-image"
+              alt=" "
               x-bind:src="data.image"
               x-bind:style="{ '--image': 'url(' + data.image + ')' }"
               x-on:load="handleImageLoad"

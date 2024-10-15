@@ -1,4 +1,6 @@
 import auth from "../utils/auth";
+import router from "../utils/router";
+import visit from "../utils/visit";
 
 export default () => {
   let cleanup;
@@ -7,6 +9,7 @@ export default () => {
     logged: false,
     redirectUrl: null,
     user: null,
+    activeEntity: null,
 
     init() {
       const stopListenAuth = auth.listen((data) => this.handleAuth(data));
@@ -17,17 +20,6 @@ export default () => {
       cleanup = () => {
         stopListenAuth();
       };
-    },
-
-    handleAuth(data) {
-      auth.set(data);
-      this.logged = auth.check();
-      this.user = auth.user();
-      this.$dispatch("login");
-
-      if (this.redirectUrl) {
-        location.href = this.redirectUrl;
-      }
     },
 
     destroy() {
@@ -47,6 +39,27 @@ export default () => {
 
     avatar() {
       return this.user ? this.user.image : null;
+    },
+
+    handleAuth(data) {
+      auth.set(data);
+      this.logged = auth.check();
+      this.user = auth.user();
+      this.$dispatch("login");
+
+      if (this.redirectUrl) {
+        location.href = this.redirectUrl;
+      }
+    },
+
+    handleActiveEntity(event) {
+      this.activeEntity = event.detail;
+    },
+
+    editPost() {
+      if (this.activeEntity?.type === "post") {
+        visit("post.edit", { id: this.activeEntity.data.id });
+      }
     },
   };
 };

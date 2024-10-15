@@ -7,7 +7,7 @@ import { currentRoute } from "../utils/visit";
 
 export default () => {
   return {
-    busy: false,
+    busy: true,
     data: null,
     dateFormat: sessionStore.get("post_date_format", "short"),
 
@@ -62,11 +62,11 @@ export default () => {
     },
 
     dateShort() {
-      return dateFormatter.formatDateShort(new Date(this.data.created_at));
+      return dateFormatter.formatDateShort(new Date(this.data?.created_at));
     },
 
     dateLong() {
-      return dateFormatter.formatDateLong(new Date(this.data.created_at));
+      return dateFormatter.formatDateLong(new Date(this.data?.created_at));
     },
 
     toggleDate() {
@@ -75,6 +75,10 @@ export default () => {
       this.dateFormat = format;
 
       sessionStore.set("post_date_format", format);
+    },
+
+    handlePopoverOpen() {
+      this.$dispatch("active-entity", { type: "post", data: this.data });
     },
   };
 };

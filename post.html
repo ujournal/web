@@ -2,11 +2,11 @@
 title: Пост
 ---
 
-<article class="post" x-data="post">
+<article x-data="post" x-bind:class="{'post': true, 'post-placeholder': busy}">
     <div class="post-header">
-        <div class="userinfo">
+        <div x-bind:class="{'userinfo': true, 'userinfo-placeholder': busy}">
             <a x-bind:href="feedUrl()" class="userinfo-image">
-                <img x-bind:src="data?.feed.image" />
+                <img alt=" " x-bind:src="data?.feed.image" />
             </a>
             <div class="userinfo-name">
                 <a x-bind:href="feedUrl()" x-text="data?.feed.name"></a>
@@ -14,7 +14,7 @@ title: Пост
                     <a
                         class="userinfo-status"
                         x-bind:href="userUrl()"
-                        x-text="`автор ${data?.user.name}`"
+                        x-text="data?.user.name ? `автор ${data?.user.name}` : ''"
                     ></a>
                 </template>
             </div>
@@ -24,7 +24,11 @@ title: Пост
                 x-on:click="toggleDate"
             ></div>
         </div>
-        <button class="button" popovertarget="post-popover">
+        <button
+            class="button"
+            popovertarget="post-popover"
+            x-on:click="handlePopoverOpen"
+        >
             {% svg icons/dots.svg %}
         </button>
     </div>

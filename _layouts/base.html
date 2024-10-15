@@ -15,6 +15,7 @@
     <body
         class="layout {{layout.layout_class}} {{page.layout_class}}"
         x-data="app"
+        x-on:active-entity.window="handleActiveEntity"
     >
         <!-- prettier-ignore -->
         {{content}}

@@ -2,11 +2,11 @@
     @apply relative flex flex-col bg-white rounded-lg outline outline-1 -outline-offset-1 outline-stone-950/10;
 }
 
-.external-wrapper.external-placeholder {
+.external.external-placeholder {
     @apply overflow-hidden text-transparent bg-stone-50 rounded-lg pointer-events-none animate-pulse;
 }
 
-.external-wrapper.external-placeholder * {
+.external.external-placeholder * {
     @apply opacity-0;
 }
 

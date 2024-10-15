@@ -1,6 +1,6 @@
 <div id="post-popover" class="popover" popover x-data="popover">
     <nav class="nav nav-white">
-        <button class="nav-button">
+        <button class="nav-button" x-on:click="editPost">
             {% svg icons/edit.svg %}
             <span class="nav-button-label">Змінити</span>
         </button>

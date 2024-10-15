@@ -49,6 +49,7 @@ export default (data = null, removable = false) => {
             <template x-for="(image, index) in data.images">
                 <div class="gallery-item">
                     <img
+                        alt=" "
                         x-bind:src="image"
                         x-bind:style="{ '--image': 'url(' + image + ')' }"
                         x-on:load="handleImageLoad"
