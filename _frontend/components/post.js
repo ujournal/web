@@ -1,4 +1,5 @@
 import api from "../utils/api";
+import { currentRoute, params } from "../utils/visit";
 
 export default () => {
   return {
@@ -13,7 +14,7 @@ export default () => {
     },
 
     async load() {
-      this.id = parseInt(new URL(location).searchParams.get("id"), 10);
+      this.id = currentRoute().params.id;
 
       const { data } = await api.get(`/posts/${this.id}`);
 

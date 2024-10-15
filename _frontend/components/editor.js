@@ -1,5 +1,4 @@
 import isUrl from "is-url";
-import { visit } from "@hotwired/turbo";
 import formSender from "../utils/form_sender";
 import api from "../utils/api";
 import store from "../utils/session_store";
@@ -7,6 +6,7 @@ import auth from "../utils/auth";
 import avatar from "../utils/avatar";
 import translate, { isItEnglish } from "../utils/translate";
 import resizeTextarea from "../utils/resize_textarea";
+import visit, { currentRoute } from "../utils/visit";
 
 export default () => {
   return {
@@ -26,7 +26,7 @@ export default () => {
           message: "Не авторизовані",
         });
 
-        visit("/");
+        visit("home");
       }
 
       try {
@@ -41,11 +41,13 @@ export default () => {
     },
 
     async load() {
-      const id = new URL(location.href).searchParams.get("id");
+      const route = currentRoute();
 
-      if (!id) {
+      if (!route) {
         return;
       }
+
+      const id = route.params.id;
 
       const { data } = await api.get(`/posts/${id}`);
 
@@ -146,6 +148,10 @@ export default () => {
       return !Boolean(this.gallery_id);
     },
 
+    shouldDisableFeed() {
+      return Boolean(this.id);
+    },
+
     shouldShowExternal() {
       return (
         Boolean(this.url) &&
@@ -176,7 +182,7 @@ export default () => {
         message: "Пост збережено",
       });
 
-      visit(`/post?id=${data.id}`);
+      visit("post.show", { id: data.id });
     },
 
     handleTitlePaste() {

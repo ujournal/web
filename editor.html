@@ -85,7 +85,12 @@ layout_class: layout-post
 
     <div class="editor-feed-field">
         <img x-bind:src="feed()?.image" class="editor-feed-image" />
-        <select class="input" name="feed_id" x-model="feed_id">
+        <select
+            class="input"
+            name="feed_id"
+            x-model="feed_id"
+            x-bind:disabled="shouldDisableFeed()"
+        >
             <option value="" x-text="`${user.name} (власна стрічка)`"></option>
             <template x-for="feed in feeds">
                 <option x-bind:value="feed.id" x-text="feed.name"></option>

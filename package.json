@@ -7,12 +7,14 @@
     "axios": "^1.7.7",
     "axios-retry": "^4.5.0",
     "browser-image-compression": "^2.0.2",
+    "inserturlparams": "^2.0.4",
     "is-url": "^1.2.4",
     "jwt-decode": "^4.0.0",
     "marked": "^14.1.2",
     "normalize-url": "^8.0.1",
     "tailwindcss": "^3.4.13",
-    "tocbot": "^4.30.0"
+    "tocbot": "^4.30.0",
+    "url-router": "^13.0.0"
   },
   "optionalDependencies": {
     "@rollup/rollup-darwin-arm64": "^4.21.3"
