@@ -67,9 +67,11 @@ export default (data = null, removable = false) => {
     },
 
     hasTitle() {
-      return Boolean(
-        this.data.title || this.data.author_name || this.data.description,
-      );
+      return true;
+
+      // return Boolean(
+      //   this.data.title || this.data.author_name || this.data.description,
+      // );
     },
 
     titleFormatted() {
@@ -81,7 +83,7 @@ export default (data = null, removable = false) => {
         return this.data.description.substring(0, 240);
       }
 
-      return null;
+      return `Посилання на ${this.host()}`;
     },
 
     host() {

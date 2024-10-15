@@ -1,5 +1,4 @@
 import auth from "../utils/auth";
-import avatar from "../utils/avatar";
 
 export default () => {
   let cleanup;
@@ -47,7 +46,7 @@ export default () => {
     },
 
     avatar() {
-      return this.user ? avatar(this.user) : null;
+      return this.user ? this.user.image : null;
     },
   };
 };

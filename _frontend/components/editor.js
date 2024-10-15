@@ -3,7 +3,6 @@ import formSender from "../utils/form_sender";
 import api from "../utils/api";
 import store from "../utils/session_store";
 import auth from "../utils/auth";
-import avatar from "../utils/avatar";
 import translate, { isItEnglish } from "../utils/translate";
 import resizeTextarea from "../utils/resize_textarea";
 import visit, { currentRoute } from "../utils/visit";
@@ -31,7 +30,8 @@ export default () => {
       }
 
       try {
-        await Promise.all([this.load(), this.loadFeeds()]);
+        await this.load();
+        await this.loadFeeds();
       } catch (error) {
         console.warn(error);
 
@@ -72,9 +72,15 @@ export default () => {
     },
 
     async loadFeeds() {
-      const { data } = await api.get("/feeds");
+      const { data } = await api.get("/feeds?with_user_feed=1");
 
       this.feeds = data;
+
+      if (!this.feed_id) {
+        const feed = data.find((feed) => feed.is_user_feed);
+
+        this.feed_id = feed.id;
+      }
 
       store.set("feeds", data);
     },
@@ -92,9 +98,9 @@ export default () => {
         this.title = "";
         this.url = title;
 
-        const { status, data } = await externals.resolveViaApi(this.url);
+        try {
+          const { status, data } = await externals.resolveViaApi(this.url);
 
-        if (status === 200 || status === 201) {
           this.external_id = data.id;
           this.url = data.url;
           this.title = data.title;
@@ -106,15 +112,15 @@ export default () => {
           }
 
           this.$dispatch("external-set-data", { data });
-        } else {
+        } catch {
           this.url = null;
 
           this.$dispatch("toast-show", {
-            message: "Не вдалося опрацювати URL. Спробуйте ще раз",
+            message: "Не вдалося опрацювати URL",
           });
+        } finally {
+          this.busy = false;
         }
-
-        this.busy = false;
       }
     },
 
@@ -123,17 +129,7 @@ export default () => {
     },
 
     feed() {
-      const user = auth.user();
-
-      const feed = this.feeds.find(
-        (feed) => feed.id === parseInt(this.feed_id, 10),
-      );
-
-      if (feed) {
-        return feed;
-      }
-
-      return { id: null, alias: `/u/${user.identifier}`, image: avatar(user) };
+      return this.feeds.find((feed) => feed.id === parseInt(this.feed_id, 10));
     },
 
     async translate() {

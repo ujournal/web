@@ -10,7 +10,7 @@
     @apply flex flex-col gap-2;
 }
 
-.post-summary:has(.external) {
+.post-summary:is(:has(.external), :has(.gallery)) {
     @apply gap-3;
 }
 
@@ -22,11 +22,11 @@
     @apply block hover:text-orange-500;
 }
 
-.post-description {
+.post-body {
     @apply text-base;
 }
 
-.post-description a {
+.post-body a {
     @apply text-blue-500 hover:text-orange-500;
 }
 
@@ -38,7 +38,7 @@
     @apply border-none shadow-none pointer-events-none select-none;
 }
 
-.post.post-placeholder *:is(.post-title, .post-description) {
+.post.post-placeholder *:is(.post-title, .post-body) {
     @apply overflow-hidden text-transparent bg-stone-50 rounded-md pointer-events-none animate-pulse;
     height: 1.5rem;
 }
@@ -47,7 +47,7 @@
     height: 1.75rem;
 }
 
-.post.post-placeholder .post-description {
+.post.post-placeholder .post-body {
     width: 75%;
 }
 

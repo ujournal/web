@@ -5,6 +5,7 @@ const routes = {
   "/": "home",
   "/post/:id": "post.show",
   "/editor/:id": "post.edit",
+  "/feed/:id": "feed.show",
 };
 
 export default {
