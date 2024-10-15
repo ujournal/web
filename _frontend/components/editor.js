@@ -7,6 +7,7 @@ import avatar from "../utils/avatar";
 import translate, { isItEnglish } from "../utils/translate";
 import resizeTextarea from "../utils/resize_textarea";
 import visit, { currentRoute } from "../utils/visit";
+import externals from "../utils/externals";
 
 export default () => {
   return {
@@ -86,10 +87,34 @@ export default () => {
       const title = this.title.trim();
 
       if (isUrl(title)) {
+        this.busy = true;
+
         this.title = "";
         this.url = title;
 
-        this.$dispatch("external-resolve", { url: title });
+        const { status, data } = await externals.resolveViaApi(this.url);
+
+        if (status === 200 || status === 201) {
+          this.external_id = data.id;
+          this.url = data.url;
+          this.title = data.title;
+
+          if (this.body === "") {
+            this.body = data.description;
+
+            resizeTextarea();
+          }
+
+          this.$dispatch("external-set-data", { data });
+        } else {
+          this.url = null;
+
+          this.$dispatch("toast-show", {
+            message: "Не вдалося опрацювати URL. Спробуйте ще раз",
+          });
+        }
+
+        this.busy = false;
       }
     },
 
@@ -213,39 +238,6 @@ export default () => {
           message: "Не вдалося завантажити деякі зорбаження",
         });
       }
-    },
-
-    handleExternalStarted() {
-      this.busy = true;
-    },
-
-    handleExternalCompleted(event) {
-      this.busy = false;
-
-      const { id, title, url, description } = event.detail.data;
-
-      if (this.external_id === id) {
-        return;
-      }
-
-      this.external_id = id;
-      this.url = url;
-      this.title = title;
-
-      if (this.body === "") {
-        this.body = description;
-
-        resizeTextarea();
-      }
-    },
-
-    handleExternalFailed() {
-      this.busy = false;
-      this.url = null;
-
-      this.$dispatch("toast-show", {
-        message: "Не вдалося опрацювати URL. Спробуйте ще раз",
-      });
     },
 
     handleExternalRemoved() {
