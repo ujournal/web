@@ -29,7 +29,7 @@
 }
 
 .gallery-remove {
-    @apply absolute right-2 top-2 w-8 h-8 text-white p-1 bg-stone-950/50 rounded-full transition active:scale-75 bg-no-repeat bg-center;
+    @apply absolute right-2 top-2 w-7 h-7 text-white p-1 bg-stone-950/50 rounded-full transition active:scale-75 bg-no-repeat bg-center;
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='1.75' stroke-linecap='round' stroke-linejoin='round' class='icon icon-tabler icons-tabler-outline icon-tabler-x'%3E%3Cpath stroke='none' d='M0 0h24v24H0z' fill='none' /%3E%3Cpath d='M18 6l-12 12' /%3E%3Cpath d='M6 6l12 12' /%3E%3C/svg%3E");
 }
 
@@ -38,7 +38,7 @@
 }
 
 .gallery-button {
-    @apply absolute top-0 bottom-0 mt-auto mb-auto w-8 h-8 text-white bg-stone-950/50 rounded-full transition active:scale-75 bg-no-repeat bg-center opacity-0 pointer-events-none;
+    @apply absolute top-0 bottom-0 mt-auto mb-auto w-7 h-7 text-white bg-stone-950/50 rounded-full transition active:scale-75 bg-no-repeat bg-center opacity-0 pointer-events-none;
 }
 
 .gallery-button.gallery-button-start {
@@ -59,4 +59,8 @@
 .gallery:not(:has(.gallery-carousel.gallery-scrolled-end))
     .gallery-button.gallery-button-end {
     @apply opacity-100 pointer-events-auto;
+}
+
+*:is(.gallery-remove, .gallery-button)::after {
+    @apply absolute -top-2 -bottom-2 -right-2 -left-2 content-[""] rounded-lg;
 }

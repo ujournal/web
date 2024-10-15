@@ -28,7 +28,7 @@
 }
 
 .external-summary {
-    @apply flex flex-col p-3 rounded-md text-sm;
+    @apply flex flex-col p-3 rounded-b-lg text-sm;
 }
 
 .external-caption::before {
@@ -58,7 +58,7 @@
 }
 
 .external:has(.external-image) .external-summary {
-    @apply absolute bottom-1 left-1 right-1 bg-stone-950/50 text-white;
+    @apply absolute bottom-0 left-0 right-0 bg-stone-950/50 text-white;
 }
 
 .external-summary:has(.external-icon) {
@@ -75,6 +75,10 @@
 }
 
 .external-remove {
-    @apply absolute right-2 top-2 w-8 h-8 text-white p-1 bg-stone-950/50 rounded-full transition active:scale-75 bg-no-repeat bg-center;
+    @apply absolute right-2 top-2 w-7 h-7 text-white p-1 bg-stone-950/50 rounded-full transition active:scale-75 bg-no-repeat bg-center;
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='1.75' stroke-linecap='round' stroke-linejoin='round' class='icon icon-tabler icons-tabler-outline icon-tabler-x'%3E%3Cpath stroke='none' d='M0 0h24v24H0z' fill='none' /%3E%3Cpath d='M18 6l-12 12' /%3E%3Cpath d='M6 6l12 12' /%3E%3C/svg%3E");
+}
+
+.external-remove::after {
+    @apply absolute -top-2 -bottom-2 -right-2 -left-2 content-[""] rounded-lg;
 }

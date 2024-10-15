@@ -87,11 +87,15 @@ export default (data = null, removable = false) => {
 
     handleRemove(event) {
       const url = event.detail.image;
-      this.store(Alpine.raw(this.data.images).filter((image) => image !== url));
+      const images = Alpine.raw(this.data.images).filter(
+        (image) => image !== url,
+      );
+
+      this.store(images);
     },
 
     handleAdd(event) {
-      this.store([...this.data.images, ...event.detail.images]);
+      this.store([...(this.data?.images || []), ...event.detail.images]);
     },
 
     handleSetData(event) {
