@@ -3,46 +3,44 @@ title: Пост
 ---
 
 <article class="post" x-data="post">
-    <template x-if="shouldShow()">
-        <div class="post-header">
-            <div class="userinfo">
-                <a x-bind:href="feedUrl()" class="userinfo-image">
-                    <img x-bind:src="data.feed.image" />
-                </a>
-                <div class="userinfo-name">
-                    <a x-bind:href="feedUrl()" x-text="data.feed.name"></a>
-                    <template x-if="!data.feed.is_user_feed">
-                        <a
-                            class="userinfo-status"
-                            x-bind:href="userUrl()"
-                            x-text="`автор ${data.user.name}`"
-                        ></a>
-                    </template>
-                </div>
-                <div
-                    class="userinfo-caption"
-                    x-text="dateFormat === 'short' ? dateShort() : dateLong()"
-                    x-on:click="toggleDate"
-                ></div>
+    <div class="post-header">
+        <div class="userinfo">
+            <a x-bind:href="feedUrl()" class="userinfo-image">
+                <img x-bind:src="data?.feed.image" />
+            </a>
+            <div class="userinfo-name">
+                <a x-bind:href="feedUrl()" x-text="data?.feed.name"></a>
+                <template x-if="!data?.feed.is_user_feed">
+                    <a
+                        class="userinfo-status"
+                        x-bind:href="userUrl()"
+                        x-text="`автор ${data?.user.name}`"
+                    ></a>
+                </template>
             </div>
-            <button class="button" popovertarget="post-popover">
-                {% svg icons/dots.svg %}
-            </button>
+            <div
+                class="userinfo-caption"
+                x-text="dateFormat === 'short' ? dateShort() : dateLong()"
+                x-on:click="toggleDate"
+            ></div>
         </div>
-    </template>
-    <template x-if="shouldShow()">
-        <div class="post-summary">
-            <h2 class="post-title" x-text="data?.title"></h2>
+        <button class="button" popovertarget="post-popover">
+            {% svg icons/dots.svg %}
+        </button>
+    </div>
+    <div class="post-summary">
+        <h2 class="post-title" x-text="data?.title"></h2>
 
-            <template x-if="shouldShowExternal()">
-                <div x-data="external(data?.external)" x-html="template"></div>
-            </template>
+        <template x-if="shouldShowExternal()">
+            <div x-data="external(data?.external)" x-html="template"></div>
+        </template>
 
-            <template x-if="shouldShowGallery()">
-                <div x-data="gallery(data?.gallery)" x-html="template"></div>
-            </template>
+        <template x-if="shouldShowGallery()">
+            <div x-data="gallery(data?.gallery)" x-html="template"></div>
+        </template>
 
-            <div class="post-body" x-text="data?.body"></div>
-        </div>
-    </template>
+        <div class="post-body" x-text="data?.body"></div>
+    </div>
 </article>
+
+{% include popovers/post_popover.html %}

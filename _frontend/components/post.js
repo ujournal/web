@@ -7,6 +7,7 @@ import { currentRoute } from "../utils/visit";
 
 export default () => {
   return {
+    busy: false,
     data: null,
     dateFormat: sessionStore.get("post_date_format", "short"),
 
@@ -15,14 +16,24 @@ export default () => {
     },
 
     async load() {
+      this.busy = true;
+
       const id = currentRoute().params.id;
 
-      const { status, data } = await r2.get(
-        await contentPaths.getExternalPath(id),
-      );
+      try {
+        const { status, data } = await r2.get(
+          await contentPaths.getExternalPath(id),
+        );
 
-      if (status === 200) {
         this.data = data;
+      } catch (error) {
+        console.warn(error);
+
+        this.$dispatch("toast-show", {
+          message: "Не вдалося завантажити пост",
+        });
+      } finally {
+        this.busy = false;
       }
     },
 
@@ -35,10 +46,18 @@ export default () => {
     },
 
     feedUrl() {
+      if (!this.data) {
+        return null;
+      }
+
       return router.buildPath("feed.show", { id: this.data.feed.id });
     },
 
     userUrl() {
+      if (!this.data) {
+        return null;
+      }
+
       return router.buildPath("feed.show", { id: this.data.user.feed.id });
     },
 
@@ -48,10 +67,6 @@ export default () => {
 
     dateLong() {
       return dateFormatter.formatDateLong(new Date(this.data.created_at));
-    },
-
-    shouldShow() {
-      return Boolean(this.data);
     },
 
     toggleDate() {

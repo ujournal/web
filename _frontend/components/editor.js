@@ -112,7 +112,9 @@ export default () => {
           }
 
           this.$dispatch("external-set-data", { data });
-        } catch {
+        } catch (error) {
+          console.warn(error);
+
           this.url = null;
 
           this.$dispatch("toast-show", {
