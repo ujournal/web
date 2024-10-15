@@ -1,28 +1,33 @@
-import api from "../utils/api";
-import { currentRoute, params } from "../utils/visit";
+import contentPaths from "../utils/content_paths";
+import r2 from "../utils/r2";
+import { currentRoute } from "../utils/visit";
 
 export default () => {
   return {
-    id: null,
-    title: "",
-    body: "",
-    external: null,
-    gallery: null,
+    data: null,
 
     init() {
       this.load();
     },
 
     async load() {
-      this.id = currentRoute().params.id;
+      const id = currentRoute().params.id;
 
-      const { data } = await api.get(`/posts/${this.id}`);
+      const { status, data } = await r2.get(
+        await contentPaths.getExternalPath(id),
+      );
 
-      this.id = data.id;
-      this.title = data.title;
-      this.body = data.body;
-      this.external = data.external;
-      this.gallery = data.gallery;
+      if (status === 200) {
+        this.data = data;
+      }
+    },
+
+    shouldShowExternal() {
+      return Boolean(this.data?.external);
+    },
+
+    shouldShowGallery() {
+      return Boolean(this.data?.gallery);
     },
   };
 };

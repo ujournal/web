@@ -19,7 +19,15 @@ title: Пост
         </button>
     </div>
     <div class="post-summary">
-        <h2 class="post-title" x-text="title"></h2>
+        <h2 class="post-title" x-text="data?.title"></h2>
+
+        <template x-if="shouldShowExternal()">
+            <div x-data="external(data?.external)" x-html="template"></div>
+        </template>
+
+        <template x-if="shouldShowGallery()">
+            <div x-data="gallery(data?.gallery)" x-html="template"></div>
+        </template>
     </div>
     <div class="post-footer">{% include reactions.html %}</div>
 </article>
