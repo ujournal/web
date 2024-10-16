@@ -41,3 +41,7 @@
 .content pre.highlight code {
     @apply p-0 bg-none;
 }
+
+.content blockquote {
+    @apply flex flex-col p-4 gap-4 bg-blue-50 rounded-lg border-l-4 border-blue-300;
+}

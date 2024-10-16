@@ -6,12 +6,12 @@
     @apply flex flex-row gap-4 items-center justify-between;
 }
 
-.post-summary {
+.post-main {
     @apply flex flex-col gap-2;
 }
 
-.post-summary:is(:has(.external), :has(.gallery)) {
-    @apply gap-3;
+.post-main:is(:has(.external), :has(.gallery)) {
+    @apply gap-4;
 }
 
 .post-title {
@@ -23,11 +23,15 @@
 }
 
 .post-body {
-    @apply text-base whitespace-pre-line;
+    @apply content text-base whitespace-pre-line;
 }
 
-.post-body a {
-    @apply text-blue-500 hover:text-orange-500;
+.post-author {
+    @apply flex flex-row justify-between p-4 bg-stone-50 rounded-lg;
+}
+
+.post-author .button {
+    @apply bg-stone-50 hover:bg-stone-50;
 }
 
 .post-footer {

@@ -32,7 +32,7 @@ title: Пост
             {% svg icons/dots.svg %}
         </button>
     </div>
-    <div class="post-summary">
+    <div class="post-main">
         <h2 class="post-title" x-text="data?.title"></h2>
 
         <template x-if="shouldShowExternal">
@@ -45,10 +45,38 @@ title: Пост
 
         <div
             class="post-body"
-            x-text="data?.body"
+            x-html="data?.bodyHtml"
             x-show="shouldShowBody"
         ></div>
+
+        <template x-if="hasThematicFeed">
+            <div class="post-author">
+                <div class="userinfo">
+                    <a x-bind:href="userUrl" class="userinfo-image">
+                        <img alt=" " x-bind:src="data?.user.feed.image" />
+                    </a>
+                    <div class="userinfo-name">
+                        <a x-bind:href="userUrl" x-text="data?.user.name"></a>
+                    </div>
+                    <div class="userinfo-caption">Автор</div>
+                </div>
+                <button type="button" class="button">
+                    {% svg icons/circle-check.svg %}
+                    <span class="button-label">В підписках</span>
+                </button>
+            </div>
+        </template>
+    </div>
+    <div class="post-footer">
+        <!--prettier-ignore-->
+        {% include reactions.html
+            placeholder=include.placeholder
+            id=include.id
+        %}
     </div>
 </article>
 
+<!--prettier-ignore-->
 {% include popovers/post_popover.html %}
+{% include popovers/reactions_popover.html %}
+{% include popovers/counts_popover.html %}

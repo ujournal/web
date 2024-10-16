@@ -15,7 +15,7 @@
             {% svg icons/dots.svg %}
         </button>
     </div>
-    <div class="post-summary">
+    <div class="post-main">
         <!--prettier-ignore-->
         {% if include.title %}
         <h2 class="post-title">
@@ -28,9 +28,9 @@
         {% endif %}
         <!--prettier-ignore-->
         {% if include.description %}
-        <p class="post-body">
-            {{include.description}} <a href="#">Розгорнути&hellip;</a>
-        </p>
+        <div class="post-body">
+            <p>{{include.description}} <a href="#">Розгорнути&hellip;</a></p>
+        </div>
         {% endif %}
     </div>
     <div class="post-footer">

@@ -78,19 +78,21 @@ layout_class: layout-post
         maxlength=5000
         name='body'
         model='body'
-        placeholder='Текст...' %}
+        placeholder='Текст' %}
 
-    <div class="editor-feed-field">
-        <img
-            alt=" "
-            x-bind:src="selectedFeed()?.image"
-            class="editor-feed-image"
-        />
+    <div
+        x-bind:class="{
+            'editor-feed': true,
+            'editor-feed-selected': hasSelectedFeed(),
+        }"
+        x-bind:title="cannotChangeFeed() ? 'Немає можливості змінити стрічку у вже опублікованому пості' : ''"
+    >
+        <img alt=" " x-bind:src="selectedFeed()?.image" />
         <select
             class="input"
             name="feed_id"
             x-model="feed_id"
-            x-bind:disabled="shouldDisableFeed"
+            x-bind:disabled="cannotChangeFeed"
         >
             <template x-for="feed in feeds">
                 <option

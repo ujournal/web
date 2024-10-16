@@ -34,18 +34,6 @@ export default () => {
       }
     },
 
-    shouldShowExternal() {
-      return Boolean(this.data?.external);
-    },
-
-    shouldShowGallery() {
-      return Boolean(this.data?.gallery);
-    },
-
-    shouldShowBody() {
-      return this.busy || Boolean(this.data?.body);
-    },
-
     feedUrl() {
       if (!this.data) {
         return null;
@@ -84,6 +72,26 @@ export default () => {
       this.dateFormat = format;
 
       sessionStore.set("post_date_format", format);
+    },
+
+    shouldShowExternal() {
+      return Boolean(this.data?.external);
+    },
+
+    shouldShowGallery() {
+      return Boolean(this.data?.gallery);
+    },
+
+    shouldShowBody() {
+      return this.busy || Boolean(this.data?.body);
+    },
+
+    hasThematicFeed() {
+      if (!this.data) {
+        return null;
+      }
+
+      return this.data.feed.thematic;
     },
 
     handlePopoverOpen() {

@@ -95,6 +95,8 @@ export default () => {
       if (isUrl(title)) {
         this.busy = true;
 
+        document.activeElement?.blur();
+
         this.title = "";
         this.url = title;
 
@@ -122,6 +124,10 @@ export default () => {
           });
         } finally {
           this.busy = false;
+
+          requestAnimationFrame(() => {
+            this.$root.querySelector("input[type='text']")?.focus();
+          });
         }
       }
     },
@@ -163,6 +169,10 @@ export default () => {
       }
     },
 
+    hasSelectedFeed() {
+      return Boolean(this.feed_id);
+    },
+
     canUpload() {
       return !Boolean(this.url) || Boolean(this.gallery_id);
     },
@@ -171,7 +181,7 @@ export default () => {
       return !Boolean(this.gallery_id);
     },
 
-    shouldDisableFeed() {
+    cannotChangeFeed() {
       return Boolean(this.id);
     },
 

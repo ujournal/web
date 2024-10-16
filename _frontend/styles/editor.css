@@ -26,15 +26,23 @@
     @apply text-stone-400 text-sm;
 }
 
-.editor-feed-field {
+.editor-feed {
     @apply relative flex flex-row;
 }
 
-.editor-feed-field > .input {
-    @apply flex-1 pl-11;
+.editor-feed > .input {
+    @apply flex-1;
 }
 
-.editor-feed-image {
-    @apply avatar !absolute top-0 bottom-0 left-2 my-auto pointer-events-none;
+.editor-feed > img {
+    @apply avatar !absolute top-0 bottom-0 left-2 my-auto pointer-events-none transition opacity-0;
     --avatar-s: 1.75rem;
+}
+
+.editor-feed.editor-feed-selected > .input {
+    @apply pl-11;
+}
+
+.editor-feed.editor-feed-selected > img {
+    @apply opacity-100;
 }
