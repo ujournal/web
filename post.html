@@ -43,7 +43,11 @@ title: Пост
             <div x-data="gallery(data?.gallery)" x-html="template"></div>
         </template>
 
-        <div class="post-body" x-text="data?.body"></div>
+        <div
+            class="post-body"
+            x-text="data?.body"
+            x-show="shouldShowBody"
+        ></div>
     </div>
 </article>
 

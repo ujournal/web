@@ -23,7 +23,7 @@
 }
 
 .post-body {
-    @apply text-base;
+    @apply text-base whitespace-pre-line;
 }
 
 .post-body a {

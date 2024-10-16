@@ -202,7 +202,7 @@ export default () => {
       const { data } = await formSender.sendForm(this.$root, api);
 
       this.$dispatch("toast-show", {
-        message: "Пост збережено",
+        message: "Пост опубліковано",
       });
 
       visit("post.show", { id: data.id });

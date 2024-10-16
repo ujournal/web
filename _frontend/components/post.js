@@ -45,6 +45,10 @@ export default () => {
       return Boolean(this.data?.gallery);
     },
 
+    shouldShowBody() {
+      return this.busy || Boolean(this.data?.body);
+    },
+
     feedUrl() {
       if (!this.data) {
         return null;
@@ -62,10 +66,18 @@ export default () => {
     },
 
     dateShort() {
+      if (!this.data) {
+        return null;
+      }
+
       return dateFormatter.formatDateShort(new Date(this.data?.created_at));
     },
 
     dateLong() {
+      if (!this.data) {
+        return null;
+      }
+
       return dateFormatter.formatDateLong(new Date(this.data?.created_at));
     },
 
