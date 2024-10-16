@@ -81,12 +81,16 @@ layout_class: layout-post
         placeholder='Текст...' %}
 
     <div class="editor-feed-field">
-        <img alt=" " x-bind:src="feed()?.image" class="editor-feed-image" />
+        <img
+            alt=" "
+            x-bind:src="selectedFeed()?.image"
+            class="editor-feed-image"
+        />
         <select
             class="input"
             name="feed_id"
             x-model="feed_id"
-            x-bind:disabled="shouldDisableFeed()"
+            x-bind:disabled="shouldDisableFeed"
         >
             <template x-for="feed in feeds">
                 <option
@@ -97,9 +101,9 @@ layout_class: layout-post
         </select>
     </div>
 
-    <template x-if="feeds.find(feed => feed.id == feed_id)?.description">
+    <template x-if="selectedFeed()?.description">
         <div
-            x-text="feeds.find(feed => feed.id == feed_id).description"
+            x-text="selectedFeed().description"
             class="editor-description"
         ></div>
     </template>

@@ -1,3 +1,4 @@
+import { visit as turboVisit } from "@hotwired/turbo";
 import Router from "url-router";
 import insertUrlParams from "inserturlparams";
 
@@ -33,5 +34,13 @@ export default {
     }
 
     return insertUrlParams(path, params);
+  },
+
+  visit(name, params = {}) {
+    return turboVisit(this.buildPath(name, params));
+  },
+
+  currentRoute() {
+    return this.parse(new URL(location).pathname);
   },
 };

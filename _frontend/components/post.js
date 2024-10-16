@@ -1,9 +1,8 @@
 import contentPaths from "../utils/content_paths";
 import dateFormatter from "../utils/date_formatter";
-import r2 from "../utils/r2";
+import cdn from "../utils/cdn";
 import router from "../utils/router";
 import sessionStore from "../utils/session_store";
-import { currentRoute } from "../utils/visit";
 
 export default () => {
   return {
@@ -18,12 +17,10 @@ export default () => {
     async load() {
       this.busy = true;
 
-      const id = currentRoute().params.id;
+      const id = router.currentRoute().params.id;
 
       try {
-        const { status, data } = await r2.get(
-          await contentPaths.getExternalPath(id),
-        );
+        const { data } = await cdn.get(await contentPaths.getExternalPath(id));
 
         this.data = data;
       } catch (error) {

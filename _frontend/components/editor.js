@@ -5,7 +5,7 @@ import store from "../utils/session_store";
 import auth from "../utils/auth";
 import translate, { isItEnglish } from "../utils/translate";
 import resizeTextarea from "../utils/resize_textarea";
-import visit, { currentRoute } from "../utils/visit";
+import router from "../utils/router";
 import externals from "../utils/externals";
 
 export default () => {
@@ -26,7 +26,7 @@ export default () => {
           message: "Не авторизовані",
         });
 
-        visit("home");
+        router.visit("home");
       }
 
       try {
@@ -42,7 +42,7 @@ export default () => {
     },
 
     async load() {
-      const route = currentRoute();
+      const route = router.currentRoute();
 
       if (!route) {
         return;
@@ -99,7 +99,7 @@ export default () => {
         this.url = title;
 
         try {
-          const { status, data } = await externals.resolveViaApi(this.url);
+          const { data } = await externals.resolveViaApi(this.url);
 
           this.external_id = data.id;
           this.url = data.url;
@@ -130,7 +130,7 @@ export default () => {
       formSender.setFormErrors(this.$root, {});
     },
 
-    feed() {
+    selectedFeed() {
       return this.feeds.find((feed) => feed.id === parseInt(this.feed_id, 10));
     },
 
@@ -205,7 +205,7 @@ export default () => {
         message: "Пост опубліковано",
       });
 
-      visit("post.show", { id: data.id });
+      router.visit("post.show", { id: data.id });
     },
 
     handleTitlePaste() {

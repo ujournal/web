@@ -5,15 +5,15 @@ title: Пост
 <article x-data="post" x-bind:class="{'post': true, 'post-placeholder': busy}">
     <div class="post-header">
         <div x-bind:class="{'userinfo': true, 'userinfo-placeholder': busy}">
-            <a x-bind:href="feedUrl()" class="userinfo-image">
+            <a x-bind:href="feedUrl" class="userinfo-image">
                 <img alt=" " x-bind:src="data?.feed.image" />
             </a>
             <div class="userinfo-name">
-                <a x-bind:href="feedUrl()" x-text="data?.feed.name"></a>
+                <a x-bind:href="feedUrl" x-text="data?.feed.name"></a>
                 <template x-if="!data?.feed.is_user_feed">
                     <a
                         class="userinfo-status"
-                        x-bind:href="userUrl()"
+                        x-bind:href="userUrl"
                         x-text="data?.user.name ? `автор ${data?.user.name}` : ''"
                     ></a>
                 </template>
@@ -35,11 +35,11 @@ title: Пост
     <div class="post-summary">
         <h2 class="post-title" x-text="data?.title"></h2>
 
-        <template x-if="shouldShowExternal()">
+        <template x-if="shouldShowExternal">
             <div x-data="external(data?.external)" x-html="template"></div>
         </template>
 
-        <template x-if="shouldShowGallery()">
+        <template x-if="shouldShowGallery">
             <div x-data="gallery(data?.gallery)" x-html="template"></div>
         </template>
 

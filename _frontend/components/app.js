@@ -1,6 +1,5 @@
 import auth from "../utils/auth";
 import router from "../utils/router";
-import visit from "../utils/visit";
 
 export default () => {
   let cleanup;
@@ -58,7 +57,7 @@ export default () => {
 
     editPost() {
       if (this.activeEntity?.type === "post") {
-        visit("post.edit", { id: this.activeEntity.data.id });
+        router.visit("post.edit", { id: this.activeEntity.data.id });
       }
     },
   };
