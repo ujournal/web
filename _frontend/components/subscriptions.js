@@ -1,18 +1,23 @@
-import api from "../utils/api";
-import store from "../utils/session_store";
+import subscriber from "../utils/subscriber";
 
 export default () => {
   return {
-    subscriptions: store.get("subscriptions", []),
+    subscriptions: [],
 
     init() {
       this.load();
     },
 
     async load() {
-      const { data } = await api.get("/subscriptions");
-      this.subscriptions = data;
-      store.set("subscriptions", data);
+      this.subscriptions = await subscriber.getSubscriptions();
+    },
+
+    async handleSubscribe(event) {
+      //
+    },
+
+    async handleUnsubscribe(event) {
+      //
     },
   };
 };

@@ -2,7 +2,14 @@
 title: Пост
 ---
 
-<article x-data="post" x-bind:class="{'post': true, 'post-placeholder': busy}">
+<article
+    x-data="post(null, false)"
+    x-bind:class="{
+        'post': true,
+        'post-short': short,
+        'post-placeholder': busy
+    }"
+>
     <div class="post-header">
         <div x-bind:class="{'userinfo': true, 'userinfo-placeholder': busy}">
             <a x-bind:href="feedUrl" class="userinfo-image">
@@ -29,6 +36,13 @@ title: Пост
             popovertarget="post-popover"
             x-on:click="handlePopoverOpen"
         >
+            Підписатися
+        </button>
+        <button
+            class="button"
+            popovertarget="post-popover"
+            x-on:click="handlePopoverOpen"
+        >
             {% svg icons/dots.svg %}
         </button>
     </div>
@@ -43,13 +57,22 @@ title: Пост
             <div x-data="gallery(data?.gallery)" x-html="template"></div>
         </template>
 
-        <div
-            class="post-body"
-            x-html="data?.bodyHtml"
-            x-show="shouldShowBody"
-        ></div>
+        <template x-if="short">
+            <p class="post-description" x-show="shouldShowDescription">
+                <span x-html="data?.description"></span>
+                <button x-on:click="toggleShort">Розгорнути</button>
+            </p>
+        </template>
 
-        <template x-if="hasThematicFeed">
+        <template x-if="!short">
+            <div
+                class="post-body"
+                x-html="data?.html"
+                x-show="shouldShowBody"
+            ></div>
+        </template>
+
+        <template x-if="shouldShowAuthor">
             <div class="post-author">
                 <div class="userinfo">
                     <a x-bind:href="userUrl" class="userinfo-image">

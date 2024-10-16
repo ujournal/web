@@ -5,8 +5,10 @@
 <nav
     class="nav"
     id="subscriptions-nav"
-    x-data="subscriptions"
     data-turbo-permanent
+    x-data="subscriptions"
+    x-on:subscribe.window="handleSubscribe"
+    x-on:unsubscribe.window="handleUnsubscribe"
 >
     <template x-for="subscription in subscriptions.slice(0, 5)">
         <!--prettier-ignore-->

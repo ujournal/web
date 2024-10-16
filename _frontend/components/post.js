@@ -4,10 +4,11 @@ import cdn from "../utils/cdn";
 import router from "../utils/router";
 import sessionStore from "../utils/session_store";
 
-export default () => {
+export default (data = null, short = true) => {
   return {
-    busy: true,
-    data: null,
+    busy: false,
+    short,
+    data,
     dateFormat: sessionStore.get("post_date_format", "short"),
 
     init() {
@@ -15,6 +16,10 @@ export default () => {
     },
 
     async load() {
+      if (this.data) {
+        return;
+      }
+
       this.busy = true;
 
       const id = router.currentRoute().params.id;
@@ -74,6 +79,10 @@ export default () => {
       sessionStore.set("post_date_format", format);
     },
 
+    toggleShort() {
+      this.short = !this.short;
+    },
+
     shouldShowExternal() {
       return Boolean(this.data?.external);
     },
@@ -83,15 +92,19 @@ export default () => {
     },
 
     shouldShowBody() {
-      return this.busy || Boolean(this.data?.body);
+      return !this.short && (this.busy || Boolean(this.data?.body));
     },
 
-    hasThematicFeed() {
+    shouldShowDescription() {
+      return this.short && (this.busy || Boolean(this.data?.body));
+    },
+
+    shouldShowAuthor() {
       if (!this.data) {
         return null;
       }
 
-      return this.data.feed.thematic;
+      return !this.short && this.data.feed.is_thematic;
     },
 
     handlePopoverOpen() {

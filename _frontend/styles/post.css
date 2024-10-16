@@ -6,6 +6,10 @@
     @apply flex flex-row gap-4 items-center justify-between;
 }
 
+.post-header .userinfo {
+    @apply mr-auto;
+}
+
 .post-main {
     @apply flex flex-col gap-2;
 }
@@ -26,12 +30,12 @@
     @apply content text-base whitespace-pre-line;
 }
 
-.post-author {
-    @apply flex flex-row justify-between p-4 bg-stone-50 rounded-lg;
+.post-description button {
+    @apply text-blue-500;
 }
 
-.post-author .button {
-    @apply bg-stone-50 hover:bg-stone-50;
+.post-author {
+    @apply flex flex-row justify-between py-4 bg-white border-y-2 border-stone-50;
 }
 
 .post-footer {
