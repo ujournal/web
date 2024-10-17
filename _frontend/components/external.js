@@ -69,10 +69,6 @@ export default (data = null, removable = false) => {
 
     hasTitle() {
       return true;
-
-      // return Boolean(
-      //   this.data.title || this.data.author_name || this.data.description,
-      // );
     },
 
     titleFormatted() {

@@ -93,6 +93,10 @@ export default (data = null, short = true) => {
       );
     },
 
+    shouldShowTitle() {
+      return this.busy || Boolean(this.data?.title);
+    },
+
     shouldShowBody() {
       return !this.short && (this.busy || Boolean(this.data?.body));
     },

@@ -107,20 +107,20 @@ export default () => {
       try {
         const { data } = await externals.resolveViaApi(this.url);
 
-        this.external_id = data.id;
-        this.url = data.url;
-
         if (this.title === "") {
           this.title = data.title;
         }
 
         if (this.body === "") {
           this.body = data.description;
-
           resizeTextarea();
         }
 
-        this.$dispatch("external-set-data", { data });
+        if (!this.external_id) {
+          this.external_id = data.id;
+          this.url = data.url;
+          this.$dispatch("external-set-data", { data });
+        }
       } catch (error) {
         console.warn(error);
 
@@ -192,10 +192,7 @@ export default () => {
     },
 
     shouldShowExternal() {
-      return (
-        Boolean(this.url) &&
-        (this.url.startsWith("http:") || this.url.startsWith("https:"))
-      );
+      return Boolean(this.external_id);
     },
 
     shouldShowGallery() {
