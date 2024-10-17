@@ -16,8 +16,9 @@
         {% if include.placeholder %}
         placeholder="{{include.placeholder}}"
         {% endif %}
-        x-data
+        x-data="marke"
         x-autosize
+        x-on:editor-body-changed.window="handleContentChanged"
         x-on:paste.stop
         {% if include.name %}
         name="{{include.name}}"

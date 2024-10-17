@@ -16,6 +16,7 @@
 
 .content ul > li {
     padding-inline-start: 0.45ch;
+    white-space-collapse: collapse;
 }
 
 .content ul > li::marker {
@@ -43,11 +44,11 @@
 }
 
 .content code {
-    @apply text-sm bg-stone-50 p-1 rounded-md;
+    @apply text-sm bg-orange-50 p-1 rounded-md font-medium;
 }
 
 .content pre.highlight {
-    @apply text-sm bg-stone-50 p-4 rounded-lg leading-6;
+    @apply text-sm bg-orange-50 p-4 rounded-lg leading-6;
 }
 
 .content pre.highlight code {

@@ -4,7 +4,6 @@ import api from "../utils/api";
 import store from "../utils/session_store";
 import auth from "../utils/auth";
 import translate, { isItEnglish } from "../utils/translate";
-import resizeTextarea from "../utils/resize_textarea";
 import router from "../utils/router";
 import externals from "../utils/externals";
 
@@ -68,7 +67,7 @@ export default () => {
         this.$dispatch("gallery-set-data", { data: data.gallery });
       }
 
-      resizeTextarea();
+      this.$dispatch("editor-body-changed");
     },
 
     async loadFeeds() {
@@ -86,7 +85,7 @@ export default () => {
     },
 
     async resolvExternalIfTitleIsUrl() {
-      if (this.busy || !this.canPasteUrl()) {
+      if (this.busy) {
         return;
       }
 
@@ -98,6 +97,15 @@ export default () => {
     },
 
     async resolveUrl(url) {
+      if (!this.canPasteUrl()) {
+        this.$dispatch("toast-show", {
+          message:
+            "Немає можливості вставити URL – очистіть потрібні поля для вставки",
+        });
+
+        return;
+      }
+
       this.busy = true;
 
       document.activeElement?.blur();
@@ -113,7 +121,8 @@ export default () => {
 
         if (this.body === "") {
           this.body = data.description;
-          resizeTextarea();
+
+          this.$dispatch("editor-body-changed");
         }
 
         if (!this.external_id) {
@@ -161,6 +170,8 @@ export default () => {
 
         if (body) {
           this.body = body.text;
+
+          this.$dispatch("editor-body-changed");
         }
       } catch (error) {
         console.warn(error);
@@ -169,8 +180,6 @@ export default () => {
           message: "Не вдалося перекласти",
         });
       } finally {
-        resizeTextarea();
-
         this.busy = false;
       }
     },
@@ -184,7 +193,12 @@ export default () => {
     },
 
     canPasteUrl() {
-      return !Boolean(this.gallery_id);
+      return (
+        !Boolean(this.gallery_id) &&
+        (!Boolean(this.title) ||
+          !Boolean(this.body) ||
+          !Boolean(this.external_id))
+      );
     },
 
     cannotChangeFeed() {
@@ -288,7 +302,7 @@ export default () => {
     async handlePaste(event) {
       const text = event.clipboardData.getData("Text");
 
-      if (text.length < 512 && isUrl(text) && this.canPasteUrl()) {
+      if (text.length < 512 && isUrl(text)) {
         event.preventDefault();
 
         await this.resolveUrl(text);
