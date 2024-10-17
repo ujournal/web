@@ -46,7 +46,7 @@
     @apply border-none shadow-none pointer-events-none select-none;
 }
 
-.post.post-placeholder *:is(.post-title, .post-body) {
+.post.post-placeholder *:is(.post-title, .post-body, .post-description) {
     @apply overflow-hidden text-transparent bg-stone-50 rounded-md pointer-events-none animate-pulse;
     height: 1.5rem;
 }
@@ -55,7 +55,7 @@
     height: 1.75rem;
 }
 
-.post.post-placeholder .post-body {
+.post.post-placeholder *:is(.post-body, .post-description) {
     width: 75%;
 }
 

@@ -57,14 +57,16 @@ title: Пост
             <div x-data="gallery(data?.gallery)" x-html="template"></div>
         </template>
 
-        <template x-if="short">
-            <p class="post-description" x-show="shouldShowDescription">
+        <template x-if="shouldShowDescription">
+            <p class="post-description">
                 <span x-html="data?.description"></span>
-                <button x-on:click="toggleShort">Розгорнути</button>
+                <template x-if="shouldShowToggleShort">
+                    <button x-on:click="toggleShort">Розгорнути</button>
+                </template>
             </p>
         </template>
 
-        <template x-if="!short">
+        <template x-if="shouldShowBody">
             <div
                 class="post-body"
                 x-html="data?.html"

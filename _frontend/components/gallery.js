@@ -12,7 +12,7 @@ export default (data = null, removable = false) => {
       this.$dispatch("gallery-started", { id: this.data?.id });
 
       try {
-        const { data } = this.id
+        const { data } = this.data?.id
           ? await api.post(`/galleries/${this.data.id}`, {
               images,
               _method: "put",

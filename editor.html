@@ -11,6 +11,7 @@ layout_class: layout-post
     x-bind:method="id ? 'put' : 'post'"
     x-on:input="clearErrors"
     x-on:submit.prevent="handleSubmit"
+    x-on:paste.window="handlePaste"
     x-on:uploader-started.window="handleUploadStarted"
     x-on:uploader-completed.window="handleUploadCompleted"
     x-on:external-removed.window="handleExternalRemoved"
@@ -93,6 +94,7 @@ layout_class: layout-post
             name="feed_id"
             x-model="feed_id"
             x-bind:disabled="cannotChangeFeed"
+            x-on:paste.stop
         >
             <template x-for="feed in feeds">
                 <option

@@ -88,7 +88,9 @@ export default (data = null, short = true) => {
     },
 
     shouldShowGallery() {
-      return Boolean(this.data?.gallery);
+      return (
+        Boolean(this.data?.gallery) && this.data?.gallery.images.length > 0
+      );
     },
 
     shouldShowBody() {
@@ -105,6 +107,10 @@ export default (data = null, short = true) => {
       }
 
       return !this.short && this.data.feed.is_thematic;
+    },
+
+    shouldShowToggleShort() {
+      return this.data?.body.length > this.data?.description.length;
     },
 
     handlePopoverOpen() {

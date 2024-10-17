@@ -93,42 +93,48 @@ export default () => {
       const title = this.title.trim();
 
       if (isUrl(title)) {
-        this.busy = true;
+        this.resolveUrl(title);
+      }
+    },
 
-        document.activeElement?.blur();
+    async resolveUrl(url) {
+      this.busy = true;
 
-        this.title = "";
-        this.url = title;
+      document.activeElement?.blur();
 
-        try {
-          const { data } = await externals.resolveViaApi(this.url);
+      this.url = url;
 
-          this.external_id = data.id;
-          this.url = data.url;
+      try {
+        const { data } = await externals.resolveViaApi(this.url);
+
+        this.external_id = data.id;
+        this.url = data.url;
+
+        if (this.title === "") {
           this.title = data.title;
-
-          if (this.body === "") {
-            this.body = data.description;
-
-            resizeTextarea();
-          }
-
-          this.$dispatch("external-set-data", { data });
-        } catch (error) {
-          console.warn(error);
-
-          this.url = null;
-
-          this.$dispatch("toast-show", {
-            message: "Не вдалося опрацювати URL",
-          });
-        } finally {
-          this.busy = false;
-
-          requestAnimationFrame(() => {
-            this.$root.querySelector("input[type='text']")?.focus();
-          });
         }
+
+        if (this.body === "") {
+          this.body = data.description;
+
+          resizeTextarea();
+        }
+
+        this.$dispatch("external-set-data", { data });
+      } catch (error) {
+        console.warn(error);
+
+        this.url = null;
+
+        this.$dispatch("toast-show", {
+          message: "Не вдалося опрацювати URL",
+        });
+      } finally {
+        this.busy = false;
+
+        requestAnimationFrame(() => {
+          this.$root.querySelector("input[type='text']")?.focus();
+        });
       }
     },
 
@@ -226,7 +232,12 @@ export default () => {
       this.resolvExternalIfTitleIsUrl();
     },
 
-    handleUploadStarted() {
+    handleUploadStarted(event) {
+      if (!this.canUpload()) {
+        event.detail.abort();
+        return;
+      }
+
       this.busy = true;
     },
 
@@ -269,12 +280,22 @@ export default () => {
       }
     },
 
-    handleGalleryFailed() {
+    handleGalleryFailed(event) {
       this.busy = false;
 
       this.$dispatch("toast-show", {
         message: "Не вдалося створити або оновити галерею",
       });
+    },
+
+    async handlePaste(event) {
+      const text = event.clipboardData.getData("Text");
+
+      if (text.length < 512 && isUrl(text) && this.canPasteUrl()) {
+        event.preventDefault();
+
+        await this.resolveUrl(text);
+      }
     },
   };
 };
