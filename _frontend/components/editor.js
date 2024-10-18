@@ -47,6 +47,8 @@ export default () => {
         return;
       }
 
+      this.busy = true;
+
       const id = route.params.id;
 
       const { data } = await api.get(`/posts/${id}`);
@@ -58,6 +60,8 @@ export default () => {
       this.feed_id = data.feed?.id;
       this.external_id = data.external?.id;
       this.gallery_id = data.gallery?.id;
+
+      this.busy = false;
 
       if (data.external) {
         this.$dispatch("external-set-data", { data: data.external });
